@@ -45,5 +45,6 @@ public class MovementController : MonoBehaviour
     {
         //move the character
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        //Debug.Log(Mathf.Sin(5));
     }
 }

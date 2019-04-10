@@ -70,4 +70,16 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void PauseGame()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }
