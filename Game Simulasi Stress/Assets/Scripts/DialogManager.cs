@@ -7,6 +7,7 @@ public class DialogManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public MovementController PlayerMovement;
 
     public Animator animator;
 
@@ -20,18 +21,28 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        animator.SetBool("IsOpen", true);
-
-        nameText.text = dialogue.name;
-
-        sentences.Clear();
-
-        foreach (string sentence in dialogue.sentences)
+        if (animator.GetBool("IsOpen"))
         {
-            sentences.Enqueue(sentence);
+            DisplayNextSentences();
         }
+        else
+        {
+            PlayerMovement.enabled = false;
 
-        DisplayNextSentences();
+            animator.SetBool("IsOpen", true);
+
+            nameText.text = dialogue.name;
+
+            sentences.Clear();
+
+            foreach (string sentence in dialogue.sentences)
+            {
+                sentences.Enqueue(sentence);
+            }
+
+            DisplayNextSentences();
+        }
+        
     }
 
     public void DisplayNextSentences()
@@ -60,5 +71,16 @@ public class DialogManager : MonoBehaviour
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        PlayerMovement.enabled = true;
+    }
+
+    public void StartDecision()
+    {
+
+    }
+
+    public void EndDecision()
+    {
+
     }
 }

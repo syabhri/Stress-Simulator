@@ -7,8 +7,12 @@ public class MovementController : MonoBehaviour
     public float speed;
     private Vector2 moveVelocity;
 
-    public Animator anim;
-    public Rigidbody2D rb;
+    [Space]
+    public Rigidbody2D rigitbody2d;
+    [Space]
+    public Animator MovingAnimator;
+
+    
 
     // Update is called once per frame
     void Update()
@@ -16,11 +20,11 @@ public class MovementController : MonoBehaviour
         //control movement animation
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            anim.SetBool("walk", true);
+            MovingAnimator.SetBool("walk", true);
         }
         else
         {
-            anim.SetBool("walk", false);
+            MovingAnimator.SetBool("walk", false);
         }
 
         //control character flip
@@ -44,7 +48,12 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         //move the character
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        rigitbody2d.MovePosition(rigitbody2d.position + moveVelocity * Time.fixedDeltaTime);
         //Debug.Log(Mathf.Sin(5));
+    }
+
+    public void OnDisable()
+    {
+        MovingAnimator.SetBool("walk", false);
     }
 }
