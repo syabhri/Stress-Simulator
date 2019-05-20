@@ -8,5 +8,4 @@ public class Subject
     public string nama;
     public int nilai;
     public int skill;
-    public int requirement;
 }

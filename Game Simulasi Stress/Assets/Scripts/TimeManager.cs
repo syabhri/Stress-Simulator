@@ -1,65 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField]
-    private float RealSecondPerInGameDay = 60f;
+    [Header("Public Variable")]
+    public FloatVariable TimeScale;
+    public TimeContainer CurrentTime;
+    public BoolVariable updateTime;
 
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI dayText;
-    private float day;
-    string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
+    [Header("UI Output")]
+    public StringVariable timeText;
+    public StringVariable dayCountText;
+    public StringVariable dayNameText;
+    
+    
+    private float totalTime;
 
-    private float dayPerWeek = 7f;
-    private float hoursPerDay = 24f;
-    private float minutesPerHours = 60f;
+    const float dayPerWeek = 7f;
+    const float hoursPerDay = 24f;
+    const float minutesPerHours = 60f;
+    readonly string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
 
     private void Update()
     {
-        UpdateTime();
+        if (updateTime.value)
+            UpdateTime();       
     }
 
     private void UpdateTime()
     {
-        day += Time.deltaTime / RealSecondPerInGameDay;
+        totalTime += Time.deltaTime / TimeScale.value;
 
-        float dayNormalized = day % 1f;
+        float dayNormalized = totalTime % 1f;
 
-        float dayInAWeek = Mathf.Floor(day) % dayPerWeek;
+        CurrentTime.hours = Mathf.Floor(dayNormalized * hoursPerDay);
+        CurrentTime.minutes = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours);
+        CurrentTime.days = Mathf.Floor(totalTime);
 
-        string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
-        string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours).ToString("00");
-        string daysString = Mathf.Floor(day + 1).ToString("00");
+        float dayInAWeek = Mathf.Floor(totalTime) % dayPerWeek;
 
-
-        timeText.text = hoursString + ":" + minutesString;
-        dayText.text = "Hari Ke - " + daysString + ", " + dayName[(int)dayInAWeek];
+        timeText.Value = CurrentTime.hours.ToString("00") + ":" + CurrentTime.minutes.ToString("00");
+        dayCountText.Value = "Hari Ke - " + (CurrentTime.days + 1).ToString("00");
+        dayNameText.Value = dayName[(int)dayInAWeek];
     }
 
-    public void StopTime()
+    public void ToggleTime()
     {
-        if (Time.timeScale == 1)
-            Time.timeScale = 0f;
+        if (updateTime.value)
+            updateTime.value = false;
         else
-            Time.timeScale = 1f;
+            updateTime.value = true;
     }
 
-    public void SkipTimeByDay(float days)
+    public void SetTime(TimeContainer time)
     {
-        day += days;
+        totalTime = 
+            time.days + 
+            (time.hours / hoursPerDay) + 
+            (time.minutes / hoursPerDay / minutesPerHours);
     }
 
-    public void SkipTimeByHour(float hours)
+    public void SkipTime(TimeContainer time)
     {
-        day += hours / hoursPerDay;
+        totalTime +=
+            time.days +
+            (time.hours / hoursPerDay) +
+            (time.minutes / hoursPerDay / minutesPerHours);
     }
 
-    public void SkipTimeByMinute(float minutes)
+    public void ResetTime()
     {
-        day += minutes / hoursPerDay / minutesPerHours;
+        totalTime = 0;
     }
 }

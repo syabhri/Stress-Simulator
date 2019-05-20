@@ -4,35 +4,56 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-    public EventWrapper InteractablesEvent;
-    public DialogManager dialogManager;
-    private bool IsInRange = false;
+    [Header("Properties")]
+    public Dialogue defaultDialogue;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        IsInRange = true;
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        IsInRange = false;
-    }
+    [Header("Event")]
+    public GameEvent onDialogStart;
 
-    void Update()
+    [Header("Condition")]
+    public BoolVariable[] ignoreInput;
+
+    [Header("DataPasser")]
+    public Dialogue dialoguePasser;
+
+    private bool isInRange = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetButtonDown("Submit") && IsInRange)
+        if (collision.gameObject.tag == "Player")
         {
-            for (int i = 0; i < InteractablesEvent.eventList.Length; i++)
+            isInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isInRange = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Submit") && isInRange && !IgnoreInput())
+        {
+            Debug.Log("Interactable Input Presseds");
+            dialoguePasser.PassValue(defaultDialogue);
+            onDialogStart.Raise();
+        }
+    }
+
+    private bool IgnoreInput()
+    {
+        foreach (BoolVariable condition in ignoreInput)
+        {
+            if (condition.value)
             {
-                switch (InteractablesEvent.eventList[i].type)
-                {
-                    case "dialogue":
-                        dialogManager.StartDialogue(InteractablesEvent.eventList[i].dialogue);
-                        break;
-                    default:
-                        break;
-                }
+                return true;
             }
         }
+        return false;
     }
 
 }

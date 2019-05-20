@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public float speed;
+    public FloatVariable speed;
     private Vector2 moveVelocity;
 
     [Space]
@@ -39,7 +39,7 @@ public class MovementController : MonoBehaviour
 
         //get input and set velocity base on speed and axis
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveVelocity = moveInput.normalized * speed;
+        moveVelocity = moveInput.normalized * speed.value;
 
         //debug
         //Debug.Log(Input.GetAxis("Horizontal") + " " + Input.GetAxis("Vertical"));

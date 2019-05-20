@@ -43,4 +43,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a30c803344b6040914ece79a4b8412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: theme
+    clip: {fileID: 8300000, guid: e83401b1b5b4eea48acce3fcd7e24bed, type: 3}
+    volume: 1
+    pitch: 1.04
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  - name: hell
+    clip: {fileID: 8300000, guid: e83401b1b5b4eea48acce3fcd7e24bed, type: 3}
+    volume: 1
+    pitch: 1.04
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  playerStats:
+    character_name: 
+    Pelajaran: []
+    ability: []

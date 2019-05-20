@@ -5,8 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName = "ScriptableObject/Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    public new string name;
+    [Tooltip("Required if this dialog is a Response"), Header("Options")]
+    public string response;
+    [Tooltip("Response for dismissing the dialog")]
+    public string dismisses;
 
-    [TextArea(3, 10)]
-    public string[] sentences;
+    [Header("Content")]
+    public Speaker[] speakers;
+
+    [Header("Response")]
+    public Dialogue[] nextDialog;
+
+    public Activity[] doActivities;
+
+    public void PassValue(Dialogue dialogue)
+    {
+        response = dialogue.response;
+        dismisses = dialogue.dismisses;
+        speakers = dialogue.speakers;
+        nextDialog = dialogue.nextDialog;
+        doActivities = dialogue.doActivities;
+    }
 }
