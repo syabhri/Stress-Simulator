@@ -12,18 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: activityPasser
   m_EditorClassIdentifier: 
-  name: 
-  activityType: []
-  animator: {fileID: 0}
-  dialogue: {fileID: 0}
+  activityName: 
+  tag: []
+  isActive: 0
   isScaduled: 0
-  day: 
+  scadule:
+    days: 0
+    hours: 0
+    minutes: 0
+  tolerance:
+    days: 0
+    hours: 0
+    minutes: 15
+  isLimited: 0
+  limitPerDay: 0
+  isDutrationAjustable: 1
+  duration:
+    days: 0
+    hours: 0
+    minutes: 0
+  isIncreaseStress: 0
+  increaseStressByHours: 0
+  increasedStressMultiplier: 0
+  isDecreaseStress: 0
+  decreaseStressByHours: 0
+  decreasedStressMultiplier: 0
+  isEffectedByStress: 0
+  EffectedStat:
+    target: {fileID: 0}
+    effector: 0
+    operation: 
+  isChangeOtherStat: 0
+  ChangeStatByHours: 0
+  otherStat:
+  - target: {fileID: 0}
+    effector: 0
+    operation: 
+  dialogue: {fileID: 0}
   ValueLimit: 0
-  AmountLimit: 0
-  duration: 0
   price: 0
   interest: []
-  abilityEffector:
-    abilityName: 
-    effectedStats: 
-    value: 0
+  abilityEffector: {fileID: 0}

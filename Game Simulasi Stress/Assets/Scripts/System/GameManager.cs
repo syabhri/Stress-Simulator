@@ -1,0 +1,63 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class GameManager : MonoBehaviour
+{
+    #region Variables and Class Reverences
+    [Header("Properties")]
+    public Vector2Variable spawnPoint;
+
+    public PlayerData playerData;
+
+    [Header("Reference")]
+    public GameObject PlayerPrefab;
+
+    [Header("Conditions")]
+    public BoolVariable IsPlaying;
+
+    #endregion
+
+    #region Unity Event Function
+    private void Start()
+    {
+        if (IsPlaying.value)
+        {
+            SpawnPlayer(playerData.playerPosition.position);
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        IsPlaying.value = false;
+    }
+    #endregion
+
+    #region GameManager function
+    public void PlayGame()
+    {
+        ChangeScene("GameplayScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public static void ChangeScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+    public static void ChangeScene(int id)
+    {
+        SceneManager.LoadScene(id);
+    }
+
+    public void SpawnPlayer(Vector2 position)
+    {
+        Instantiate<GameObject>(PlayerPrefab, new
+            Vector3(position.x, position.y, 0),
+            PlayerPrefab.transform.rotation);
+    }
+    #endregion
+}

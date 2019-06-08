@@ -5,15 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName = "ScriptableObject/Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    [Tooltip("Required if this dialog is a Response"), Header("Options")]
+    [Tooltip("Response to the dialog before"), Header("Options")]
     public string response;
-    [Tooltip("Response for dismissing the dialog")]
+
+    [Tooltip("Response for dismissing the dialog, a.k.a closing massage")]
     public string dismisses;
 
     [Header("Content")]
     public Speaker[] speakers;
 
-    [Header("Response")]
+    [Header("Response Choice")]
     public Dialogue[] nextDialog;
 
     public Activity[] doActivities;

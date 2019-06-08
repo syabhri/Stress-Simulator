@@ -12,18 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: dance
   m_EditorClassIdentifier: 
-  name: dance
-  activityType: []
-  animator: {fileID: 0}
-  dialogue: {fileID: 0}
+  activityName: dance
+  isUseEnergy: 1
+  isCostMoney: 1
+  cost: 10
   isScaduled: 0
-  day: 
-  ValueLimit: 0
-  AmountLimit: 0
-  duration: 0
-  price: 0
-  interest: []
-  abilityEffector:
-    abilityName: 
-    effectedStats: 
-    value: 0
+  scadule:
+    days: 0
+    hours: 0
+    minutes: 0
+  tolerance:
+    days: 0
+    hours: 0
+    minutes: 15
+  isLimited: 0
+  limitPerDay: 0
+  currentCount: 0
+  valueLimit: 0
+  currentValue: 0
+  isDutrationAjustable: 1
+  duration:
+    days: 0
+    hours: 10
+    minutes: 0
+  isIncreaseStress: 1
+  increaseStressByHours: 1
+  increasedStressMultiplier: 2
+  isDecreaseStress: 1
+  decreaseStressByHours: 1
+  decreasedStressMultiplier: 5
+  isEffectedByStress: 1
+  isChangeOtherStat: 1
+  ChangeStatByHours: 0
+  otherStat:
+    target: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
+    effector: 10
+    useExternalEeffector: 0
+    externalEffector: {fileID: 0}
+  operation: 
+  interest: {fileID: 0}
+  ability: {fileID: 0}

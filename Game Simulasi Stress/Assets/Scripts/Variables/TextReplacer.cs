@@ -16,8 +16,13 @@ public class TextReplacer : MonoBehaviour
 {
     public TextMeshProUGUI Text; // <changes>
 
-    public StringVariable Variable;
+    [Space]
+    public bool updateString;
+    public StringVariable stringVariable;
+    public bool updateFloat;
+    public FloatVariable floatVariable;
 
+    [Space]
     public bool AlwaysUpdate;
 
     public string BeforeText = "";
@@ -25,7 +30,7 @@ public class TextReplacer : MonoBehaviour
 
     private void OnEnable()
     {
-        Text.text = Variable.Value;
+        UpdateText();
     }
 
     private void Update()
@@ -38,6 +43,14 @@ public class TextReplacer : MonoBehaviour
 
     public void UpdateText()
     {
-        Text.text = BeforeText + Variable.Value + AfterText;
+        
+        if (updateFloat)
+        {
+            Text.text = BeforeText + floatVariable.value.ToString() + AfterText;
+        }
+        if (updateString)
+        {
+            Text.text = BeforeText + stringVariable.Value + AfterText;
+        }
     }
 }

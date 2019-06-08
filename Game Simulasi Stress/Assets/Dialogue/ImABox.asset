@@ -18,9 +18,10 @@ MonoBehaviour:
   - name: Box1
     avatar: {fileID: 0}
     sentences:
-    - 'hallo, Nama Saya Box '
+    - hallo [player], Nama Saya Box '
     - ini teman saya box2
   nextDialog:
   - {fileID: 11400000, guid: 5b912a5bb6ef968448ce00657b2f3d49, type: 2}
-  - {fileID: 11400000, guid: 5b912a5bb6ef968448ce00657b2f3d49, type: 2}
-  doActivities: []
+  - {fileID: 11400000, guid: 675251e95dfa40a47af7df8280d423f9, type: 2}
+  doActivities:
+  - {fileID: 11400000, guid: 2d0b5137ce2eb094c95c2795d7ed5766, type: 2}

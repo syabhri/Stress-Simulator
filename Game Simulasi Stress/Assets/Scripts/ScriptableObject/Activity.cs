@@ -5,29 +5,91 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Activity", menuName = "ScriptableObject/Activity")]
 public class Activity : ScriptableObject
 {
-    public new string name;
-    public string[] activityType;
+    [Header("Properties")]
+    public string activityName;
+    public bool isUseEnergy;
+    //public string[] tag;
+    //public bool isActive;
 
-    public Animator animator;
-    public Dialogue dialogue;
+    [Header("Cost")]
+    public bool isCostMoney;
+    public float cost;
 
+    [Header("Scadule")]
     public bool isScaduled;
-    public string day;
+    public TimeFormat scadule;
+    public TimeFormat tolerance = new TimeFormat(0,0,15);//default value
 
-    public float ValueLimit;
+    [Header("Limit")]
+    public bool isLimited;
+    public float limitPerDay;
+    public float currentCount;
+    public float valueLimit;
+    public float currentValue;
 
-    public float AmountLimit;
+    [Header("Duration")]
+    public bool isDutrationAjustable;
+    public TimeFormat duration;
 
-    public float duration;
+    [Header("Increase Stress")]
+    public bool isIncreaseStress;
+    public bool increaseStressByHours;
+    public float increasedStressMultiplier;
 
-    public float price;
+    [Header("Decrease Stress")]
+    public bool isDecreaseStress;
+    public bool decreaseStressByHours;
+    public float decreasedStressMultiplier;
 
-    public string[] interest;
+    [Header("Effected By Stress")]
+    public bool isEffectedByStress;
+    //public List<FloatVariable> EffectedStat;
 
-    public Ability abilityEffector;
+    [Header("Other Stat")]
+    public bool isChangeOtherStat;
+    public bool ChangeStatByHours;
+    public FloatPair otherStat;
+    [Tooltip("Operation is the basic operator \"=+-*/\" used to change the target")]
+    public string operation;
 
+    [Header("Bonus")]
+    public FloatVariable interest;
+    public FloatVariable ability;
+
+    //incoplete
     public void PassValue(Activity activity)
     {
+        activityName = activity.activityName;
+        isUseEnergy = activity.isUseEnergy;
+        //tag = activity.tag;
+        //isActive = activity.isActive;
 
+        isCostMoney = activity.isCostMoney;
+        cost = activity.cost;
+
+        isScaduled = activity.isScaduled;
+        scadule.PassValue(activity.scadule);
+        tolerance.PassValue(activity.tolerance);
+
+        isLimited = activity.isLimited;
+        limitPerDay = activity.limitPerDay;
+
+        isDutrationAjustable = activity.isDutrationAjustable;
+        duration.PassValue(activity.duration);
+
+        isIncreaseStress = activity.isIncreaseStress;
+        increaseStressByHours = activity.increaseStressByHours;
+        increasedStressMultiplier = activity.increasedStressMultiplier;
+
+        isDecreaseStress = activity.isDecreaseStress;
+        decreaseStressByHours = activity.decreaseStressByHours;
+        decreasedStressMultiplier = activity.decreasedStressMultiplier;
+
+        isEffectedByStress = activity.isEffectedByStress;
+        //EffectedStat = activity.EffectedStat;
+
+        isChangeOtherStat = activity.isChangeOtherStat;
+        ChangeStatByHours = activity.ChangeStatByHours;
+        otherStat = activity.otherStat;
     }
 }

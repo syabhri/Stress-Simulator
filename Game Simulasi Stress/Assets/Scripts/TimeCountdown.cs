@@ -7,6 +7,7 @@ public class TimeCountdown : MonoBehaviour
 {
     public float timestart = 10;
     public Text CountdownText;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,10 @@ public class TimeCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timestart<=0)
+        {
+            animator.SetTrigger("GameOver");
+        }
         if (CountdownText.enabled)
         {
             timestart -= Time.deltaTime;

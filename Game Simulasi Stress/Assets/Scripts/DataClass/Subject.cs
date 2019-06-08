@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Subject
+[CreateAssetMenu(menuName = "Custom/Subject")]
+public class Subject : ScriptableObject
 {
-    public string nama;
+    public new string name;
     public int nilai;
-    public int skill;
 }

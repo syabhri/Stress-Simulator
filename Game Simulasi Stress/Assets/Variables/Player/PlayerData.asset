@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3a52efee442da4882723ebe0cb9b1b, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  character_name: {fileID: 11400000, guid: 80588d0018ce1fe49acf760fa27e1090, type: 2}
+  avatar: {fileID: 0}
+  playerPosition: {fileID: 11400000, guid: 55508fb05fa6f1e4dbbdb26bb4edb6c4, type: 2}
+  stats:
+  - {fileID: 11400000, guid: 5a40079fb69929043a6b6f9bafc51416, type: 2}
+  - {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
+  - {fileID: 11400000, guid: 52d982d39a175834e842a68ac2b3a673, type: 2}
+  abilities: []
+  subjects: []
+  skills: []

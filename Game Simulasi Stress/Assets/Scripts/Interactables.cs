@@ -36,11 +36,14 @@ public class Interactables : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Submit") && isInRange && !IgnoreInput())
+        if (Input.GetButtonDown("Submit") && isInRange)
         {
-            Debug.Log("Interactable Input Presseds");
-            dialoguePasser.PassValue(defaultDialogue);
-            onDialogStart.Raise();
+            if (!IgnoreInput())
+            {
+                Debug.Log("Interaction Started : " + this.gameObject.name);
+                dialoguePasser.PassValue(defaultDialogue);
+                onDialogStart.Raise();
+            } 
         }
     }
 
