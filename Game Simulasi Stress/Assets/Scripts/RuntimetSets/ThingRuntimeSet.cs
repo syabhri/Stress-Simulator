@@ -8,5 +8,5 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Runtime Set/Thing")]
-public class ThingRuntimeSet : RuntimeSet<Thing>
+public class ThingRuntimeSet : RuntimeSet<GameObject>
 { }

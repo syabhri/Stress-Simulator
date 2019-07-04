@@ -26,10 +26,16 @@ public class Thing : MonoBehaviour
     private void OnEnable()
     {
         if (isSingle)
-            RuntimeSet.Item = this;
+        {
+            RuntimeSet.Item = gameObject;
+            RuntimeSet.isSingle = true;
+        }
         else
-            RuntimeSet.Add(this);
+        {
+            RuntimeSet.Add(gameObject);
+        }
     }
+            
 
     private void Start()
     {
@@ -41,17 +47,17 @@ public class Thing : MonoBehaviour
     {
         if (removeOnDisabled)
         {
-            if (isSingle)
+            if (RuntimeSet.isSingle)
                 RuntimeSet.Item = null;
             else
-                RuntimeSet.Remove(this);
+                RuntimeSet.Remove(gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        if (!isSingle)
-            RuntimeSet.Remove(this);
+        if (!RuntimeSet.isSingle)
+            RuntimeSet.Remove(gameObject);
         else
             RuntimeSet.Item = null;
     }

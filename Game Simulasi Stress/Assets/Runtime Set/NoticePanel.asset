@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: NoticePanel
   m_EditorClassIdentifier: 
   Items: []
+  Item: {fileID: 0}
+  isSingle: 1

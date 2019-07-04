@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnergyScale
   m_EditorClassIdentifier: 
   DeveloperDescription: the energy consuption per hour
-  value: 1
+  value: 10

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tidur
   m_EditorClassIdentifier: 
   activityName: Tidur
+  isUseEnergy: 0
   isCostMoney: 0
   cost: 0
   isScaduled: 0
@@ -24,8 +25,9 @@ MonoBehaviour:
     days: 0
     hours: 0
     minutes: 15
-  isLimited: 0
-  limitPerDay: 0
+  isLimited: 1
+  limitPerDay: 1
+  currentCount: 0
   isDutrationAjustable: 1
   duration:
     days: 0
@@ -36,16 +38,19 @@ MonoBehaviour:
   increasedStressMultiplier: 0
   isDecreaseStress: 1
   decreaseStressByHours: 0
-  decreasedStressMultiplier: 0
-  isEffectedByStress: 0
-  EffectedStat:
-    target: {fileID: 0}
-    effector: 0
-    operation: 
-  isChangeOtherStat: 0
-  ChangeStatByHours: 0
-  otherStat: []
-  dialogue: {fileID: 0}
-  ValueLimit: 0
-  interest: []
-  abilityEffector: {fileID: 0}
+  decreasedStressMultiplier: 2
+  isChangeOtherStat: 1
+  ChangeStatByHours: 1
+  isEffectedByStress: 1
+  otherStat:
+    name: 
+    target: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
+    effector: 10
+    operation: +
+    useRange: 1
+    min: 0
+    max: 100
+    useExternalEeffector: 0
+    externalEffector: {fileID: 0}
+  interest: {fileID: 0}
+  ability: {fileID: 0}

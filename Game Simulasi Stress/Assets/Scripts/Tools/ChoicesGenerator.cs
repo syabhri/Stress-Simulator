@@ -53,6 +53,14 @@ public class ChoicesGenerator : MonoBehaviour
             button.onClick.AddListener(delegate { OnDialogEnd.Raise(); });
             button.onClick.AddListener(delegate { OnActivityStart.Raise(); });
             button.onClick.AddListener(delegate { OnDecisionEnd.Raise(); });
+
+            if (doActivity.isLimited)
+            {
+                if (ActivityManager.LimitPerDayReached(doActivity))
+                {
+                    button.interactable = false;
+                }
+            }
         }
         ButtonTextPasser.Value = dialogue.dismisses;
         //Debug.Log(dialogue.dismisses + dialogue.name);
@@ -88,6 +96,7 @@ public class ChoicesGenerator : MonoBehaviour
             button = unusedButtons.Dequeue();
             button.onClick.RemoveAllListeners();
             button.gameObject.SetActive(true);
+            button.interactable = true;
             usedButtons.Enqueue(button);
         }
         else

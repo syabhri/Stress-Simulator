@@ -7,78 +7,42 @@ public class MovementController : MonoBehaviour
     public FloatVariable speed;
     private Vector2 moveVelocity;
 
-    [Space]
-    public Rigidbody2D rigitbody2d;
-    [Space]
-    public Animator MovingAnimator;
-    public bool IsBlendTree;
-    public bool autoFlip;
+    private Rigidbody2D rigitbody2d;
+    private Animator MovingAnimator;
 
     private void OnEnable()
     {
         Debug.Log("Player Movement Enabled");
     }
 
+    private void Start()
+    {
+        rigitbody2d = GetComponent<Rigidbody2D>();
+        MovingAnimator = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        //control movement animation
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            if (!IsBlendTree)
-                MovingAnimator.SetBool("walk", true);
-        }
-        else
-        {
-            if (!IsBlendTree)
-                MovingAnimator.SetBool("walk", false);
-        }
+        //reset walk status
+        MovingAnimator.SetBool("walk", false);
 
-        //control movement animation (blendtree)
-        if (IsBlendTree)
-        {
-            MovingAnimator.SetFloat("X", Input.GetAxis("Horizontal"));
-            MovingAnimator.SetFloat("Y", Input.GetAxis("Vertical"));
-        }
+        //send axis information to control movement animation
+        MovingAnimator.SetFloat("X", Input.GetAxisRaw("Horizontal"));
+        MovingAnimator.SetFloat("Y", Input.GetAxisRaw("Vertical"));
 
-        //control character flip
-        if (Input.GetAxis("Horizontal") > 0 && autoFlip)
+        //sending last axis information to control idle animation
+        if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            MovingAnimator.SetFloat("wasX", Input.GetAxisRaw("Horizontal"));
+            MovingAnimator.SetFloat("wasY", 0);
+            MovingAnimator.SetBool("walk", true);
         }
-        else if(Input.GetAxis("Horizontal") < 0 && autoFlip)
+        if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-
-        // dumb char idle
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            MovingAnimator.SetBool("right", true);
-            MovingAnimator.SetBool("left", false);
-            MovingAnimator.SetBool("back", false);
-            MovingAnimator.SetBool("front", false);
-        }
-        else if (Input.GetAxis("Vertical") > 0)
-        {
-            MovingAnimator.SetBool("right", false);
-            MovingAnimator.SetBool("left", false);
-            MovingAnimator.SetBool("back", true);
-            MovingAnimator.SetBool("front", false);
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            MovingAnimator.SetBool("right", false);
-            MovingAnimator.SetBool("left", true);
-            MovingAnimator.SetBool("back", false);
-            MovingAnimator.SetBool("front", false);
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            MovingAnimator.SetBool("right", false);
-            MovingAnimator.SetBool("left", false);
-            MovingAnimator.SetBool("back", false);
-            MovingAnimator.SetBool("front", true);
+            MovingAnimator.SetFloat("wasX", 0);
+            MovingAnimator.SetFloat("wasY", Input.GetAxisRaw("Vertical"));
+            MovingAnimator.SetBool("walk", true);
         }
 
         //get input and set velocity base on speed and axis
@@ -98,7 +62,7 @@ public class MovementController : MonoBehaviour
 
     public void OnDisable()
     {
-        //MovingAnimator.SetBool("walk", false);
+        MovingAnimator.SetBool("walk", false);
         MovingAnimator.SetFloat("X", 0);
         MovingAnimator.SetFloat("Y", 0);
         Debug.Log("Player Movemnt Disabled");

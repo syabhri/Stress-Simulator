@@ -19,6 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a40079fb69929043a6b6f9bafc51416, type: 2}
   - {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
   - {fileID: 11400000, guid: 52d982d39a175834e842a68ac2b3a673, type: 2}
-  abilities: []
-  subjects: []
-  skills: []
+  ability: {fileID: 11400000, guid: 6335c0c8a0b99d4469e550d4b51171ce, type: 2}
+  interest:
+  - {fileID: 0}
+  skills:
+  - {fileID: 11400000, guid: 1ebca7b465c188143b0ee7ac607b5bc1, type: 2}

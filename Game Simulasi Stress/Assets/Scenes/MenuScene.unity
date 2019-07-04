@@ -3496,7 +3496,18 @@ MonoBehaviour:
   m_Group: {fileID: 1030256985}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
+        m_MethodName: SetAvatar
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
@@ -3909,10 +3920,10 @@ RectTransform:
   m_Father: {fileID: 125126156}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -556, y: -200}
+  m_SizeDelta: {x: 510, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &801465891
 MonoBehaviour:
@@ -4642,7 +4653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.9172974, y: -108}
+  m_AnchoredPosition: {x: 1.9172363, y: -108}
   m_SizeDelta: {x: -70.9, y: -256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055968706
@@ -5297,8 +5308,8 @@ GameObject:
   - component: {fileID: 1209412314}
   - component: {fileID: 1209412317}
   - component: {fileID: 1209412316}
-  - component: {fileID: 1209412315}
   - component: {fileID: 1209412318}
+  - component: {fileID: 1209412315}
   m_Layer: 5
   m_Name: Avatar Display
   m_TagString: Untagged
@@ -5334,14 +5345,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1209412313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0293b5db2b02bb54dbf3ad7c3dcfb324, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1209412316}
-  dropdown: {fileID: 0}
-  sprites:
-  - {fileID: 21300000, guid: f2a5f96d642dc4246a5bcc44c642c4d1, type: 3}
-  - {fileID: 21300000, guid: 872d3d4038fdd144eb679d981b2ee8ac, type: 3}
+  Event: {fileID: 11400000, guid: 826cec9567c32eb4e8687d1fc0e46b50, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1209412316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,7 +5385,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f2a5f96d642dc4246a5bcc44c642c4d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a2119b4efdf6bc468c9c8833af2e269, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5388,11 +5411,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1209412313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
+  Event: {fileID: 11400000, guid: 494b6b1bf42438446b23a47c2739f1fd, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1209412316}
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 21300000, guid: 3a2119b4efdf6bc468c9c8833af2e269,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1227997249
 GameObject:
   m_ObjectHideFlags: 3

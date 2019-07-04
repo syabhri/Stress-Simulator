@@ -41,14 +41,18 @@ MonoBehaviour:
   isDecreaseStress: 1
   decreaseStressByHours: 1
   decreasedStressMultiplier: 5
-  isEffectedByStress: 1
   isChangeOtherStat: 1
   ChangeStatByHours: 0
+  isEffectedByStress: 1
   otherStat:
+    name: 
     target: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
     effector: 10
+    operation: +
+    useRange: 0
+    min: 0
+    max: 0
     useExternalEeffector: 0
     externalEffector: {fileID: 0}
-  operation: 
   interest: {fileID: 0}
-  ability: {fileID: 0}
+  ability: {fileID: 11400000, guid: 6335c0c8a0b99d4469e550d4b51171ce, type: 2}

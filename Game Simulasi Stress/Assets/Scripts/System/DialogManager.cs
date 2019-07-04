@@ -10,14 +10,14 @@ public class DialogManager : MonoBehaviour
     public float typingDelay = .01f;
     public float punctuationDelay = .5f;
     [SerializeField]
-    private List<char> punctuation;
+    private List<char> punctuation = new List<char>();
     [Tooltip("replace words that match in \"local\" with \"external\" from the dilaog")]
-    public List<StringPair> replace;
+    public List<StringPair> replace = new List<StringPair>();
 
     [Header("UI Output")]
     public StringVariable nameText;
     public StringVariable dialogueText;
-    public SpriteContainer avatarSprite;
+    //public Sprite avatarSprite;
 
     [Header("Reference")]
     public ThingRuntimeSet decisionPanel;
@@ -44,15 +44,16 @@ public class DialogManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         speakers = new Queue<Speaker>();
-        punctuation = new List<char>();
     }
-
     private void Update()
     {
         //listen submit only when dilaog panel is open but decision panel is closed
-        if (IsDialogOpen.value)
-            if (Input.GetButtonDown("Submit") && !IsDecisionOpen.value)
+        if (Input.GetButtonDown("Submit"))
+            if (IsDialogOpen.value && !IsDecisionOpen.value)
+            {
                 DisplayNextSentences();
+                Debug.Log("Displaying next sentence....");
+            }
     }
 
     private void OnEnable()
@@ -83,6 +84,7 @@ public class DialogManager : MonoBehaviour
 
     public void DisplayNextSpeaker()
     {
+        Debug.Log("Displaying Next Speaker");
         if (speakers.Count == 0)
         {
             if (dialogue.nextDialog.Length != 0 || dialogue.doActivities.Length != 0)
@@ -94,7 +96,7 @@ public class DialogManager : MonoBehaviour
 
         Speaker speaker = speakers.Dequeue();
         nameText.Value = speaker.name;
-        avatarSprite.sprite = speaker.avatar;
+        //avatarSprite = speaker.avatar;
         sentences.Clear();
 
         foreach (string sentence in speaker.sentences)
@@ -163,9 +165,9 @@ public class DialogManager : MonoBehaviour
     public void StartDecision()
     {
         Debug.Log("Decision Started");
-        foreach (Thing thing in decisionPanel.Items)
+        foreach (GameObject thing in decisionPanel.Items)
         {
-            thing.gameObject.SetActive(true);
+            thing.SetActive(true);
         }
         IsDecisionOpen.value = true;
         dialoguePasser = dialogue;
@@ -175,9 +177,9 @@ public class DialogManager : MonoBehaviour
     public void EndDecision()
     {
         IsDecisionOpen.value = false;
-        foreach (Thing thing in decisionPanel.Items)
+        foreach (GameObject thing in decisionPanel.Items)
         {
-            thing.gameObject.SetActive(false);
+            thing.SetActive(false);
         }
         Debug.Log("Decision Ended");
     }

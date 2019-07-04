@@ -19,6 +19,7 @@ public class ActivityManager : MonoBehaviour
     [Header("References")]
     public ThingRuntimeSet timeSetterPanel;
     public ThingRuntimeSet timeSetterOkButton;
+    public ThingRuntimeSet noticePanel;
 
     [Header("Conditions")]
     public BoolVariable isTimeSetterOpen;
@@ -26,11 +27,16 @@ public class ActivityManager : MonoBehaviour
     [Header("Events")]
     public GameEvent onPlayerMove;
     public GameEvent onPlayerStop;
-    public GameEvent onPhase2;
     public GameEvent onAjustDuration;
 
     [Header("Data Passer")]
     public TimeContainer timePasser;
+
+    [Header("UI Output")]
+    public StringVariable noticePanelText;
+
+    [Header("Activities")]
+    public List<Activity> activityList;
 
     //time setter panel ok button;
     private Button okButton;
@@ -41,9 +47,12 @@ public class ActivityManager : MonoBehaviour
 
     #region Unity Calback Function
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-
+        if (currentTime.time.hours == 0 && currentTime.time.minutes == 0)
+        {
+            ResetLimitPerDay();
+        }
     }
     #endregion
 
@@ -57,12 +66,12 @@ public class ActivityManager : MonoBehaviour
         if(activity.isDutrationAjustable)
         {
             //open panel to insert duration and change duration to the inputed amount
-            foreach (Thing thing in timeSetterPanel.Items)
+            foreach (GameObject thing in timeSetterPanel.Items)
             {
-                thing.gameObject.SetActive(true);
+                thing.SetActive(true);
                 Debug.Log("TimeSetter active");
             }
-            foreach (Thing thing in timeSetterOkButton.Items)//sementara
+            foreach (GameObject thing in timeSetterOkButton.Items)//sementara
             {
                 okButton = thing.GetComponent<Button>();
             }
@@ -103,9 +112,16 @@ public class ActivityManager : MonoBehaviour
             ChangeOtherStat();
         }
 
-        if (activity.interest != null)
+        //apply the bonus interest if activity interest match any of player interest
+        if (activity.interest != null && playerData.interest.Count > 0)
         {
-            
+            ApplyBonusInterest();
+        }
+
+        //apply the ability bonus if activity ability match the player ability
+        if (activity.ability != null && playerData.ability != null)
+        {
+            ApplyBonusAbility();
         }
 
         EndActivity();
@@ -121,11 +137,17 @@ public class ActivityManager : MonoBehaviour
             Debug.Log("Energy Decreased by " + consuption + ", Energy = " + energy.value);
         }
             
-        //decrease the money if activity using money
+        // decrease the money if activity using money
         if (activity.isCostMoney)
         {
             money.value -= activity.cost;
             Debug.Log("Money Decreased by " + activity.cost + ", Money = " + money.value);
+        }
+
+        // if activity is limited increase activity count
+        if (activity.isLimited)
+        {
+            activity.currentCount += 1;
         }
 
         onPlayerMove.Raise();
@@ -148,7 +170,10 @@ public class ActivityManager : MonoBehaviour
         }
         else //show message "you too tired"
         {
-            Debug.Log("Not Enough Energy, need at least " + consuption + " energy");
+            string message = "Energi Tidak Cukup, Butuh Setidaknya " + consuption + " energi";
+            noticePanelText.Value = message;
+            noticePanel.Item.SetActive(true);
+            Debug.Log(message);
             Debug.Log("Activity Ended");
             onPlayerMove.Raise();
             return false;
@@ -164,7 +189,10 @@ public class ActivityManager : MonoBehaviour
         }
         else //show message "you dont have enough money"
         {
-            Debug.Log("Not Enough Money, need at least " + activity.cost + " coin");
+            string message = "Koin Tidak Cukup, Butuh Setidaknya " + activity.cost + " Koin";
+            noticePanelText.Value = message;
+            noticePanel.Item.SetActive(true);
+            Debug.Log(message);
             Debug.Log("Activity Ended");
             onPlayerMove.Raise();
             return false;
@@ -223,54 +251,15 @@ public class ActivityManager : MonoBehaviour
         if (activity.isEffectedByStress)
             effector = EffectedByStress(effector);
 
-        // process the effector if the
-        if (activity.interest != null)
-        {
-            effector = ApplyBonusInterest(effector);
-        }
-
-        if (activity.ability != null)
-        {
-            effector = ApplyBonusAbility(effector);
-        }
-
         //change the target stat according to the configured operation and effector
-        switch (activity.operation)
-        {
-            case "=":
-                pair.target.value = effector;
-                break;
-            case "+":
-                pair.target.value += effector;
-                break;
-            case "-":
-                pair.target.value -= effector;
-                break;
-            case "*":
-                pair.target.value *= effector;
-                break;
-            case "/":
-                pair.target.value /= effector;
-                break;
-            default:
-                Debug.LogError("Operator Not Match : " +
-                    activity.operation + ", available operator are \"=+-*/\"");
-                break;
-        }
+        pair.DoOperation(effector);
 
         //limit range so the stat can't go above 100 or below 0
-        if (pair.target.value > 100)
-        {
-            pair.target.value = 100;
-        }
-        if (pair.target.value < 0)
-        {
-            pair.target.value = 0;
-        }
+        pair.target.value = Mathf.Clamp(pair.target.value, 0, 100);
 
         Debug.Log("Stat " + pair.target.name + " Changed from " +
             old + " to " + pair.target.value +
-            " using " + activity.operation + " operation with " +
+            " using " + pair.operation + " operation with " +
             effector + " effector value");
     }
 
@@ -291,26 +280,46 @@ public class ActivityManager : MonoBehaviour
         return effector;
     }
 
-    public float ApplyBonusInterest(float effector)
+    public void ApplyBonusInterest()
     {
-        foreach (FloatVariable interest in playerData.interest)
+        //cycle trough player interest
+        foreach (FloatPairContainer interest in playerData.interest)
         {
-            if (activity.interest == interest)
+            float old = activity.interest.pair.target.value; ;
+            //if activity interest match the player interest
+            if (activity.interest.name == interest.name)
             {
-                effector += interest.value;
-                return effector;
-            }
-        }
-        return effector;
+                old = activity.interest.pair.target.value;
+
+                //and the stat is change by the hours
+                if (activity.ChangeStatByHours)
+                {
+                    //apply the interest bonus multiply by the activity duration
+                    activity.interest.pair.DoOperation((int)activity.duration.ToHours());
+                }
+                else
+                {
+                    activity.interest.pair.DoOperation();
+                }
+
+                Debug.Log("Interest Applied " + old + " > " + activity.interest.pair.target.value);
+            }     
+        }   
     }
 
-    public float ApplyBonusAbility(float effector)
+    public void ApplyBonusAbility()
     {
-        if (activity.ability == playerData.ability)
+        float old;
+        if (activity.ability.name == playerData.ability.name)
         {
-            effector += activity.ability.value;
+            old = activity.ability.pair.target.value;
+            if (activity.ChangeStatByHours)
+                activity.ability.pair.DoOperation((int)activity.duration.ToHours());
+            else
+                activity.ability.pair.DoOperation();
+
+            Debug.Log("Ability Applied " + old + " > " + activity.ability.pair.target.value);
         }
-        return effector;
     }
     #endregion
 
@@ -327,20 +336,30 @@ public class ActivityManager : MonoBehaviour
         return false;
     }
 
-    public bool CheckLimitPerDay()
+    public static bool LimitPerDayReached(Activity activity)
     {
-        if (activity.currentCount > activity.limitPerDay)
+        if (activity.currentCount >= activity.limitPerDay)
             return true;
         else
             return false;
     }
 
+    public void ResetLimitPerDay()
+    {
+        foreach (Activity activity in activityList)
+        {
+            if (activity.isLimited)
+                activity.currentCount = 0;
+        }
+    }
+
+    /*
     public bool CheckValueLimit()
     {
         if (activity.currentValue > activity.valueLimit)
             return true;
         else
             return false;
-    }
+    }*/
     #endregion
 }

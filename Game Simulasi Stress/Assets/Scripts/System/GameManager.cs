@@ -9,10 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("Properties")]
     public Vector2Variable spawnPoint;
 
-    public PlayerData playerData;
-
     [Header("Reference")]
-    public GameObject PlayerPrefab;
+    public PlayerData playerData;
 
     [Header("Conditions")]
     public BoolVariable IsPlaying;
@@ -39,7 +37,7 @@ public class GameManager : MonoBehaviour
         ChangeScene("GameplayScene");
     }
 
-    public void QuitGame()
+    public static void QuitGame()
     {
         Application.Quit();
     }
@@ -55,9 +53,9 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer(Vector2 position)
     {
-        Instantiate<GameObject>(PlayerPrefab, new
+        Instantiate<GameObject>(playerData.avatar, new
             Vector3(position.x, position.y, 0),
-            PlayerPrefab.transform.rotation);
+            Quaternion.identity);
     }
     #endregion
 }

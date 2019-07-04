@@ -12,6 +12,8 @@ public abstract class RuntimeSet<T> : ScriptableObject
 {
     public List<T> Items = new List<T>();
     public T Item;
+    [HideInInspector]
+    public bool isSingle;
 
     public void Add(T thing)
     {

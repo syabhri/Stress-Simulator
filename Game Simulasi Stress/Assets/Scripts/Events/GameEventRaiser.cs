@@ -5,10 +5,45 @@ using UnityEngine.Events;
 
 public class GameEventRaiser : MonoBehaviour
 {
-    public UnityEvent[] unityEvent;
+    [Tooltip("invoke event when disabled")]
+    public bool onDisable;
+    [Tooltip("invoke event when enabled")]
+    public bool onEnable;
+    public UnityEvent unityEvents;
+
+    private void OnEnable()
+    {
+        if (onEnable)
+        {
+            OnGameEventRaised();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (onDisable)
+        {
+            OnGameEventRaised();
+        }
+    }
+
+    public void OnGameEventRaised()
+    {
+        unityEvents.Invoke();
+    }
+
+    /* reserved
+    public void OnGameEventRaised()
+    {
+        foreach (UnityEvent unityEvent in unityEvents)
+        {
+            unityEvent.Invoke();
+        }
+    }
 
     public void OnGameEventRaised(int i)
     {
-        unityEvent[i].Invoke();
+        unityEvents[i].Invoke();
     }
+    */
 }

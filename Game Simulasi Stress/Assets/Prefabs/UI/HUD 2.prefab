@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 604649416918193}
   - component: {fileID: 604649416918194}
   m_Layer: 5
-  m_Name: HUD 1
+  m_Name: HUD 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1066,7 +1066,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slider: {fileID: 604649428931401}
   Variable: {fileID: 11400000, guid: 5a40079fb69929043a6b6f9bafc51416, type: 2}
-  normalize: 1
+  min: 0
+  max: 100
 --- !u!1 &604649456932233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1133,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 50%
+  m_text: 40%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1214,7 +1215,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
