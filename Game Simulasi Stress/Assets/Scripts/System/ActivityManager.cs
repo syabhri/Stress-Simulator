@@ -28,6 +28,7 @@ public class ActivityManager : MonoBehaviour
     public GameEvent onPlayerMove;
     public GameEvent onPlayerStop;
     public GameEvent onAjustDuration;
+    public GameEvent onTimeSkip;
 
     [Header("Data Passer")]
     public TimeContainer timePasser;
@@ -47,6 +48,10 @@ public class ActivityManager : MonoBehaviour
 
     #region Unity Calback Function
     // Start is called before the first frame update
+    private void Start()
+    {
+        okButton = timeSetterOkButton.Item.GetComponent<Button>();
+    }
     void Update()
     {
         if (currentTime.time.hours == 0 && currentTime.time.minutes == 0)
@@ -63,18 +68,13 @@ public class ActivityManager : MonoBehaviour
         onPlayerStop.Raise();
         this.activity = activity;
 
+        noticePanelText.Value = string.Empty;
+
         if(activity.isDutrationAjustable)
         {
             //open panel to insert duration and change duration to the inputed amount
-            foreach (GameObject thing in timeSetterPanel.Items)
-            {
-                thing.SetActive(true);
-                Debug.Log("TimeSetter active");
-            }
-            foreach (GameObject thing in timeSetterOkButton.Items)//sementara
-            {
-                okButton = thing.GetComponent<Button>();
-            }
+            timeSetterPanel.Item.SetActive(true);
+            Debug.Log("TimeSetter opened");
             okButton.onClick.RemoveAllListeners();
             okButton.onClick.AddListener(delegate { AdjustDuration(); });
             okButton.onClick.AddListener(delegate { Phase2(); });
@@ -134,6 +134,7 @@ public class ActivityManager : MonoBehaviour
         {
             float consuption = EnergyPerHour.value * activity.duration.ToHours();
             energy.value -= consuption;
+            noticePanelText.Value += "Energy -" + consuption + "/n";
             Debug.Log("Energy Decreased by " + consuption + ", Energy = " + energy.value);
         }
             
@@ -141,6 +142,7 @@ public class ActivityManager : MonoBehaviour
         if (activity.isCostMoney)
         {
             money.value -= activity.cost;
+            noticePanelText.Value += "Money -" + activity.cost + "/n";
             Debug.Log("Money Decreased by " + activity.cost + ", Money = " + money.value);
         }
 
@@ -149,6 +151,8 @@ public class ActivityManager : MonoBehaviour
         {
             activity.currentCount += 1;
         }
+
+        SkipTime();
 
         onPlayerMove.Raise();
         Debug.Log("Activity Ended");
@@ -209,6 +213,7 @@ public class ActivityManager : MonoBehaviour
 
         if (stress.value > 100)
             stress.value = 100;
+        noticePanelText.Value += "Stress +" + (stress.value - old) + "/n";
         Debug.Log("Stress +" + (stress.value - old) + ", Stress = " + stress.value);
     }
 
@@ -222,6 +227,7 @@ public class ActivityManager : MonoBehaviour
             stress.value -= activity.decreasedStressMultiplier;
         if (stress.value < 0)
             stress.value = 0;
+        noticePanelText.Value += "Stress " + (stress.value - old) + "/n";
         Debug.Log("Stress " + (stress.value - old) + ", Stress = " + stress.value);
     }
 
@@ -257,6 +263,7 @@ public class ActivityManager : MonoBehaviour
         //limit range so the stat can't go above 100 or below 0
         pair.target.value = Mathf.Clamp(pair.target.value, 0, 100);
 
+        noticePanelText.Value += pair.target.name + " " + (pair.target.value - old);
         Debug.Log("Stat " + pair.target.name + " Changed from " +
             old + " to " + pair.target.value +
             " using " + pair.operation + " operation with " +
@@ -351,6 +358,12 @@ public class ActivityManager : MonoBehaviour
             if (activity.isLimited)
                 activity.currentCount = 0;
         }
+    }
+
+    public void SkipTime()
+    {
+        timePasser.time.PassValue(activity.duration);
+        onTimeSkip.Raise();
     }
 
     /*

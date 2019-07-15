@@ -21,4 +21,29 @@ public class PlayerData : ScriptableObject
     {
         this.avatar = avatar;
     }
+
+    public void SetAbility(FloatPairContainer ability)
+    {
+        this.ability = ability;
+    }
+
+    public void ResetAbility()
+    {
+        ability = null;
+    }
+
+    public void SetInterest(FloatPairContainer interest)
+    {
+        this.interest.Add(interest);
+    }
+
+    public void RemoveInterest(FloatPairContainer interest)
+    {
+        this.interest.Remove(interest);
+    }
+
+    public void ResetInterest()
+    {
+        interest.Clear();
+    }
 }

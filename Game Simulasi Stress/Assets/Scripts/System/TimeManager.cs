@@ -29,6 +29,13 @@ public class TimeManager : MonoBehaviour
             UpdateTime();       
     }
 
+    private void OnDisable()
+    {
+        CurrentTime.time.days = 0;
+        CurrentTime.time.hours = 0;
+        CurrentTime.time.minutes = 0;
+    }
+
     private void UpdateTime()
     {
         totalTime += Time.deltaTime / TimeScale.value;

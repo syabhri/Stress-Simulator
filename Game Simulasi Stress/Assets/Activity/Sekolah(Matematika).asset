@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: Sekolah(Matematika)
   m_EditorClassIdentifier: 
-  activityName: Sekolah(Matematika)
+  activityName: Sekolah()
   isUseEnergy: 1
   isCostMoney: 0
   cost: 0
@@ -28,8 +28,6 @@ MonoBehaviour:
   isLimited: 0
   limitPerDay: 0
   currentCount: 0
-  valueLimit: 0
-  currentValue: 0
   isDutrationAjustable: 0
   duration:
     days: 0

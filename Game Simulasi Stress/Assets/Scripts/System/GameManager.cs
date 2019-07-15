@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
     #region Variables and Class Reverences
     [Header("Properties")]
-    public Vector2Variable spawnPoint;
+    public Vector2Variable DefaultSpawnPoint;
+    public TimeContainer GameTimeUp;
 
     [Header("Reference")]
     public PlayerData playerData;
+    public TimeContainer CurrentTime;
 
     [Header("Conditions")]
     public BoolVariable IsPlaying;
@@ -22,9 +26,18 @@ public class GameManager : MonoBehaviour
     {
         if (IsPlaying.value)
         {
-            SpawnPlayer(playerData.playerPosition.position);
+            //SpawnPlayer(playerData.playerPosition.position);
         }
     }
+
+    private void Update()
+    {
+        if (IsPlaying.value)
+        {
+            CheckEndGame();
+        }
+    }
+
     private void OnApplicationQuit()
     {
         IsPlaying.value = false;
@@ -34,6 +47,7 @@ public class GameManager : MonoBehaviour
     #region GameManager function
     public void PlayGame()
     {
+        IsPlaying.value = true;
         ChangeScene("GameplayScene");
     }
 
@@ -56,6 +70,22 @@ public class GameManager : MonoBehaviour
         Instantiate<GameObject>(playerData.avatar, new
             Vector3(position.x, position.y, 0),
             Quaternion.identity);
+        Debug.Log("player spawed");
+    }
+
+    public void CheckEndGame()
+    {
+        if (CurrentTime.time.days >= GameTimeUp.time.days)
+        {
+            if (CurrentTime.time.hours >= GameTimeUp.time.hours)
+            {
+                if (CurrentTime.time.minutes >= GameTimeUp.time.minutes)
+                {
+                    IsPlaying.value = false;
+                    ChangeScene(2);
+                }
+            }
+        }
     }
     #endregion
 }
