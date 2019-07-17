@@ -6,20 +6,28 @@ public class ToggleEvent : MonoBehaviour
 {
     [Tooltip("the toggle that will trigger the event")]
     public Toggle toggle;
-    [Tooltip("trigger the event when toggle is off/unselected instead")]
-    public bool whenOff;
     [Tooltip("the event that will be triggered")]
-    public UnityEvent unityEvent;
-    
-    public void TryInvoke()
+    public UnityEvent onSelect;
+    public UnityEvent onDeselect;
+
+    private void Start()
     {
-        if (!whenOff && toggle.isOn)
+        if (toggle == null)
         {
-            unityEvent.Invoke();
+            toggle = GetComponent<Toggle>();
         }
-        else if (whenOff && !toggle.isOn)
+        InvokeEvent();
+    }
+
+    public void InvokeEvent()
+    {
+        if (toggle.isOn)
         {
-            unityEvent.Invoke();
+            onSelect.Invoke();
+        }
+        else if (!toggle.isOn)
+        {
+            onDeselect.Invoke();
         }
     }
 }

@@ -14,6 +14,7 @@ using TMPro;
 
 public class TextReplacer : MonoBehaviour
 {
+    [Tooltip("Text In ui that need to be relace")]
     public TextMeshProUGUI Text; // <changes>
 
     [Space]

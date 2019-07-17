@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   character_name: {fileID: 11400000, guid: 80588d0018ce1fe49acf760fa27e1090, type: 2}
-  avatar: {fileID: 7996294828283943519, guid: e026d9ac4b4b9834fbefd47f61247100, type: 3}
+  avatar: {fileID: 7996294828283943519, guid: 587ee922fd4df4046ba62cb7e0813491, type: 3}
   playerPosition: {fileID: 11400000, guid: 55508fb05fa6f1e4dbbdb26bb4edb6c4, type: 2}
   stats:
   - {fileID: 11400000, guid: 5a40079fb69929043a6b6f9bafc51416, type: 2}
   - {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
   - {fileID: 11400000, guid: 52d982d39a175834e842a68ac2b3a673, type: 2}
-  ability: {fileID: 11400000, guid: 7831b0a20b86084439a587e180db9927, type: 2}
+  ability: {fileID: 0}
   interest: []
   skills:
   - {fileID: 11400000, guid: 1ebca7b465c188143b0ee7ac607b5bc1, type: 2}

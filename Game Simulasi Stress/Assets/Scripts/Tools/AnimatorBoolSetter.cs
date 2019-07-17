@@ -37,4 +37,9 @@ public class AnimatorBoolSetter : MonoBehaviour
     {
         Animator.SetBool(parameterHash, Bool.value);
     }
+
+    private void OnDisable()
+    {
+        Bool.value = false;
+    }
 }

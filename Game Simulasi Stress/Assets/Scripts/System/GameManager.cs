@@ -12,18 +12,30 @@ public class GameManager : MonoBehaviour
     public Vector2Variable DefaultSpawnPoint;
     public TimeContainer GameTimeUp;
 
-    [Header("Reference")]
+    [Header("External Variables")]
     public PlayerData playerData;
     public TimeContainer CurrentTime;
 
+    [Header("Reference")]
+    public ThingRuntimeSet noticePanel;
+    public ThingRuntimeSet Player;
+
     [Header("Conditions")]
     public BoolVariable IsPlaying;
+
+    [Header("UI Output")]
+    public StringVariable NoticeText;
+
+    private SpriteRenderer playerSprite;
+    private Animator playerAnimator;
 
     #endregion
 
     #region Unity Event Function
     private void Start()
     {
+        playerSprite = Player.Item.GetComponent<SpriteRenderer>();
+        playerAnimator = Player.Item.GetComponent<Animator>();
         if (IsPlaying.value)
         {
             //SpawnPlayer(playerData.playerPosition.position);
@@ -47,30 +59,45 @@ public class GameManager : MonoBehaviour
     #region GameManager function
     public void PlayGame()
     {
+        if (!CheckDataPlayer())
+        {
+            NoticeText.Value = "Tolong Isi Nama Karakter";
+            noticePanel.Item.SetActive(true);
+            return;
+        }
         IsPlaying.value = true;
         ChangeScene("GameplayScene");
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }
 
-    public static void ChangeScene(string name)
+    public void ChangeScene(string name)
     {
         SceneManager.LoadScene(name);
     }
-    public static void ChangeScene(int id)
+    public void ChangeScene(int id)
     {
         SceneManager.LoadScene(id);
     }
 
+    // Function Reserved 
+    /*
     public void SpawnPlayer(Vector2 position)
     {
         Instantiate<GameObject>(playerData.avatar, new
             Vector3(position.x, position.y, 0),
             Quaternion.identity);
         Debug.Log("player spawed");
+    }*/
+
+    // assign the avatar sprite and animation to player character
+    public void AssignAvatar(Sprite sprite, RuntimeAnimatorController animator)
+    {
+        playerSprite.sprite = sprite;
+        playerAnimator.runtimeAnimatorController = animator;
     }
 
     public void CheckEndGame()
@@ -86,6 +113,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // will return false if required player data is incomplete or missing
+    public bool CheckDataPlayer()
+    {
+        if (playerData.character_name.Value == string.Empty)
+            return false;
+        else
+            return true;
     }
     #endregion
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     public Vector2Variable destination;
+    public GameEvent animationEvent;
 
     [Header("Interaction")]
     public bool isRequireInteraction;
@@ -18,7 +19,9 @@ public class Teleporter : MonoBehaviour
         isInRange = true;
         target = collision.transform;
         if (!isRequireInteraction)
+        {
             Teleport(collision.transform);
+        }  
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -36,6 +39,10 @@ public class Teleporter : MonoBehaviour
     // move targeted object to destination coordinate
     public void Teleport(Transform target)
     {
+        if (animationEvent != null)
+        {
+            animationEvent.Raise();
+        }
         try
         {
             target.SetPositionAndRotation(

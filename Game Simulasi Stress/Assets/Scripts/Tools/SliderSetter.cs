@@ -19,6 +19,14 @@ public class SliderSetter : MonoBehaviour
     public float min;
     public float max;
 
+    private void Start()
+    {
+        if (Slider == null)
+        {
+            Slider = GetComponent<Slider>();
+        }
+    }
+
     private void Update()
     {
             Slider.value = Mathf.Clamp01(
