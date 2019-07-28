@@ -9,13 +9,21 @@ public class PlayerData : ScriptableObject
     public GameObject avatar;
     public Vector2Variable playerPosition;
 
+    [Space]
+
     public List<FloatVariable> stats;
+
+    [Space]
 
     public FloatPairContainer ability;
 
+    [Space]
+
     public List<FloatPairContainer> interest;
 
-    public List<FloatVariable> skills;
+    [Space]
+
+    public List<FloatVariable> knowlage;
 
     public void SetAvatar(GameObject avatar)
     {

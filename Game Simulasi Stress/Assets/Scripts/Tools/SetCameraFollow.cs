@@ -5,17 +5,21 @@ using Cinemachine;
 
 public class SetCameraFollow : MonoBehaviour
 {
-    public PlayerData playerData;
+    public ThingRuntimeSet player;
 
     public CinemachineVirtualCamera virtualCamera;
     // Start is called before the first frame update
     void Start()
     {
+        if (virtualCamera == null)
+        {
+            virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        }
         SetFollow();
     }
 
     public void SetFollow()
     {
-        virtualCamera.Follow = playerData.avatar.transform;
+        virtualCamera.Follow = player.Item.transform;
     }
 }

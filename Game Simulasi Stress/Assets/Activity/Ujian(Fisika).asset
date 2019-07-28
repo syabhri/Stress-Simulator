@@ -46,7 +46,7 @@ MonoBehaviour:
     name: 
     target: {fileID: 11400000, guid: ad032580fae7d414a83b7e21d48c9108, type: 2}
     effector: 10
-    operation: +
+    operation: =
     useRange: 1
     min: 0
     max: 100

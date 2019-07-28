@@ -2431,7 +2431,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1205242496}
-        m_MethodName: PlayGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4537,12 +4537,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 739497648853751761, guid: 0ff27f6e6aec06e49b0566430400e8f3,
-        type: 3}
-      propertyPath: playerData
-      value: 
-      objectReference: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6,
-        type: 2}
     - target: {fileID: 739497648853751761, guid: 0ff27f6e6aec06e49b0566430400e8f3,
         type: 3}
       propertyPath: IsPlaying
@@ -9751,6 +9745,22 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2059149346167793096, guid: 300de625cf84acc4c9c7e669e1af72a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059149347344706643, guid: 300de625cf84acc4c9c7e669e1af72a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059149347344706643, guid: 300de625cf84acc4c9c7e669e1af72a0,
+        type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1835520806489497746, guid: 587ee922fd4df4046ba62cb7e0813491,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 300de625cf84acc4c9c7e669e1af72a0, type: 3}
 --- !u!114 &2187454418944105234 stripped

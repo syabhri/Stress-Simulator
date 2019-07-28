@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeScale: {fileID: 11400000, guid: f3318c67ebfcf9e4281fb11eaed097ce, type: 2}
   CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
+  StartTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
   updateTime: {fileID: 11400000, guid: 16542bb248d153342abcdd7eb71404c9, type: 2}
   timeText: {fileID: 11400000, guid: 73f03487940fc604ab5d43c9c0e8bbdc, type: 2}
   dayCountText: {fileID: 11400000, guid: 846f3544a9cfeeb47b6c49a0b69abb2e, type: 2}

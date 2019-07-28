@@ -8,6 +8,7 @@ public class TimeManager : MonoBehaviour
     [Header("Public Variable")]
     public FloatVariable TimeScale;
     public TimeContainer CurrentTime;
+    public TimeContainer StartTime;
     public BoolVariable updateTime;
 
     [Header("UI Output")]
@@ -22,6 +23,11 @@ public class TimeManager : MonoBehaviour
     const float hoursPerDay = 24f;
     const float minutesPerHours = 60f;
     readonly string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
+
+    private void Start()
+    {
+        SetTime(StartTime);
+    }
 
     private void Update()
     {

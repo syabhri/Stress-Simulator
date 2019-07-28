@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 
 public class PlayableFix : MonoBehaviour
 {
+    public ThingRuntimeSet timelineManager;
     public PlayableDirector director;
     public GameEvent OnPlayableFix;
 

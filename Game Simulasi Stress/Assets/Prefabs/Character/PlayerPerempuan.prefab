@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 7996294828283943504}
   - component: {fileID: 7996294828283943510}
   - component: {fileID: 7996294828283943509}
-  - component: {fileID: 586700229507866322}
   - component: {fileID: 583524678174741598}
   - component: {fileID: 9211676257634119387}
   m_Layer: 0
@@ -225,37 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 55508fb05fa6f1e4dbbdb26bb4edb6c4, type: 2}
   realtimeSaving: 0
---- !u!114 &586700229507866322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996294828283943519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: f47abde18f5a6d445863f61c1860a8e0, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7996294828283943518}
-        m_MethodName: set_runtimeAnimatorController
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 9100000, guid: 6ce8c4792c2128c42bd1a63bc45d6ca8,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.RuntimeAnimatorController,
-            UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!70 &583524678174741598
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

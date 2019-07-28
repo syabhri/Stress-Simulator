@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Teleporter : MonoBehaviour
 {
     public Vector2Variable destination;
-    public GameEvent animationEvent;
+    public GameEvent EnterAnimation;
+    public GameEvent ExitAnimation;
 
     [Header("Interaction")]
     public bool isRequireInteraction;
@@ -14,17 +16,18 @@ public class Teleporter : MonoBehaviour
     private bool isInRange = false;
     private Transform target;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         isInRange = true;
         target = collision.transform;
         if (!isRequireInteraction)
         {
-            Teleport(collision.transform);
-        }  
+            Teleport();
+        }
+        
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         isInRange = false;
     }
@@ -33,25 +36,40 @@ public class Teleporter : MonoBehaviour
     {
         if (isInRange)
             if (Input.GetButtonDown(triggerButton))
-                Teleport(target);
+                Teleport();
     }
 
     // move targeted object to destination coordinate
-    public void Teleport(Transform target)
+    public void Teleport()
     {
-        if (animationEvent != null)
+        if (EnterAnimation != null)
         {
-            animationEvent.Raise();
+            EnterAnimation.Raise();
         }
-        try
+        else
         {
-            target.SetPositionAndRotation(
-            new Vector3(destination.position.x, destination.position.y),
-            Quaternion.identity);
+            moveTarget();
         }
-        catch (System.Exception)
+    }
+
+    public void moveTarget()
+    {
+        if (isInRange)
         {
-            throw;
+            try
+            {
+                target.SetPositionAndRotation(
+                new Vector3(destination.position.x, destination.position.y),
+                Quaternion.identity);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            if (ExitAnimation != null)
+            {
+                ExitAnimation.Raise();
+            }
         }
     }
 }

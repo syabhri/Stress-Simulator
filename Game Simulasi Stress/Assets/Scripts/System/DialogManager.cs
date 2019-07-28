@@ -14,7 +14,7 @@ public class DialogManager : MonoBehaviour
     [Tooltip("replace words that match in \"local\" with \"external\" from the dilaog")]
     public List<StringPair> replace = new List<StringPair>();
 
-    [Header("UI Output")]
+    [Header("GUI")]
     public StringVariable nameText;
     public StringVariable dialogueText;
     //public Sprite avatarSprite;

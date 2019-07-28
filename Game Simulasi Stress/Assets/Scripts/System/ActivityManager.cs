@@ -32,6 +32,7 @@ public class ActivityManager : MonoBehaviour
 
     [Header("Data Passer")]
     public TimeContainer timePasser;
+    public Activity activity;//reference to the current activity
 
     [Header("UI Output")]
     public StringVariable noticePanelText;
@@ -41,9 +42,6 @@ public class ActivityManager : MonoBehaviour
 
     //time setter panel ok button;
     private Button okButton;
-    //reference to the current activity
-    [SerializeField]
-    private Activity activity;
     #endregion
 
     #region Unity Calback Function
