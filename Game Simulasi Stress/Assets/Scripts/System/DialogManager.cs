@@ -47,13 +47,14 @@ public class DialogManager : MonoBehaviour
     }
     private void Update()
     {
+        // Replaced By New Input Event Component
         //listen submit only when dilaog panel is open but decision panel is closed
-        if (Input.GetButtonDown("Submit"))
+        /*if (Input.GetButtonDown("Submit"))
             if (IsDialogOpen.value && !IsDecisionOpen.value)
             {
                 DisplayNextSentences();
                 Debug.Log("Displaying next sentence....");
-            }
+            }*/
     }
 
     private void OnEnable()

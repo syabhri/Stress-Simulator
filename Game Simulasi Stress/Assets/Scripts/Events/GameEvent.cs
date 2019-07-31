@@ -6,6 +6,7 @@
 // ----------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -22,6 +23,13 @@ public class GameEvent : ScriptableObject
         Debug.Log(name);
         for (int i = eventListeners.Count - 1; i >= 0; i--)
             eventListeners[i].OnEventRaised();
+    }
+
+    public void DelayedRaise(float delay)
+    {
+        Debug.Log(name);
+        for (int i = eventListeners.Count - 1; i >= 0; i--)
+            eventListeners[i].Invoke("OnEventRaised", delay);
     }
 
     public void RegisterListener(GameEventListener listener)

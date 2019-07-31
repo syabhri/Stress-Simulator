@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Teleporter : MonoBehaviour
 {
     public Vector2Variable destination;
-    public GameEvent EnterAnimation;
-    public GameEvent ExitAnimation;
+    public float delay;
 
     [Header("Interaction")]
     public bool isRequireInteraction;
@@ -18,6 +16,10 @@ public class Teleporter : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (destination == null)
+        {
+            Debug.LogError("Destination is not set");
+        }
         isInRange = true;
         target = collision.transform;
         if (!isRequireInteraction)
@@ -42,34 +44,20 @@ public class Teleporter : MonoBehaviour
     // move targeted object to destination coordinate
     public void Teleport()
     {
-        if (EnterAnimation != null)
-        {
-            EnterAnimation.Raise();
-        }
-        else
-        {
-            moveTarget();
-        }
+        Invoke("moveTarget", delay);  
     }
 
-    public void moveTarget()
+    private void moveTarget()
     {
-        if (isInRange)
+        try
         {
-            try
-            {
-                target.SetPositionAndRotation(
-                new Vector3(destination.position.x, destination.position.y),
-                Quaternion.identity);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
-            if (ExitAnimation != null)
-            {
-                ExitAnimation.Raise();
-            }
+            target.SetPositionAndRotation(
+            new Vector3(destination.position.x, destination.position.y),
+            Quaternion.identity);
+        }
+        catch (System.Exception)
+        {
+            throw;
         }
     }
 }

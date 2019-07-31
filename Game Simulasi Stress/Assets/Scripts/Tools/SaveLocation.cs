@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class SaveLocation : MonoBehaviour
 {
     public Vector2Variable target;

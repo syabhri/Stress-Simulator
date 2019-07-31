@@ -22,6 +22,7 @@ public class SliderTextUpdater : MonoBehaviour
         updateText();
     }
 
+    // called when value changed
     public void updateText ()
     {
         if (TextTarget == null && SliderSource == null)

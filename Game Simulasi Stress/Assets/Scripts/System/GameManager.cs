@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Vector2Variable DefaultSpawnPoint;
     public TimeContainer GameTimeUp;
     public TimeContainer StarTime;
+    public FloatVariable LoadingProgress;
 
     [Header("External Variables")]
     public PlayerData playerData;
@@ -20,16 +21,19 @@ public class GameManager : MonoBehaviour
 
     [Header("Reference")]
     public ThingRuntimeSet noticePanel;
+    public ThingRuntimeSet LoadingPanel;
     public ThingRuntimeSet Player;
 
     [Header("Conditions")]
-    public BoolVariable IsPlaying;
+    public bool IsPlaying;
+    public BoolVariable[] ignoreInput;
 
     [Header("UI Output")]
     public StringVariable NoticeText;
 
-    [Header("Event")]
-    public GameEvent OnTimeSet;
+    //[Header("Events")]
+    //public GameEvent OnPaused;
+
 
     //private SpriteRenderer playerSprite;
     //private Animator playerAnimator;
@@ -37,13 +41,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Unity Event Function
-    private void Start()
+    private void Awake()
     {
+        // set input group to 0;
+
         //playerSprite = Player.Item.GetComponent<SpriteRenderer>();
         //playerAnimator = Player.Item.GetComponent<Animator>();
-        if (IsPlaying.value)
+        if (IsPlaying)
         {
-            //SpawnPlayer(playerData.playerPosition.position);
             //AssignAvatar();
             SpawnPlayer(playerData.playerPosition.position);
         }
@@ -52,26 +57,42 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlaying.value)
+        if (IsPlaying)
         {
             CheckEndGame();
+            if (Input.GetButton("Pause") && !IgnoreInput())
+            {
+                
+            }
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        IsPlaying.value = false;
     }
     #endregion
 
     #region GameManager function
-    public void PlayGame()
+    public void PlayGame(int sceneIndex)
     {
-        IsPlaying.value = true;
-        ChangeScene("GameplayScene");
+        StartCoroutine(LoadAsynchronously(sceneIndex));
     }
 
-    public void NewGame()
+    IEnumerator LoadAsynchronously (int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        LoadingPanel.Item.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            Debug.Log(progress);
+
+            LoadingProgress.value = progress;
+
+            yield return null;
+        }
+    }
+
+    public void NewGame(int sceneIndex)
     {
         // Check Player Data
         if (!CheckDataPlayer())
@@ -119,7 +140,7 @@ public class GameManager : MonoBehaviour
         // set player position to default position
         playerData.playerPosition.position = DefaultSpawnPoint.position;
         
-        PlayGame();
+        PlayGame(sceneIndex);
     }
 
     public void LoadGame()
@@ -127,9 +148,26 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("Function not implemented yet");
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        Debug.Log("GamePaused");
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("GamePaused");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void QuitToMEnu()
+    {
+        ChangeScene(0);
     }
 
     public void ChangeScene(string name)
@@ -166,7 +204,7 @@ public class GameManager : MonoBehaviour
             {
                 if (CurrentTime.time.minutes >= GameTimeUp.time.minutes)
                 {
-                    IsPlaying.value = false;
+                    IsPlaying = false;
                     ChangeScene(2);
                 }
             }
@@ -180,6 +218,18 @@ public class GameManager : MonoBehaviour
             return false;
         else
             return true;
+    }
+
+    private bool IgnoreInput()
+    {
+        foreach (BoolVariable condition in ignoreInput)
+        {
+            if (condition.value)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     #endregion
 }

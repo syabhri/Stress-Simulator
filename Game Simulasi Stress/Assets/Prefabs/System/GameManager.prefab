@@ -46,10 +46,11 @@ MonoBehaviour:
   DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
   GameTimeUp: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
   StarTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
+  LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
   CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
   noticePanel: {fileID: 11400000, guid: 2cb3823165920064e9545481091ebcf9, type: 2}
-  Player: {fileID: 0}
-  IsPlaying: {fileID: 11400000, guid: 712fbe159e63d8d46ba2027ad7cac473, type: 2}
+  LoadingPanel: {fileID: 11400000, guid: 4ab8c066dc1bbee43892275e268b8f6a, type: 2}
+  Player: {fileID: 11400000, guid: 5232c2cb1655b1a4f9ffb386554d8729, type: 2}
+  IsPlaying: 0
   NoticeText: {fileID: 11400000, guid: 69054b7d623791f4bb009b049a9476af, type: 2}
-  OnTimeSet: {fileID: 0}

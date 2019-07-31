@@ -7,22 +7,22 @@ public class ColliderEvent : MonoBehaviour
 {
     [Tooltip("use triggered colider instead")]
     public bool onTrigger;
-    public GameEvent ExternalEvent;
-    public UnityEvent LocalEvent;
+    public UnityEvent enterEvent;
+    public UnityEvent exitEvent;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("ping");
         if (!onTrigger)
         {
-            if (ExternalEvent != null)
-            {
-                ExternalEvent.Raise();
-            }
-            else
-            {
-                LocalEvent.Invoke();
-            }
+            enterEvent.Invoke();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!onTrigger)
+        {
+            exitEvent.Invoke();
         }
     }
 
@@ -30,14 +30,15 @@ public class ColliderEvent : MonoBehaviour
     {
         if (onTrigger)
         {
-            if (ExternalEvent != null)
-            {
-                ExternalEvent.Raise();
-            }
-            else
-            {
-                LocalEvent.Invoke();
-            }
+            enterEvent.Invoke();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (onTrigger)
+        {
+            exitEvent.Invoke();
         }
     }
 }
