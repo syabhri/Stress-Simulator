@@ -30,6 +30,7 @@ public class DialogManager : MonoBehaviour
     public GameEvent OnDecisionStart;
     public GameEvent OnPlayerMove;
     public GameEvent OnPlayerStop;
+    public GameEvent OnDialogEnd;
 
     [Header("Data Passer")]
     public Dialogue dialoguePasser;
@@ -159,6 +160,7 @@ public class DialogManager : MonoBehaviour
     public void EndDialogue()
     {
         OnPlayerMove.Raise();
+        OnDialogEnd.Raise();
         IsDialogOpen.value = false;
         Debug.Log("Dialog Ended");
     }

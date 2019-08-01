@@ -60,10 +60,6 @@ public class GameManager : MonoBehaviour
         if (IsPlaying)
         {
             CheckEndGame();
-            if (Input.GetButton("Pause") && !IgnoreInput())
-            {
-                
-            }
         }
     }
     #endregion

@@ -15,9 +15,9 @@ public class Activity : ScriptableObject
     public bool isCostMoney;
     public float cost;
 
-    [Header("Scadule")]
-    public bool isScaduled;
-    public TimeFormat scadule;
+    [Header("Schedule")]
+    public bool isScheduled;
+    public TimeFormat schedule;
     public TimeFormat tolerance = new TimeFormat(0,0,15);//default value
 
     [Header("Limit")]
@@ -64,8 +64,8 @@ public class Activity : ScriptableObject
         isCostMoney = activity.isCostMoney;
         cost = activity.cost;
 
-        isScaduled = activity.isScaduled;
-        scadule.PassValue(activity.scadule);
+        isScheduled = activity.isScheduled;
+        schedule.PassValue(activity.schedule);
         tolerance.PassValue(activity.tolerance);
 
         isLimited = activity.isLimited;

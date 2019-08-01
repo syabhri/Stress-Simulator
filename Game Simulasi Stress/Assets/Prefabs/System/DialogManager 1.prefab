@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3570304904242914685}
   - component: {fileID: 483298412}
   - component: {fileID: 2089675601067290041}
+  - component: {fileID: 1473335187781568794}
+  - component: {fileID: 2007532418047168677}
   m_Layer: 0
   m_Name: DialogManager 1
   m_TagString: Untagged
@@ -61,6 +63,7 @@ MonoBehaviour:
   OnDecisionStart: {fileID: 11400000, guid: 6bfbf2927473bb642b205d392232be9a, type: 2}
   OnPlayerMove: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
   OnPlayerStop: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
+  OnDialogEnd: {fileID: 11400000, guid: dcd8139202ab99e44ae281b5d4d6775d, type: 2}
   dialoguePasser: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1, type: 2}
 --- !u!114 &3002764964020409517
 MonoBehaviour:
@@ -85,6 +88,30 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1473335187781568794}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1473335187781568794}
+        m_MethodName: ActivateInputGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -168,6 +195,78 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3002764964020409515}
         m_MethodName: DisplayNextSentences
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1473335187781568794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002764964020409514}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b06bb8268fce14b81d46f685fb77fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonName: Submit
+  useInputGroup: 1
+  inputGroup: 1
+  activeInputGroup: {fileID: 11400000, guid: 08dd9a1bf15002d4688e07ed0663ab32, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3002764964020409515}
+        m_MethodName: DisplayNextSentences
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &2007532418047168677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002764964020409514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: dcd8139202ab99e44ae281b5d4d6775d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1473335187781568794}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1473335187781568794}
+        m_MethodName: DeactivateInputGroup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -63,8 +63,17 @@ public class ActivityManager : MonoBehaviour
     public void DoActivity(Activity activity)
     {
         Debug.Log("activity started : " + activity.activityName);//testing
-        onPlayerStop.Raise();
         this.activity = activity;
+        onPlayerStop.Raise();
+
+        //check activity scadule
+        if (activity.isScheduled)
+        {
+            if (!CheckSchedule(activity))
+            {
+
+            }
+        }
 
         noticePanelText.Value = string.Empty;
 
@@ -86,6 +95,8 @@ public class ActivityManager : MonoBehaviour
     {
         Debug.Log("Activity Phase2 begin");
 
+
+
         if(activity.isUseEnergy)
             if (!CheckEnergy())
                 return;
@@ -93,7 +104,10 @@ public class ActivityManager : MonoBehaviour
         if (activity.isCostMoney)
             if (!CheckMoney())
                 return;
-        
+
+        //reset notice panel text
+        noticePanelText.Value = "";
+
         if (activity.isIncreaseStress)
         {
             IncreaseStress();
@@ -154,6 +168,8 @@ public class ActivityManager : MonoBehaviour
 
         onPlayerMove.Raise();
         Debug.Log("Activity Ended");
+
+
     }
 
     public void AdjustDuration()
@@ -329,10 +345,12 @@ public class ActivityManager : MonoBehaviour
     #endregion
 
     #region Activity Scheduling
-    public bool CkeckScadule(Activity activity)
+
+    // return true if atcivity is on scadule
+    public bool CheckSchedule(Activity activity)
     {
-        if (currentTime.time.hours >= activity.scadule.hours
-            && currentTime.time.minutes >= activity.scadule.minutes
+        if (currentTime.time.hours >= activity.schedule.hours
+            && currentTime.time.minutes >= activity.schedule.minutes
             && currentTime.time.hours <= activity.tolerance.hours
             && currentTime.time.minutes <= activity.tolerance.minutes)
         {
