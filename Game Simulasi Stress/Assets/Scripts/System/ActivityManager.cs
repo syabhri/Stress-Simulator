@@ -71,7 +71,12 @@ public class ActivityManager : MonoBehaviour
         {
             if (!CheckSchedule(activity))
             {
-
+                noticePanelText.Value =
+                    "Aktifitas belum tersedia, aktifitas baru bisa di lakukan mulai jam "
+                    + activity.schedule.hours.ToString("00") + " : " + activity.schedule.minutes.ToString("00");
+                noticePanel.Item.SetActive(true);
+                onPlayerMove.Raise();
+                return;
             }
         }
 

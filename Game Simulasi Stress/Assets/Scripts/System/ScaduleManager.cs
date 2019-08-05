@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class ScaduleManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Dialogue> dialogues;
+    public TimeContainer CurrentTime;
 
-    // Update is called once per frame
-    void Update()
+    public void SelectDialog()
     {
         
     }

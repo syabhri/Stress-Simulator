@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
-  m_Name: Sekolah(Matematika)
+  m_Name: Ujian(Fisika)
   m_EditorClassIdentifier: 
-  activityName: Sekolah()
+  activityName: ndo)lah(B. Indo)
   isUseEnergy: 1
   isCostMoney: 0
   cost: 0
-  isScaduled: 0
-  scadule:
+  isScheduled: 0
+  schedule:
     days: 0
     hours: 0
     minutes: 0
@@ -44,13 +44,13 @@ MonoBehaviour:
   isEffectedByStress: 0
   otherStat:
     name: 
-    target: {fileID: 11400000, guid: 1ebca7b465c188143b0ee7ac607b5bc1, type: 2}
+    target: {fileID: 11400000, guid: ad032580fae7d414a83b7e21d48c9108, type: 2}
     effector: 10
     operation: =
     useRange: 1
     min: 0
     max: 100
-    useExternalEeffector: 0
-    externalEffector: {fileID: 0}
-  interest: {fileID: 11400000, guid: c08b2637d93cf6e47a1d94934b2d0fda, type: 2}
+    useExternalEeffector: 1
+    externalEffector: {fileID: 11400000, guid: 0b3880c6a39453c4ca6be3d931689ff1, type: 2}
+  interest: {fileID: 11400000, guid: 79253bd6ef4cf8a4e9a0ed69275ca99b, type: 2}
   ability: {fileID: 0}

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
-  m_Name: Ujian(Biologi)
+  m_Name: Jalan-Jalan
   m_EditorClassIdentifier: 
-  activityName: Sekolah(B. Indo)
+  activityName: Jalan-Jalan
   isUseEnergy: 1
-  isCostMoney: 0
+  isCostMoney: 1
   cost: 0
-  isScaduled: 0
-  scadule:
+  isScheduled: 0
+  schedule:
     days: 0
     hours: 0
     minutes: 0
@@ -31,26 +31,26 @@ MonoBehaviour:
   isDutrationAjustable: 0
   duration:
     days: 0
-    hours: 2
+    hours: 0
     minutes: 0
-  isIncreaseStress: 1
+  isIncreaseStress: 0
   increaseStressByHours: 0
-  increasedStressMultiplier: 4
+  increasedStressMultiplier: 0
   isDecreaseStress: 0
   decreaseStressByHours: 0
   decreasedStressMultiplier: 0
-  isChangeOtherStat: 1
+  isChangeOtherStat: 0
   ChangeStatByHours: 0
   isEffectedByStress: 0
   otherStat:
     name: 
-    target: {fileID: 11400000, guid: 27a79a09500884d49b1455a702c280ef, type: 2}
-    effector: 10
-    operation: =
+    target: {fileID: 0}
+    effector: 0
+    operation: 
     useRange: 1
     min: 0
     max: 100
-    useExternalEeffector: 1
-    externalEffector: {fileID: 11400000, guid: 0bc8f11e2e6b56e43928a1a042ba62f6, type: 2}
-  interest: {fileID: 11400000, guid: 79253bd6ef4cf8a4e9a0ed69275ca99b, type: 2}
+    useExternalEeffector: 0
+    externalEffector: {fileID: 0}
+  interest: {fileID: 0}
   ability: {fileID: 0}

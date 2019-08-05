@@ -5,24 +5,27 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-    [Header("Public Variable")]
+    [Header("Properties")]
+    public float totalTime;
+    public float dayNormalized;
+    public float dayInAWeek;
+
+    [Space]
+    public const float dayPerWeek = 7f;
+    public const float hoursPerDay = 24f;
+    public const float minutesPerHours = 60f;
+    public string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
+
+    [Header("External Variable")]
     public FloatVariable TimeScale;
-    public TimeContainer CurrentTime;
     public TimeContainer StartTime;
-    public BoolVariable updateTime;
+    public TimeContainer CurrentTime;
+    public IntVariable dayShift;
 
     [Header("UI Output")]
     public StringVariable timeText;
     public StringVariable dayCountText;
     public StringVariable dayNameText;
-    
-    
-    private float totalTime;
-
-    const float dayPerWeek = 7f;
-    const float hoursPerDay = 24f;
-    const float minutesPerHours = 60f;
-    readonly string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
 
     private void Start()
     {
@@ -31,8 +34,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        if (updateTime.value)
-            UpdateTime();       
+        UpdateTime();       
     }
 
     private void OnDisable()
@@ -46,25 +48,17 @@ public class TimeManager : MonoBehaviour
     {
         totalTime += Time.deltaTime / TimeScale.value;
 
-        float dayNormalized = totalTime % 1f;
+        dayNormalized = totalTime % 1f;
 
         CurrentTime.time.hours = Mathf.Floor(dayNormalized * hoursPerDay);
         CurrentTime.time.minutes = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours);
         CurrentTime.time.days = Mathf.Floor(totalTime);
 
-        float dayInAWeek = Mathf.Floor(totalTime) % dayPerWeek;
+        dayInAWeek = Mathf.Floor(totalTime) % dayPerWeek;
 
         timeText.Value = CurrentTime.time.hours.ToString("00") + ":" + CurrentTime.time.minutes.ToString("00");
-        dayCountText.Value = "Hari Ke - " + (CurrentTime.time.days + 1).ToString("00");
-        dayNameText.Value = dayName[(int)dayInAWeek];
-    }
-
-    public void ToggleTime()
-    {
-        if (updateTime.value)
-            updateTime.value = false;
-        else
-            updateTime.value = true;
+        dayCountText.Value = (CurrentTime.time.days + 1).ToString("00");
+        dayNameText.Value = dayName[(int)Mathf.Clamp(dayInAWeek + dayShift.value, 0, dayPerWeek)];
     }
 
     public void SetTime(TimeContainer timeContainer)
