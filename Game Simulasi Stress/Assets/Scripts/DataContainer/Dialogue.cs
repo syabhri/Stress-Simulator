@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName = "ScriptableObject/Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    [Tooltip("Response to the dialog before"), Header("Options")]
+    [Tooltip("Response for dialog before this"), Header("Options")]
     public string response;
 
-    [Tooltip("Response for dismissing the dialog, a.k.a closing massage")]
+    [Tooltip("Dissmiss massage when choses the decisison to end dialog")]
     public string dismisses;
 
     [Header("Content")]

@@ -22,7 +22,7 @@ public class ChoicesGenerator : MonoBehaviour
     public GameEvent OnDecisionEnd;
     public GameEvent OnDialogEnd;
 
-    private Navigation customNav;
+    public Navigation customNav;
 
     private void Awake()
     {

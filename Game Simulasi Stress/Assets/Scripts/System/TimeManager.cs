@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
@@ -27,6 +28,14 @@ public class TimeManager : MonoBehaviour
     public StringVariable dayCountText;
     public StringVariable dayNameText;
 
+    [System.Serializable]
+    public class TimeEvent {
+        public TimeFormat timeFrequency;
+        public UnityEvent timeEvent;
+    }
+
+    public List<TimeEvent> routineEvent;
+
     private void Start()
     {
         SetTime(StartTime);
@@ -34,7 +43,9 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateTime();       
+        UpdateTime();
+
+        
     }
 
     private void OnDisable()
@@ -59,6 +70,21 @@ public class TimeManager : MonoBehaviour
         timeText.Value = CurrentTime.time.hours.ToString("00") + ":" + CurrentTime.time.minutes.ToString("00");
         dayCountText.Value = (CurrentTime.time.days + 1).ToString("00");
         dayNameText.Value = dayName[(int)Mathf.Clamp(dayInAWeek + dayShift.value, 0, dayPerWeek)];
+    }
+
+    //not implemented yet
+    public void CheckRoutine()
+    {
+        if (routineEvent != null)
+        {
+            foreach (TimeEvent routine in routineEvent)
+            {
+                if (routine.timeFrequency.ToHours() % CurrentTime.time.ToHours() == 0)
+                {
+                    routine.timeEvent.Invoke();
+                }
+            }
+        }
     }
 
     public void SetTime(TimeContainer timeContainer)
