@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TimeScale
   m_EditorClassIdentifier: 
   DeveloperDescription: "Time Scale is real second \nper ingame day"
-  value: 1
+  value: 1440

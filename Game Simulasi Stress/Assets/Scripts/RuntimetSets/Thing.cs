@@ -25,6 +25,39 @@ public class Thing : MonoBehaviour
 
     private void OnEnable()
     {
+        if (removeOnDisabled)
+        {
+            AddToSet();
+        } 
+    }
+            
+
+    private void Awake()
+    {
+        if (isDisabled)
+            gameObject.SetActive(false);
+
+        if (!removeOnDisabled)
+        {
+            AddToSet();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (removeOnDisabled)
+        {
+            RemoveFromSet();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        RemoveFromSet();
+    }
+
+    public void AddToSet()
+    {
         if (isSingle)
         {
             RuntimeSet.Item = gameObject;
@@ -35,31 +68,12 @@ public class Thing : MonoBehaviour
             RuntimeSet.Add(gameObject);
         }
     }
-            
 
-    private void Start()
+    public void RemoveFromSet()
     {
-        if (isDisabled)
-            gameObject.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        if (removeOnDisabled)
-        {
-            if (RuntimeSet.isSingle)
-                RuntimeSet.Item = null;
-            else
-                RuntimeSet.Remove(gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (!RuntimeSet.isSingle)
-            RuntimeSet.Remove(gameObject);
-        else
+        if (RuntimeSet.isSingle)
             RuntimeSet.Item = null;
+        else
+            RuntimeSet.Remove(gameObject);
     }
-
 }

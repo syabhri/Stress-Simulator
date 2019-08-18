@@ -168,10 +168,7 @@ public class DialogManager : MonoBehaviour
     public void StartDecision()
     {
         Debug.Log("Decision Started");
-        foreach (GameObject thing in decisionPanel.Items)
-        {
-            thing.SetActive(true);
-        }
+        decisionPanel.Acitvate();
         IsDecisionOpen.value = true;
         dialoguePasser = dialogue;
         OnDecisionStart.Raise();
@@ -180,10 +177,7 @@ public class DialogManager : MonoBehaviour
     public void EndDecision()
     {
         IsDecisionOpen.value = false;
-        foreach (GameObject thing in decisionPanel.Items)
-        {
-            thing.SetActive(false);
-        }
+        decisionPanel.Deactivate();
         Debug.Log("Decision Ended");
     }
 }

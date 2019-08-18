@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ChoicesGenerator2 : MonoBehaviour
 {
     public Button ButtonTemplate;
+    [Tooltip("close/disable when any of the assiged button is clicked")]
+    public bool DisableOnClick = true;
+    [Tooltip("clear assigned button when disabled")]
     public bool ClearOnDisabled = true;
 
     private Stack<Button> unusedButtons;
@@ -34,6 +37,11 @@ public class ChoicesGenerator2 : MonoBehaviour
         {
             button = Instantiate(ButtonTemplate, gameObject.transform, worldPositionStays: false);
             usedButtons.Push(button);
+        }
+
+        if (DisableOnClick)
+        {
+            button.onClick.AddListener(delegate { gameObject.SetActive(false); });
         }
         return button;
     }
