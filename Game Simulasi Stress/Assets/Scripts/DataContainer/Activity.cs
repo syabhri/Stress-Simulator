@@ -10,6 +10,7 @@ public class Activity : ScriptableObject
     public bool isUseEnergy;
     //public string[] tag;
     //public bool isActive;
+    public GameEvent AnimationTrigger;
 
     [Header("Cost")]
     public bool isCostMoney;
@@ -17,13 +18,13 @@ public class Activity : ScriptableObject
 
     [Header("Schedule")]
     public bool isScheduled;
+    public bool isRoutine;
     public TimeFormat schedule;
     public TimeFormat tolerance = new TimeFormat(0,0,15);//default value
 
     [Header("Limit")]
     public bool isLimited;
     public float limitPerDay;
-    [Tooltip("auto, do not change")]
     public float currentCount;
     //public float valueLimit;
     //[Tooltip("auto, do not change")]

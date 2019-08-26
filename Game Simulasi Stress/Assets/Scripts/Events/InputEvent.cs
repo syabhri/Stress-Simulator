@@ -7,12 +7,12 @@ public class InputEvent : MonoBehaviour
 {
     public string buttonName;
 
-    [Header("Input Group")]
-    public bool useInputGroup;
     [Tooltip("group with same number can Listen to an input at the same time. 0 is default input group")]
     public int inputGroup;
-    [Tooltip("currently Listening input group")]
-    public IntVariable activeInputGroup;
+    [Tooltip("Activate Input Group Upon Enable")]
+    public bool ActivateOnEnable;
+
+    public static int activeInputGroup;
 
     [Header("Events")]
     public UnityEvent unityEvent;
@@ -20,29 +20,43 @@ public class InputEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (useInputGroup)
+        if (Input.GetButtonDown(buttonName) && activeInputGroup == inputGroup)
         {
-            if (Input.GetButtonDown(buttonName) && activeInputGroup.value == inputGroup)
-            {
-                unityEvent.Invoke();
-            }
-        }
-        else
-        {
-            if (Input.GetButtonDown(buttonName))
-            {
-                unityEvent.Invoke();
-            }
+            unityEvent.Invoke();
         }
     }
-     
+
+    private void OnEnable()
+    {
+        if (ActivateOnEnable)
+        {
+            ActivateInputGroup();
+        } 
+    }
+
+    private void OnDisable()
+    {
+        if (ActivateOnEnable)
+        {
+            DeactivateInputGroup();
+        }
+    }
+
     public void ActivateInputGroup()
     {
-        activeInputGroup.value = inputGroup;
+        activeInputGroup = inputGroup;
+        Debug.Log("active Input Group = " + activeInputGroup);
     }
 
     public void DeactivateInputGroup()
     {
-        activeInputGroup.value = 0;
+        activeInputGroup = 0;
+        Debug.Log("active Input Group = 0");
+    }
+
+    public void setInputGroup(int inputGroup)
+    {
+        activeInputGroup = inputGroup;
+        Debug.Log("active Input Group = " + activeInputGroup);
     }
 }

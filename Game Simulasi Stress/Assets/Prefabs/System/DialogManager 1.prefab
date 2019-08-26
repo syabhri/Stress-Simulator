@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3002764964020409516}
   - component: {fileID: 3002764964020409515}
   - component: {fileID: 3002764964020409517}
-  - component: {fileID: 3570304904242914685}
   - component: {fileID: 483298412}
   - component: {fileID: 2089675601067290041}
   - component: {fileID: 1473335187781568794}
@@ -58,13 +57,24 @@ MonoBehaviour:
   nameText: {fileID: 11400000, guid: 339af6d440022cc478f2e3800016ccbc, type: 2}
   dialogueText: {fileID: 11400000, guid: 4185570f15429da4ca4bb50791dcfe27, type: 2}
   decisionPanel: {fileID: 11400000, guid: 2b9796b92df183a4189aedec3591cba8, type: 2}
-  IsDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
-  IsDecisionOpen: {fileID: 11400000, guid: 73313b8b67a2d614ba9bcf009dc9a8b9, type: 2}
-  OnDecisionStart: {fileID: 11400000, guid: 6bfbf2927473bb642b205d392232be9a, type: 2}
-  OnPlayerMove: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
-  OnPlayerStop: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
-  OnDialogEnd: {fileID: 11400000, guid: dcd8139202ab99e44ae281b5d4d6775d, type: 2}
-  dialoguePasser: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1, type: 2}
+  ActivityManager: {fileID: 11400000, guid: 4d1e35831028b964781b90df29af4d0c, type: 2}
+  OnDialogStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnTypeSentenceFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
+  ButtonTextPasser: {fileID: 11400000, guid: 09c9d0ae3ba440a4eb27bd367884aebb, type: 2}
 --- !u!114 &3002764964020409517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 24e282af1f673084cabc0d538b5a790a, type: 2}
+  Event: {fileID: 11400000, guid: c515b0767e26ba645b4e38f4053faa94, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -111,35 +121,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1,
             type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &3570304904242914685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3002764964020409514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: fe06a19787a21ed4d9cdb1f71a9ae1e8, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3002764964020409515}
-        m_MethodName: EndDecision
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -219,8 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonName: Submit
-  useInputGroup: 1
   inputGroup: 1
+  ActivateOnEnable: 0
   activeInputGroup: {fileID: 11400000, guid: 08dd9a1bf15002d4688e07ed0663ab32, type: 2}
   unityEvent:
     m_PersistentCalls:

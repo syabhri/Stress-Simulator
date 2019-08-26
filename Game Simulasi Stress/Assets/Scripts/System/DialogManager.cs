@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
@@ -20,31 +21,38 @@ public class DialogManager : MonoBehaviour
     //public Sprite avatarSprite;
 
     [Header("Reference")]
-    public ThingRuntimeSet decisionPanel;
-
-    [Header("Condition")]
-    public BoolVariable IsDialogOpen;
-    public BoolVariable IsDecisionOpen;
+    //public ThingRuntimeSet decisionPanel;
+    public GameObject decisionPanel;
+    public ThingRuntimeSet ActivityManager;
 
     [Header("Event")]
-    public GameEvent OnDecisionStart;
-    public GameEvent OnPlayerMove;
-    public GameEvent OnPlayerStop;
-    public GameEvent OnDialogEnd;
+    public UnityEvent OnDialogStart;
+    public UnityEvent OnDialogEnd;
+    public UnityEvent OnTypeSentenceFinish;
+
+    [Header("Conditions")]
+    public BoolVariable isDialogOpen;
 
     [Header("Data Passer")]
-    public Dialogue dialoguePasser;
+    public StringVariable ButtonTextPasser;
 
     //temp data container
     private Queue<string> sentences;
     private Queue<Speaker> speakers;
     private  Dialogue dialogue;
 
+    //temp Reference
+    private ButtonGenerator buttonGenerator;
+    private ActivityManager activityManager;
+
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         speakers = new Queue<Speaker>();
+
+        buttonGenerator = decisionPanel.GetComponent<ButtonGenerator>();
+        activityManager = ActivityManager.Item.GetComponent<ActivityManager>();
     }
     private void Update()
     {
@@ -58,21 +66,13 @@ public class DialogManager : MonoBehaviour
             }*/
     }
 
-    private void OnEnable()
-    {
-        //reset decision and dialog panel
-        IsDialogOpen.value = false;
-        IsDecisionOpen.value = false;
-    }
-
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("DialogStarted");
+        isDialogOpen.value = true;
+        OnDialogStart.Invoke();
+
         this.dialogue = dialogue;
-
-        OnPlayerStop.Raise();
-
-        IsDialogOpen.value = true;
 
         speakers.Clear();
 
@@ -89,10 +89,13 @@ public class DialogManager : MonoBehaviour
         Debug.Log("Displaying Next Speaker");
         if (speakers.Count == 0)
         {
-            if (dialogue.nextDialog.Length != 0 || dialogue.doActivities.Length != 0)
-                StartDecision();
-            else
-                Invoke("EndDialogue", .1f);
+            if (!decisionPanel.activeSelf)
+            {
+                if (dialogue.nextDialog.Length != 0 || dialogue.doActivities.Length != 0)
+                    StartDecision();
+                else
+                    Invoke("EndDialogue", .1f);
+            }
             return;
         }
 
@@ -159,25 +162,41 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        OnPlayerMove.Raise();
-        OnDialogEnd.Raise();
-        IsDialogOpen.value = false;
+        isDialogOpen.value = false;
+        OnDialogEnd.Invoke();
         Debug.Log("Dialog Ended");
     }
 
     public void StartDecision()
     {
         Debug.Log("Decision Started");
-        decisionPanel.Acitvate();
-        IsDecisionOpen.value = true;
-        dialoguePasser = dialogue;
-        OnDecisionStart.Raise();
+        decisionPanel.SetActive(true);
+        AssignNextDialogues();
+        AssignActivities();
+
+        ButtonTextPasser.Value = dialogue.dismisses;
+        Button button = buttonGenerator.AssignButton();
+        button.onClick.AddListener(delegate { EndDialogue(); } ); 
     }
 
-    public void EndDecision()
+    public void AssignNextDialogues()
     {
-        IsDecisionOpen.value = false;
-        decisionPanel.Deactivate();
-        Debug.Log("Decision Ended");
+        foreach (Dialogue dialogue in dialogue.nextDialog)
+        {
+            ButtonTextPasser.Value = dialogue.response;
+            Button button = buttonGenerator.AssignButton();
+            button.onClick.AddListener(delegate { StartDialogue(dialogue); });
+        }
+    }
+
+    public void AssignActivities()
+    {
+        foreach (Activity activity in dialogue.doActivities)
+        {
+            ButtonTextPasser.Value = activity.name;
+            Button button = buttonGenerator.AssignButton();
+            button.onClick.AddListener(delegate { activityManager.DoActivity(activity); });
+            button.onClick.AddListener(delegate { EndDialogue(); });
+        }
     }
 }

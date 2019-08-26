@@ -128,13 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonName: Submit
-  useInputGroup: 1
   inputGroup: 0
+  ActivateOnEnable: 0
   activeInputGroup: {fileID: 11400000, guid: 08dd9a1bf15002d4688e07ed0663ab32, type: 2}
   unityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 24e282af1f673084cabc0d538b5a790a, type: 2}
+      - m_Target: {fileID: 11400000, guid: c515b0767e26ba645b4e38f4053faa94, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:

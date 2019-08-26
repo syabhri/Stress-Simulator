@@ -7,37 +7,38 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [Header("Properties")]
-    public float totalTime;
-    public float dayNormalized;
-    public float dayInAWeek;
+    [SerializeField] private float totalTime;
+    [SerializeField] private float dayNormalized;
+    [SerializeField] private float dayInAWeek;
+    [SerializeField] private float test;
 
-    [Space]
+    // constant values
     public const float dayPerWeek = 7f;
     public const float hoursPerDay = 24f;
     public const float minutesPerHours = 60f;
-    public string[] dayName = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
+    public readonly string[] dayName = { "Senin", "Selasa", "Rabu",
+        "Kamis", "Jumat", "Sabtu", "Minggu" };
 
-    [Header("External Variable")]
+    [Header("Public Variable")]
     public FloatVariable TimeScale;
     public TimeContainer StartTime;
     public TimeContainer CurrentTime;
     public IntVariable dayShift;
 
-    [Header("UI Output")]
+    [Header("Output UI")]
     public StringVariable timeText;
     public StringVariable dayCountText;
     public StringVariable dayNameText;
 
-    [System.Serializable]
-    public class TimeEvent {
-        public TimeFormat timeFrequency;
-        public UnityEvent timeEvent;
-    }
+    [Header("Routine Events")]
+    public TimeFormat TriggerTime;
+    public UnityEvent OnNextDay;
 
-    public List<TimeEvent> routineEvent;
+    private bool IsRoutineExecuted;
 
     private void Start()
     {
+        // set the starting time, default is 00:00 at day 1
         SetTime(StartTime);
     }
 
@@ -45,6 +46,14 @@ public class TimeManager : MonoBehaviour
     {
         UpdateTime();
 
+        if (TriggerTime.days == 0)
+        {
+            ExecuteRoutine();
+        }
+        else
+        {
+            ExecuteWeeklyRoutine();
+        }
         
     }
 
@@ -72,21 +81,6 @@ public class TimeManager : MonoBehaviour
         dayNameText.Value = dayName[(int)Mathf.Clamp(dayInAWeek + dayShift.value, 0, dayPerWeek)];
     }
 
-    //not implemented yet
-    public void CheckRoutine()
-    {
-        if (routineEvent != null)
-        {
-            foreach (TimeEvent routine in routineEvent)
-            {
-                if (routine.timeFrequency.ToHours() % CurrentTime.time.ToHours() == 0)
-                {
-                    routine.timeEvent.Invoke();
-                }
-            }
-        }
-    }
-
     public void SetTime(TimeContainer timeContainer)
     {
         totalTime =
@@ -106,5 +100,42 @@ public class TimeManager : MonoBehaviour
     public void ResetTime()
     {
         totalTime = 0;
+    }
+
+    public void ExecuteRoutine()
+    {
+        if (TriggerTime.hours == CurrentTime.time.hours &&
+            TriggerTime.minutes == CurrentTime.time.minutes)
+        {
+            if (!IsRoutineExecuted)
+            {
+                Debug.Log("Executing Routine....");
+                OnNextDay.Invoke();
+                IsRoutineExecuted = true;
+            }
+        }
+        else
+        {
+            IsRoutineExecuted = false;
+        }
+    }
+
+    public void ExecuteWeeklyRoutine()
+    {
+        if (TriggerTime.hours == CurrentTime.time.hours &&
+            TriggerTime.minutes == CurrentTime.time.minutes &&
+            TriggerTime.days == dayInAWeek)
+        {
+            if (!IsRoutineExecuted)
+            {
+                Debug.Log("Executing Routine....");
+                OnNextDay.Invoke();
+                IsRoutineExecuted = true;
+            }
+        }
+        else
+        {
+            IsRoutineExecuted = false;
+        }
     }
 }

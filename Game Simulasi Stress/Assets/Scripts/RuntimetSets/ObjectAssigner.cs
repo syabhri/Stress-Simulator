@@ -18,7 +18,7 @@ public class ObjectAssigner : MonoBehaviour
     [Tooltip("Reference asiggner for disabled object")]
     public GameObjectPair[] referenceList;
 
-    private void Start()
+    private void Awake()
     {
         foreach (GameObjectPair pair in referenceList)
         {

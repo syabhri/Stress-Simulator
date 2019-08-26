@@ -215,17 +215,5 @@ public class GameManager : MonoBehaviour
         else
             return true;
     }
-
-    private bool IgnoreInput()
-    {
-        foreach (BoolVariable condition in ignoreInput)
-        {
-            if (condition.value)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     #endregion
 }

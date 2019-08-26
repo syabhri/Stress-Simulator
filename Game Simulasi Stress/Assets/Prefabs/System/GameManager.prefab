@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 739497648853751761}
   - component: {fileID: 7820484409494991973}
   - component: {fileID: 8541872964584808616}
-  - component: {fileID: 6342882751935102915}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -74,7 +73,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: b1554c25a2a8d0541b98d26cd1cbff43, type: 2}
+      - m_Target: {fileID: 739497648853751761}
         m_MethodName: Acitvate
         m_Mode: 1
         m_Arguments:
@@ -85,7 +84,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 739497648853751761}
+      - m_Target: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
         m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
@@ -136,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: b1554c25a2a8d0541b98d26cd1cbff43, type: 2}
+      - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
         m_MethodName: Deactivate
         m_Mode: 1
         m_Arguments:
@@ -150,36 +149,6 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
         m_MethodName: Raise
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &6342882751935102915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739497648853751775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 1
-  onEnable: 0
-  unityEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 08dd9a1bf15002d4688e07ed0663ab32, type: 2}
-        m_MethodName: SetValue
-        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

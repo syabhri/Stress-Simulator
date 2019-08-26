@@ -20,6 +20,8 @@ public class ActivityManager : MonoBehaviour
     public ThingRuntimeSet timeSetterPanel;
     public ThingRuntimeSet timeSetterOkButton;
     public ThingRuntimeSet noticePanel;
+    public ThingRuntimeSet transitionPanel;
+    public ThingRuntimeSet player;
 
     [Header("Conditions")]
     public BoolVariable isTimeSetterOpen;
@@ -29,6 +31,10 @@ public class ActivityManager : MonoBehaviour
     public GameEvent onPlayerStop;
     public GameEvent onAjustDuration;
     public GameEvent onTimeSkip;
+
+    [Header("Transition")]
+    public GameEvent onFadeOut;
+    public GameEvent onFadeIn;
 
     [Header("Data Passer")]
     public TimeContainer timePasser;
@@ -110,6 +116,8 @@ public class ActivityManager : MonoBehaviour
             if (!CheckMoney())
                 return;
 
+
+
         //reset notice panel text
         noticePanelText.Value = "";
 
@@ -169,12 +177,44 @@ public class ActivityManager : MonoBehaviour
             activity.currentCount += 1;
         }
 
+        if (activity.AnimationTrigger != null)
+        {
+            activity.AnimationTrigger.Raise();
+            StopAllCoroutines();
+            StartCoroutine(StartTransition(1, 2));
+        }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(StartTransition(2));
+        }
+
         SkipTime();
 
         onPlayerMove.Raise();
         Debug.Log("Activity Ended");
 
 
+    }
+
+    IEnumerator StartTransition(float duration)
+    {
+        onFadeOut.Raise();
+        yield return new WaitForSeconds(duration);
+        onFadeIn.Raise();
+    }
+
+    IEnumerator StartTransition(float delay,float duration)
+    {
+        yield return new WaitForSeconds(delay);
+        onFadeOut.Raise();
+        yield return new WaitForSeconds(duration);
+        onFadeIn.Raise();
+    }
+
+    public void Showchanges()
+    {
+        noticePanel.Acitvate();
     }
 
     public void AdjustDuration()
@@ -354,6 +394,7 @@ public class ActivityManager : MonoBehaviour
     // return true if atcivity is on scadule
     public bool CheckSchedule(Activity activity)
     {
+        
         if (currentTime.time.hours >= activity.schedule.hours
             && currentTime.time.minutes >= activity.schedule.minutes
             && currentTime.time.hours <= activity.tolerance.hours
