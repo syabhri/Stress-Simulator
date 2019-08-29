@@ -15,9 +15,11 @@ MonoBehaviour:
   activityName: Tidur
   isUseEnergy: 0
   AnimationTrigger: {fileID: 11400000, guid: 038476547a3ca024baae3781c6672992, type: 2}
+  animator: {fileID: 0}
   isCostMoney: 0
   cost: 0
   isScheduled: 0
+  isRoutine: 0
   schedule:
     days: 0
     hours: 0
@@ -28,17 +30,17 @@ MonoBehaviour:
     minutes: 15
   isLimited: 1
   limitPerDay: 1
-  currentCount: 0
+  currentCount: 4
   isDutrationAjustable: 1
   duration:
     days: 0
-    hours: 0
+    hours: 7
     minutes: 0
   isIncreaseStress: 0
   increaseStressByHours: 0
   increasedStressMultiplier: 0
   isDecreaseStress: 1
-  decreaseStressByHours: 0
+  decreaseStressByHours: 1
   decreasedStressMultiplier: 2
   isChangeOtherStat: 1
   ChangeStatByHours: 1

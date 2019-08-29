@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 7996294828283943518}
   - component: {fileID: 7996294828283943506}
   - component: {fileID: 7996294828283943507}
+  - component: {fileID: 583524678174741598}
   - component: {fileID: 7996294828283943511}
   - component: {fileID: 7996294828283943504}
   - component: {fileID: 7996294828283943510}
   - component: {fileID: 7996294828283943509}
-  - component: {fileID: 583524678174741598}
   - component: {fileID: 9211676257634119387}
   m_Layer: 0
   m_Name: PlayerPerempuan
@@ -141,6 +141,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &583524678174741598
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996294828283943519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -2.14}
+  m_Size: {x: 3.3, y: 1.5}
+  m_Direction: 1
 --- !u!114 &7996294828283943511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,22 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 55508fb05fa6f1e4dbbdb26bb4edb6c4, type: 2}
   realtimeSaving: 1
---- !u!70 &583524678174741598
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996294828283943519}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2.14}
-  m_Size: {x: 3.3, y: 1.5}
-  m_Direction: 1
 --- !u!114 &9211676257634119387
 MonoBehaviour:
   m_ObjectHideFlags: 0

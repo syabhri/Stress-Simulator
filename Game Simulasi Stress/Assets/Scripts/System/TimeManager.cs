@@ -32,9 +32,12 @@ public class TimeManager : MonoBehaviour
 
     [Header("Routine Events")]
     public TimeFormat TriggerTime;
-    public UnityEvent OnNextDay;
+    public UnityEvent OnTriggerTime;
 
     private bool IsRoutineExecuted;
+    public static float currentday;
+    public static float currentHours;
+    public static float currentMinutes;
 
     private void Start()
     {
@@ -70,9 +73,13 @@ public class TimeManager : MonoBehaviour
 
         dayNormalized = totalTime % 1f;
 
-        CurrentTime.time.hours = Mathf.Floor(dayNormalized * hoursPerDay);
-        CurrentTime.time.minutes = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours);
-        CurrentTime.time.days = Mathf.Floor(totalTime);
+        currentday = Mathf.Floor(totalTime);
+        currentHours = Mathf.Floor(dayNormalized * hoursPerDay);
+        currentMinutes = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours);
+
+        CurrentTime.time.days = currentday;
+        CurrentTime.time.hours = currentHours;
+        CurrentTime.time.minutes = currentMinutes;
 
         dayInAWeek = Mathf.Floor(totalTime) % dayPerWeek;
 
@@ -110,7 +117,7 @@ public class TimeManager : MonoBehaviour
             if (!IsRoutineExecuted)
             {
                 Debug.Log("Executing Routine....");
-                OnNextDay.Invoke();
+                OnTriggerTime.Invoke();
                 IsRoutineExecuted = true;
             }
         }
@@ -129,7 +136,7 @@ public class TimeManager : MonoBehaviour
             if (!IsRoutineExecuted)
             {
                 Debug.Log("Executing Routine....");
-                OnNextDay.Invoke();
+                OnTriggerTime.Invoke();
                 IsRoutineExecuted = true;
             }
         }

@@ -22,7 +22,7 @@ public class DialogManager : MonoBehaviour
 
     [Header("Reference")]
     //public ThingRuntimeSet decisionPanel;
-    public GameObject decisionPanel;
+    public ThingRuntimeSet decisionPanel;
     public ThingRuntimeSet ActivityManager;
 
     [Header("Event")]
@@ -35,6 +35,7 @@ public class DialogManager : MonoBehaviour
 
     [Header("Data Passer")]
     public StringVariable ButtonTextPasser;
+    public TimeContainer CurrentTime;
 
     //temp data container
     private Queue<string> sentences;
@@ -51,7 +52,7 @@ public class DialogManager : MonoBehaviour
         sentences = new Queue<string>();
         speakers = new Queue<Speaker>();
 
-        buttonGenerator = decisionPanel.GetComponent<ButtonGenerator>();
+        buttonGenerator = decisionPanel.Item.GetComponent<ButtonGenerator>();
         activityManager = ActivityManager.Item.GetComponent<ActivityManager>();
     }
     private void Update()
@@ -89,7 +90,7 @@ public class DialogManager : MonoBehaviour
         Debug.Log("Displaying Next Speaker");
         if (speakers.Count == 0)
         {
-            if (!decisionPanel.activeSelf)
+            if (!decisionPanel.Item.activeSelf)
             {
                 if (dialogue.nextDialog.Length != 0 || dialogue.doActivities.Length != 0)
                     StartDecision();
@@ -170,7 +171,7 @@ public class DialogManager : MonoBehaviour
     public void StartDecision()
     {
         Debug.Log("Decision Started");
-        decisionPanel.SetActive(true);
+        decisionPanel.Item.SetActive(true);
         AssignNextDialogues();
         AssignActivities();
 
@@ -193,6 +194,17 @@ public class DialogManager : MonoBehaviour
     {
         foreach (Activity activity in dialogue.doActivities)
         {
+            if (activity.isScheduled)
+            {
+                if (TimeManager.currentday == activity.schedule.days &&
+                    TimeManager.currentHours >= activity.schedule.hours &&
+                    TimeManager.currentMinutes >= activity.schedule.minutes &&
+                    TimeManager.currentHours <= activity.tolerance.days &&
+                    TimeManager.currentMinutes >= activity.tolerance.minutes)
+                {
+                    break;
+                }
+            }
             ButtonTextPasser.Value = activity.name;
             Button button = buttonGenerator.AssignButton();
             button.onClick.AddListener(delegate { activityManager.DoActivity(activity); });

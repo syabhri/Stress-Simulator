@@ -7,6 +7,8 @@ public class GameData : ScriptableObject
 {
     public TimeContainer timeLimit;
 
+    public TimeContainer timeCountdown;
+
     public Vector2Variable[] SpawnPoints;
 
     public List<FloatVariable> subjects;

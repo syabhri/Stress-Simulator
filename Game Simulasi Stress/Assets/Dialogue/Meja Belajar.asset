@@ -20,4 +20,7 @@ MonoBehaviour:
     sentences:
     - Sebuah Meja Belajar Lengkap dengan berbagai macam buku dan Sebuah Komputer.
   nextDialog: []
-  doActivities: []
+  doActivities:
+  - {fileID: 11400000, guid: f60692a2de7eef4418944108c8f8b06f, type: 2}
+  - {fileID: 11400000, guid: a253211b72285ed469d1b9591379fd94, type: 2}
+  - {fileID: 11400000, guid: 219ce45696843a349bd971f47a190abc, type: 2}

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class InputEvent : MonoBehaviour
 {
     public string buttonName;
+    public bool debug;
 
     [Tooltip("group with same number can Listen to an input at the same time. 0 is default input group")]
     public int inputGroup;
@@ -23,6 +24,11 @@ public class InputEvent : MonoBehaviour
         if (Input.GetButtonDown(buttonName) && activeInputGroup == inputGroup)
         {
             unityEvent.Invoke();
+        }
+
+        if (debug)
+        {
+            Debug.Log(activeInputGroup);
         }
     }
 

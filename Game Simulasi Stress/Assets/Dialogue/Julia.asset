@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Julia
   m_EditorClassIdentifier: 
   response: 
-  dismisses: blum ada kabar apa-apa
+  dismisses: Acuhkan
   speakers:
   - name: Julia
     avatar: {fileID: 0}
     sentences:
-    - eh [player], gimana ada kabar baru?
+    - 'Hai [player], apa kabar?
+
+      Hari ini cuacanya sangat cerah.'
   nextDialog: []
   doActivities:
   - {fileID: 11400000, guid: 0a1e548b521e457489c1eb64da16727c, type: 2}

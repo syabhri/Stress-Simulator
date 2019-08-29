@@ -37,4 +37,13 @@ public class TimeFormat
         return days + (hours / TimeManager.hoursPerDay) +
             ((minutes / TimeManager.minutesPerHours) / TimeManager.hoursPerDay);
     }
+
+    public bool Matches(TimeFormat timeFormat)
+    {
+        if (days == timeFormat.days && hours == timeFormat.hours && minutes == timeFormat.minutes)
+        {
+            return true;
+        }
+        return false;
+    }
 }

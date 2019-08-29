@@ -21,4 +21,10 @@ MonoBehaviour:
     - Meja yang ditempati para siswa berjajar di kelas. mejamu juga termasuk dalam
       jejeran itu
   nextDialog: []
-  doActivities: []
+  doActivities:
+  - {fileID: 11400000, guid: a83298c943fea86408bbac8d6c92cd8a, type: 2}
+  - {fileID: 11400000, guid: af377349c09e5d640ba969b617bc5cef, type: 2}
+  - {fileID: 11400000, guid: 0bcffbfaa9af83e47ad6a906703d300d, type: 2}
+  - {fileID: 11400000, guid: 016328218509f264cb9782937aface05, type: 2}
+  - {fileID: 11400000, guid: 4adcb6c88d3222f449b5ed6511b98375, type: 2}
+  - {fileID: 11400000, guid: 590471889cc6682458e39c36a8454edd, type: 2}

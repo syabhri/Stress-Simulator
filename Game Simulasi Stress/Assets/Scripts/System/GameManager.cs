@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Conditions")]
     public bool IsPlaying;
-    public BoolVariable[] ignoreInput;
 
     [Header("UI Output")]
     public StringVariable NoticeText;

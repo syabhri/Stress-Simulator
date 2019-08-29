@@ -48,10 +48,12 @@ public class TextReplacer : MonoBehaviour
         if (updateFloat)
         {
             Text.text = BeforeText + floatVariable.value.ToString() + AfterText;
+            Text.text = Text.text.Replace("/n", "<br>");
         }
         if (updateString)
         {
             Text.text = BeforeText + stringVariable.Value + AfterText;
+            Text.text = Text.text.Replace("/n", "<br>");
         }
     }
 }

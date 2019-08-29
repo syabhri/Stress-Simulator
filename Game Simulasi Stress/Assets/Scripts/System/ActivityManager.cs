@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ActivityManager : MonoBehaviour
 {
     #region Activity Variables and Object References
     [Header("Properties")]
+    [Tooltip("How many energy consumed per hourse of activity")]
     public FloatVariable EnergyPerHour;
 
     [Header("External Variables")]
@@ -20,21 +22,16 @@ public class ActivityManager : MonoBehaviour
     public ThingRuntimeSet timeSetterPanel;
     public ThingRuntimeSet timeSetterOkButton;
     public ThingRuntimeSet noticePanel;
-    public ThingRuntimeSet transitionPanel;
     public ThingRuntimeSet player;
 
-    [Header("Conditions")]
-    public BoolVariable isTimeSetterOpen;
-
     [Header("Events")]
-    public GameEvent onPlayerMove;
-    public GameEvent onPlayerStop;
-    public GameEvent onAjustDuration;
     public GameEvent onTimeSkip;
+    public UnityEvent OnActivityStart;
+    public UnityEvent OnActivityEnd;
 
     [Header("Transition")]
-    public GameEvent onFadeOut;
-    public GameEvent onFadeIn;
+    public GameEvent InTransition;
+    public GameEvent OutTransition;
 
     [Header("Data Passer")]
     public TimeContainer timePasser;
@@ -42,9 +39,6 @@ public class ActivityManager : MonoBehaviour
 
     [Header("UI Output")]
     public StringVariable noticePanelText;
-
-    [Header("Activities")]
-    public List<Activity> activityList;
 
     //time setter panel ok button;
     private Button okButton;
@@ -56,13 +50,6 @@ public class ActivityManager : MonoBehaviour
     {
         okButton = timeSetterOkButton.Item.GetComponent<Button>();
     }
-    void Update()
-    {
-        if (currentTime.time.hours == 0 && currentTime.time.minutes == 0)
-        {
-            ResetLimitPerDay();
-        }
-    }
     #endregion
 
     #region Activity Excecution
@@ -70,7 +57,7 @@ public class ActivityManager : MonoBehaviour
     {
         Debug.Log("activity started : " + activity.activityName);//testing
         this.activity = activity;
-        onPlayerStop.Raise();
+        OnActivityStart.Invoke();
 
         //check activity scadule
         if (activity.isScheduled)
@@ -81,7 +68,7 @@ public class ActivityManager : MonoBehaviour
                     "Aktifitas belum tersedia, aktifitas baru bisa di lakukan mulai jam "
                     + activity.schedule.hours.ToString("00") + " : " + activity.schedule.minutes.ToString("00");
                 noticePanel.Item.SetActive(true);
-                onPlayerMove.Raise();
+                OnActivityEnd.Invoke();
                 return;
             }
         }
@@ -106,18 +93,28 @@ public class ActivityManager : MonoBehaviour
     {
         Debug.Log("Activity Phase2 begin");
 
-
-
-        if(activity.isUseEnergy)
+        if (activity.isUseEnergy)
             if (!CheckEnergy())
                 return;
-
         if (activity.isCostMoney)
             if (!CheckMoney())
                 return;
 
+        if (activity.AnimationTrigger != null)
+        {
+            player.Deactivate();
+            activity.AnimationTrigger.Raise();
+            StopAllCoroutines();
+            StartCoroutine(StartTransition(1, 2));
+        }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(StartTransition(2));
+        }
+    }
 
-
+    public void Phase3() {
         //reset notice panel text
         noticePanelText.Value = "";
 
@@ -159,7 +156,7 @@ public class ActivityManager : MonoBehaviour
         {
             float consuption = EnergyPerHour.value * activity.duration.ToHours();
             energy.value -= consuption;
-            noticePanelText.Value += "Energy -" + consuption + "/n";
+            noticePanelText.Value += "<color=red>Energy -" + consuption + "/n";
             Debug.Log("Energy Decreased by " + consuption + ", Energy = " + energy.value);
         }
             
@@ -167,7 +164,7 @@ public class ActivityManager : MonoBehaviour
         if (activity.isCostMoney)
         {
             money.value -= activity.cost;
-            noticePanelText.Value += "Money -" + activity.cost + "/n";
+            noticePanelText.Value += "<color=red>Money -" + activity.cost;
             Debug.Log("Money Decreased by " + activity.cost + ", Money = " + money.value);
         }
 
@@ -177,21 +174,9 @@ public class ActivityManager : MonoBehaviour
             activity.currentCount += 1;
         }
 
-        if (activity.AnimationTrigger != null)
-        {
-            activity.AnimationTrigger.Raise();
-            StopAllCoroutines();
-            StartCoroutine(StartTransition(1, 2));
-        }
-        else
-        {
-            StopAllCoroutines();
-            StartCoroutine(StartTransition(2));
-        }
-
         SkipTime();
 
-        onPlayerMove.Raise();
+        OnActivityEnd.Invoke();
         Debug.Log("Activity Ended");
 
 
@@ -199,21 +184,21 @@ public class ActivityManager : MonoBehaviour
 
     IEnumerator StartTransition(float duration)
     {
-        onFadeOut.Raise();
+        OutTransition.Raise();
         yield return new WaitForSeconds(duration);
-        onFadeIn.Raise();
+        Phase3();
+        InTransition.Raise();
+        noticePanel.Acitvate();
     }
 
     IEnumerator StartTransition(float delay,float duration)
     {
         yield return new WaitForSeconds(delay);
-        onFadeOut.Raise();
+        OutTransition.Raise();
         yield return new WaitForSeconds(duration);
-        onFadeIn.Raise();
-    }
-
-    public void Showchanges()
-    {
+        player.Acitvate();
+        Phase3();
+        InTransition.Raise();
         noticePanel.Acitvate();
     }
 
@@ -238,7 +223,7 @@ public class ActivityManager : MonoBehaviour
             noticePanel.Item.SetActive(true);
             Debug.Log(message);
             Debug.Log("Activity Ended");
-            onPlayerMove.Raise();
+            OnActivityEnd.Invoke();
             return false;
         }
     }
@@ -257,7 +242,7 @@ public class ActivityManager : MonoBehaviour
             noticePanel.Item.SetActive(true);
             Debug.Log(message);
             Debug.Log("Activity Ended");
-            onPlayerMove.Raise();
+            OnActivityEnd.Invoke();
             return false;
         }
     }
@@ -272,7 +257,7 @@ public class ActivityManager : MonoBehaviour
 
         if (stress.value > 100)
             stress.value = 100;
-        noticePanelText.Value += "Stress +" + (stress.value - old) + "/n";
+        noticePanelText.Value += "<color=red>Stress +" + (stress.value - old) + "/n";
         Debug.Log("Stress +" + (stress.value - old) + ", Stress = " + stress.value);
     }
 
@@ -286,7 +271,7 @@ public class ActivityManager : MonoBehaviour
             stress.value -= activity.decreasedStressMultiplier;
         if (stress.value < 0)
             stress.value = 0;
-        noticePanelText.Value += "Stress " + (stress.value - old) + "/n";
+        noticePanelText.Value += "<color=green>Stress " + (stress.value - old) + "/n";
         Debug.Log("Stress " + (stress.value - old) + ", Stress = " + stress.value);
     }
 
@@ -322,7 +307,12 @@ public class ActivityManager : MonoBehaviour
         //limit range so the stat can't go above 100 or below 0
         pair.target.value = Mathf.Clamp(pair.target.value, 0, 100);
 
-        noticePanelText.Value += pair.target.name + " " + (pair.target.value - old);
+        noticePanelText.Value += 
+            "<color=" + Mathf.Sign(pair.target.value - old).ToString().Replace("-1","red").Replace("1","green") + ">" + 
+            pair.target.name + " " + 
+            Mathf.Sign(pair.target.value - old).ToString().Replace("-1","+").Replace('1','+') + 
+            Mathf.Abs(pair.target.value - old) + "/n";
+
         Debug.Log("Stat " + pair.target.name + " Changed from " +
             old + " to " + pair.target.value +
             " using " + pair.operation + " operation with " +
@@ -411,15 +401,6 @@ public class ActivityManager : MonoBehaviour
             return true;
         else
             return false;
-    }
-
-    public void ResetLimitPerDay()
-    {
-        foreach (Activity activity in activityList)
-        {
-            if (activity.isLimited)
-                activity.currentCount = 0;
-        }
     }
 
     public void SkipTime()
