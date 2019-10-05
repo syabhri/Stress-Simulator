@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 // Used to generate a set of buttons
 public class ButtonGenerator : MonoBehaviour
 {
     public Button ButtonTemplate;
-    [Tooltip("close/disable when any of the assiged button is clicked")]
-    public bool DisableOnClick = true;
+
     [Tooltip("clear assigned button when disabled")]
     public bool ClearOnDisabled = true;
+
+    [Tooltip("Default action of every button generated when pressed")]
+    public UnityEvent DefaultAction;
 
     private Stack<Button> unusedButtons;
     private Stack<Button> usedButtons;
@@ -40,10 +43,7 @@ public class ButtonGenerator : MonoBehaviour
             usedButtons.Push(button);
         }
 
-        if (DisableOnClick)
-        {
-            button.onClick.AddListener(delegate { gameObject.SetActive(false); });
-        }
+        button.onClick.AddListener(delegate { DefaultAction.Invoke(); });
         return button;
     }
 
@@ -67,10 +67,7 @@ public class ButtonGenerator : MonoBehaviour
             usedButtons.Push(button);
         }
 
-        if (DisableOnClick)
-        {
-            button.onClick.AddListener(delegate { gameObject.SetActive(false); });
-        }
+        button.onClick.AddListener(delegate { DefaultAction.Invoke(); });
         return button;
     }
 

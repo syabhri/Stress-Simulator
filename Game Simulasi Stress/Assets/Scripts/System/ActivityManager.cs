@@ -39,6 +39,8 @@ public class ActivityManager : MonoBehaviour
 
     [Header("UI Output")]
     public StringVariable noticePanelText;
+    public StringVariable schedule;
+
 
     //time setter panel ok button;
     private Button okButton;
@@ -399,6 +401,11 @@ public class ActivityManager : MonoBehaviour
         {
             return true;
         }
+        return false;
+    }
+
+    public bool PrintCurrrentSchedule(ActivitySet activities)
+    {
         return false;
     }
 
