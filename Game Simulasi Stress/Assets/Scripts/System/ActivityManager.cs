@@ -11,7 +11,7 @@ public class ActivityManager : MonoBehaviour
     [Tooltip("How many energy consumed per hourse of activity")]
     public FloatVariable EnergyPerHour;
 
-    [Header("External Variables")]
+    [Header("Values")]
     public FloatVariable energy;
     public FloatVariable stress;
     public FloatVariable money;
@@ -71,6 +71,13 @@ public class ActivityManager : MonoBehaviour
                 OnActivityEnd.Invoke();
                 return;
             }
+        }
+
+        if (LimitPerDayReached(activity))
+        {
+            noticePanelText.Value = "Limit Aktifitas Telah Tercapai, Coba Lagi Besok";
+            noticePanel.Item.SetActive(true);
+            OnActivityEnd.Invoke();
         }
 
         noticePanelText.Value = string.Empty;

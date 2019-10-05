@@ -211,4 +211,14 @@ public class DialogManager : MonoBehaviour
             button.onClick.AddListener(delegate { EndDialogue(); });
         }
     }
+
+    public void AssignChoice(Dialogue dialogue)
+    {
+        foreach (Dialogue.ChoiceEvent choiceEvent in dialogue.choiceEvent)
+        {
+            ButtonTextPasser.Value = choiceEvent.name;
+            Button button = buttonGenerator.AssignButton();
+            button.onClick.AddListener(delegate { choiceEvent.unityEvent.Invoke(); });
+        }
+    }
 }

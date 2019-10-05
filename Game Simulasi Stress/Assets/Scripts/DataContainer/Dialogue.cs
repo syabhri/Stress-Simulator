@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Dialogue", menuName = "ScriptableObject/Dialogue")]
 public class Dialogue : ScriptableObject
 {
+    [System.Serializable]
+    public class ChoiceEvent
+    {
+        public string name;
+        public UnityEvent unityEvent;
+    }
+
     [Tooltip("Response for dialog before this"), Header("Options")]
     public string response;
 
@@ -15,6 +23,7 @@ public class Dialogue : ScriptableObject
     public Speaker[] speakers;
 
     [Header("Response Choice")]
+    public ChoiceEvent[] choiceEvent;
     public Dialogue[] nextDialog;
 
     public Activity[] doActivities;

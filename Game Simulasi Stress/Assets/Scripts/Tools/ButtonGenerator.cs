@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 // Used to generate a set of buttons
 public class ButtonGenerator : MonoBehaviour
@@ -46,6 +47,34 @@ public class ButtonGenerator : MonoBehaviour
         return button;
     }
 
+    // assign button 
+    public Button AssignButton(string ButtonText)
+    {
+        Button button;
+        if (unusedButtons.Count > 0)
+        {
+            button = unusedButtons.Pop();
+            button.onClick.RemoveAllListeners();
+            button.GetComponentInChildren<TextMeshProUGUI>().text = ButtonText;
+            button.gameObject.SetActive(true);
+            button.interactable = true;
+            usedButtons.Push(button);
+        }
+        else
+        {
+            button = Instantiate(ButtonTemplate, gameObject.transform, worldPositionStays: false);
+            button.GetComponentInChildren<TextMeshProUGUI>().text = ButtonText;
+            usedButtons.Push(button);
+        }
+
+        if (DisableOnClick)
+        {
+            button.onClick.AddListener(delegate { gameObject.SetActive(false); });
+        }
+        return button;
+    }
+
+    // clear button set
     public void ClearUsedButtons()
     {
         while (usedButtons.Count > 0)
@@ -56,6 +85,7 @@ public class ButtonGenerator : MonoBehaviour
         }
     }
 
+    // clear button set on disbale
     private void OnDisable()
     {
         if (ClearOnDisabled)

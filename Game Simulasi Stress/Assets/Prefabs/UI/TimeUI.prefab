@@ -257,7 +257,7 @@ MonoBehaviour:
   updateFloat: 0
   floatVariable: {fileID: 0}
   AlwaysUpdate: 1
-  BeforeText: 'Hari ke- '
+  BeforeText: Hari Ke -
   AfterText: /30
 --- !u!1 &8847484767567158197
 GameObject:

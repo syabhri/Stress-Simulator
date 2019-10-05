@@ -11,7 +11,7 @@ public class Activity : ScriptableObject
     //public string[] tag;
     //public bool isActive;
     public GameEvent AnimationTrigger;
-    public Animator animator;
+    //public Animator animator;
 
     [Header("Cost")]
     public bool isCostMoney;
