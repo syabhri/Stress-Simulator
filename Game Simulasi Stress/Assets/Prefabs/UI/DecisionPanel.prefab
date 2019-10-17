@@ -128,5 +128,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonTemplate: {fileID: 6345902125333011060, guid: b361419ac81a91d4b8e1cf44fd84dfb7,
     type: 3}
-  DisableOnClick: 1
   ClearOnDisabled: 1
+  DefaultAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8247696905878254768}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

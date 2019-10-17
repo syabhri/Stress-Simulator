@@ -9,8 +9,6 @@ public class TimeManager : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private float totalTime;
     [SerializeField] private float dayNormalized;
-    [SerializeField] private float dayInAWeek;
-    [SerializeField] private float test;
 
     // constant values
     public const float dayPerWeek = 7f;
@@ -35,9 +33,11 @@ public class TimeManager : MonoBehaviour
     public UnityEvent OnTriggerTime;
 
     private bool IsRoutineExecuted;
-    public static float currentday;
+    public static float currentDay;
     public static float currentHours;
     public static float currentMinutes;
+    public static float dayOfTheWeek;
+    
 
     private void Start()
     {
@@ -73,19 +73,19 @@ public class TimeManager : MonoBehaviour
 
         dayNormalized = totalTime % 1f;
 
-        currentday = Mathf.Floor(totalTime);
+        currentDay = Mathf.Ceil(totalTime);
         currentHours = Mathf.Floor(dayNormalized * hoursPerDay);
         currentMinutes = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHours);
 
-        CurrentTime.time.days = currentday;
+        CurrentTime.time.days = currentDay;
         CurrentTime.time.hours = currentHours;
         CurrentTime.time.minutes = currentMinutes;
 
-        dayInAWeek = Mathf.Floor(totalTime) % dayPerWeek;
+        dayOfTheWeek = Mathf.Ceil(totalTime) % dayPerWeek;
 
         timeText.Value = CurrentTime.time.hours.ToString("00") + ":" + CurrentTime.time.minutes.ToString("00");
-        dayCountText.Value = (CurrentTime.time.days + 1).ToString("00");
-        dayNameText.Value = dayName[(int)Mathf.Clamp(dayInAWeek + dayShift.value, 0, dayPerWeek)];
+        dayCountText.Value = (CurrentTime.time.days).ToString("00");
+        dayNameText.Value = dayName[(int)Mathf.Clamp(dayOfTheWeek - 1 + dayShift.value, 0, dayPerWeek)];
     }
 
     public void SetTime(TimeContainer timeContainer)
@@ -109,10 +109,11 @@ public class TimeManager : MonoBehaviour
         totalTime = 0;
     }
 
+    // execute routine event every day
     public void ExecuteRoutine()
     {
-        if (TriggerTime.hours == CurrentTime.time.hours &&
-            TriggerTime.minutes == CurrentTime.time.minutes)
+        if (TriggerTime.hours >= CurrentTime.time.hours &&
+            TriggerTime.minutes >= CurrentTime.time.minutes)
         {
             if (!IsRoutineExecuted)
             {
@@ -127,11 +128,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    // execute routine event at spesific day of the week
     public void ExecuteWeeklyRoutine()
     {
-        if (TriggerTime.hours == CurrentTime.time.hours &&
-            TriggerTime.minutes == CurrentTime.time.minutes &&
-            TriggerTime.days == dayInAWeek)
+        if (TriggerTime.hours >= CurrentTime.time.hours &&
+            TriggerTime.minutes >= CurrentTime.time.minutes &&
+            TriggerTime.days >= dayOfTheWeek)
         {
             if (!IsRoutineExecuted)
             {

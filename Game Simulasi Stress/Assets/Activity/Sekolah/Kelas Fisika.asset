@@ -15,13 +15,12 @@ MonoBehaviour:
   activityName: Kelas Fisika
   isUseEnergy: 1
   AnimationTrigger: {fileID: 11400000, guid: 1c4b469273672314a814b207669997d5, type: 2}
-  animator: {fileID: 0}
   isCostMoney: 0
   cost: 0
   isScheduled: 1
   isRoutine: 0
   schedule:
-    days: 0
+    days: 1
     hours: 13
     minutes: 0
   tolerance:

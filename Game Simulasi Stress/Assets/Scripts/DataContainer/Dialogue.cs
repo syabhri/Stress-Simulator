@@ -28,6 +28,9 @@ public class Dialogue : ScriptableObject
 
     public Activity[] doActivities;
 
+    [Header("OnDialogEnd")]
+    public UnityEvent OnDialogEnd;
+
     public void PassValue(Dialogue dialogue)
     {
         response = dialogue.response;

@@ -15,10 +15,9 @@ MonoBehaviour:
   activityName: Kelas B. Indonesia
   isUseEnergy: 1
   AnimationTrigger: {fileID: 11400000, guid: 1c4b469273672314a814b207669997d5, type: 2}
-  animator: {fileID: 0}
   isCostMoney: 0
   cost: 0
-  isScheduled: 0
+  isScheduled: 1
   isRoutine: 1
   schedule:
     days: 0

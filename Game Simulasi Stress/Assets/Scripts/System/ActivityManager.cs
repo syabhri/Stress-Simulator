@@ -11,7 +11,7 @@ public class ActivityManager : MonoBehaviour
     [Tooltip("How many energy consumed per hourse of activity")]
     public FloatVariable EnergyPerHour;
 
-    [Header("Values")]
+    [Header("Data")]
     public FloatVariable energy;
     public FloatVariable stress;
     public FloatVariable money;
@@ -70,18 +70,24 @@ public class ActivityManager : MonoBehaviour
                     "Aktifitas belum tersedia, aktifitas baru bisa di lakukan mulai jam "
                     + activity.schedule.hours.ToString("00") + " : " + activity.schedule.minutes.ToString("00");
                 noticePanel.Item.SetActive(true);
+                CancelActivity();
                 OnActivityEnd.Invoke();
                 return;
             }
         }
 
-        if (LimitPerDayReached(activity))
+        if (activity.isLimited)
         {
-            noticePanelText.Value = "Limit Aktifitas Telah Tercapai, Coba Lagi Besok";
-            noticePanel.Item.SetActive(true);
-            OnActivityEnd.Invoke();
+            if (LimitPerDayReached(activity))
+            {
+                noticePanelText.Value = "Limit Aktifitas Telah Tercapai, Coba Lagi Besok";
+                noticePanel.Item.SetActive(true);
+                CancelActivity();
+                OnActivityEnd.Invoke();
+                return;
+            }
         }
-
+        
         noticePanelText.Value = string.Empty;
 
         if(activity.isDutrationAjustable)
@@ -187,8 +193,11 @@ public class ActivityManager : MonoBehaviour
 
         OnActivityEnd.Invoke();
         Debug.Log("Activity Ended");
+    }
 
-
+    public void CancelActivity()
+    {
+        Debug.Log("Activity Canceled");
     }
 
     IEnumerator StartTransition(float duration)
@@ -404,9 +413,24 @@ public class ActivityManager : MonoBehaviour
         return false;
     }
 
-    public bool PrintCurrrentSchedule(ActivitySet activities)
+    public void PrintCurrrentSchedule(ActivitySet activities)
     {
-        return false;
+        schedule.Value = string.Empty;
+
+        foreach (Activity activity in activities.activities)
+        {
+            if (activity.isScheduled)
+            {
+                if (activity.schedule.days == TimeManager.dayOfTheWeek)
+                {
+                    if (schedule.Value != "")
+                        schedule.Value += "/n";
+
+                    schedule.Value += activity.name + " : " + activity.schedule.hours.ToString("00")
+                        + ":" + activity.schedule.minutes.ToString("00");
+                }
+            }
+        }
     }
 
     public static bool LimitPerDayReached(Activity activity)

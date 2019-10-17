@@ -196,7 +196,7 @@ public class DialogManager : MonoBehaviour
         {
             if (activity.isScheduled)
             {
-                if (TimeManager.currentday == activity.schedule.days &&
+                if (TimeManager.currentDay == activity.schedule.days &&
                     TimeManager.currentHours >= activity.schedule.hours &&
                     TimeManager.currentMinutes >= activity.schedule.minutes &&
                     TimeManager.currentHours <= activity.tolerance.days &&
