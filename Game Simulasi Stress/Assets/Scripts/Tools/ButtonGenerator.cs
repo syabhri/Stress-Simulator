@@ -25,7 +25,7 @@ public class ButtonGenerator : MonoBehaviour
         unusedButtons = new Stack<Button>();
     }
 
-    // assign a button to the set
+    // assign a button witout text
     public Button AssignButton()
     {
         Button button;
@@ -47,7 +47,7 @@ public class ButtonGenerator : MonoBehaviour
         return button;
     }
 
-    // assign button 
+    // assign button with text
     public Button AssignButton(string ButtonText)
     {
         Button button;

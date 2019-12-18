@@ -7,39 +7,32 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
-    #region Variables and Class Reverences
+
+    #region Variables
     [Header("Properties")]
-    public Vector2Variable DefaultSpawnPoint;
-    public TimeContainer GameTimeUp;
-    public TimeContainer StarTime;
-    public FloatVariable LoadingProgress;
+    public bool IsPlaying;
+    public TimeFormat starTime;
+    public TimeFormat endTime;
 
     [Header("External Variables")]
     public PlayerData playerData;
+    public GameData gameData;
+    public TimeContainer StarTime;
+    public TimeContainer EndTime;
     public TimeContainer CurrentTime;
-    //public TimeContainer TimePasser;
+    public Vector2Variable DefaultSpawnPoint;
 
     [Header("Reference")]
     public ThingRuntimeSet noticePanel;
     public ThingRuntimeSet LoadingPanel;
     public ThingRuntimeSet Player;
 
-    [Header("Conditions")]
-    public bool IsPlaying;
-
     [Header("UI Output")]
     public StringVariable NoticeText;
-
-    //[Header("Events")]
-    //public GameEvent OnPaused;
-
-
-    //private SpriteRenderer playerSprite;
-    //private Animator playerAnimator;
-
+    public FloatVariable LoadingProgress;
     #endregion
 
-    #region Unity Event Function
+    #region Unity Functions
     private void Awake()
     {
         // set input group to 0;
@@ -65,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     #region GameManager function
     public void PlayGame(int sceneIndex)
-    {
+    { 
         StartCoroutine(LoadAsynchronously(sceneIndex));
     }
 
@@ -87,53 +80,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NewGame(int sceneIndex)
+    public void NewGame(int sceneIndex) 
     {
-        // Check Player Data
-        if (!CheckDataPlayer())
+        //set Starting Knowlage knowlage
+        foreach (FloatVariable knowlege in playerData.knowleges)
         {
-            NoticeText.Value = "Tolong Isi Nama Karakter";
-            noticePanel.Item.SetActive(true);
-            return;
+            knowlege.SetValue(0);
         }
 
-        // Set Starting Clock Time
-        StarTime.time  = new TimeFormat(0, 7, 0);
+        // Set Starting Stat
+        playerData.stressLevel.SetValue(0);
+        playerData.energy.SetValue(100);
+        playerData.coin.SetValue(30);
 
-        /* Reserved
-        // set offset to ending time according to set start clock time
-        GameTimeUp.time.days += StarTime.time.days;
-        GameTimeUp.time.hours += StarTime.time.hours;
-        GameTimeUp.time.minutes += StarTime.time.minutes;
-        */
-
-        // reset player knowlage
-        foreach (FloatVariable knowlage in playerData.knowlage)
-        {
-            knowlage.SetValue(0);
-        }
-
-        // Set Stat Accordingly
-        foreach (FloatVariable stat in playerData.stats)
-        {
-            if (stat.name == "Energy")
-            {
-                stat.SetValue(100);
-                Debug.Log("Energy set to 100");
-            } else if (stat.name == "Money")
-            {
-                stat.SetValue(10);
-                Debug.Log("Coin set to 10");
-            }
-            else
-            {
-                stat.SetValue(0);
-                Debug.Log("The rest of stat reset to 0");
-            }
-        }
-
-        // set player position to default position
+        // set player default spawn position
         playerData.playerPosition.position = DefaultSpawnPoint.position;
+
+        // set game duration
+        StarTime.time.SetValue(starTime);
+        EndTime.time.SetValue(endTime);
         
         PlayGame(sceneIndex);
     }
@@ -174,45 +139,26 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(id);
     }
 
-    
     public void SpawnPlayer(Vector2 position)
     {
-        Instantiate<GameObject>(playerData.avatar, new
+        Instantiate<GameObject>(playerData.Avatar, new
             Vector3(position.x, position.y, 0),
             Quaternion.identity);
         Debug.Log("player spawed");
     }
- 
-    /* Reserved (For Use With Unity Timeline)
-    // assign the avatar sprite and animation to player character
-    public void AssignAvatar(Sprite sprite, RuntimeAnimatorController animator)
-    {
-        //playerSprite.sprite = sprite;
-        //playerAnimator.runtimeAnimatorController = animator;
-    } */
 
     public void CheckEndGame()
     {
-        if (CurrentTime.time.days >= GameTimeUp.time.days)
+        if (CurrentTime.time.days >= EndTime.time.days)
         {
-            if (CurrentTime.time.hours >= GameTimeUp.time.hours)
+            if (CurrentTime.time.hours >= EndTime.time.hours)
             {
-                if (CurrentTime.time.minutes >= GameTimeUp.time.minutes)
+                if (CurrentTime.time.minutes >= EndTime.time.minutes)
                 {
-                    IsPlaying = false;
                     ChangeScene(2);
                 }
             }
         }
-    }
-
-    // will return false if required player data is incomplete or missing
-    public bool CheckDataPlayer()
-    {
-        if (playerData.character_name.Value == string.Empty)
-            return false;
-        else
-            return true;
     }
     #endregion
 }

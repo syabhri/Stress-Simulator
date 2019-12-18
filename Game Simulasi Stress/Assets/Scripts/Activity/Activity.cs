@@ -67,14 +67,14 @@ public class Activity : ScriptableObject
         cost = activity.cost;
 
         isScheduled = activity.isScheduled;
-        schedule.PassValue(activity.schedule);
-        tolerance.PassValue(activity.tolerance);
+        schedule.SetValue(activity.schedule);
+        tolerance.SetValue(activity.tolerance);
 
         isLimited = activity.isLimited;
         limitPerDay = activity.limitPerDay;
 
         isDutrationAjustable = activity.isDutrationAjustable;
-        duration.PassValue(activity.duration);
+        duration.SetValue(activity.duration);
 
         isIncreaseStress = activity.isIncreaseStress;
         increaseStressByHours = activity.increaseStressByHours;

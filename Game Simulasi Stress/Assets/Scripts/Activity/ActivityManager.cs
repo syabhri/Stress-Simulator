@@ -9,7 +9,7 @@ public class ActivityManager : MonoBehaviour
     #region Activity Variables and Object References
     [Header("Properties")]
     [Tooltip("How many energy consumed per hourse of activity")]
-    public FloatVariable EnergyPerHour;
+    public float EnergyPerHour;
 
     [Header("Data")]
     public FloatVariable energy;
@@ -169,7 +169,7 @@ public class ActivityManager : MonoBehaviour
         //decrease energy according to activity duration if activity used energy
         if (activity.isUseEnergy)
         {
-            float consuption = EnergyPerHour.value * activity.duration.ToHours();
+            float consuption = EnergyPerHour * activity.duration.ToHours();
             energy.value -= consuption;
             noticePanelText.Value += "<color=red>Energy -" + consuption + "/n";
             Debug.Log("Energy Decreased by " + consuption + ", Energy = " + energy.value);
@@ -222,13 +222,13 @@ public class ActivityManager : MonoBehaviour
 
     public void AdjustDuration()
     {
-        activity.duration.PassValue(timePasser.time);
+        activity.duration.SetValue(timePasser.time);
     }
 
     //check wether the player have enough energy to do the activity
     public bool CheckEnergy()
     {
-        float consuption = activity.duration.ToHours() * EnergyPerHour.value;
+        float consuption = activity.duration.ToHours() * EnergyPerHour;
         if (energy.value >= consuption)
         {
             Debug.Log("Energy Enough, Energy -" + consuption);
@@ -443,7 +443,7 @@ public class ActivityManager : MonoBehaviour
 
     public void SkipTime()
     {
-        timePasser.time.PassValue(activity.duration);
+        timePasser.time.SetValue(activity.duration);
         onTimeSkip.Raise();
     }
 

@@ -20,7 +20,7 @@ public class TimeFormat
         this.minutes = minutes;
     }
 
-    public void PassValue(TimeFormat time)
+    public void SetValue(TimeFormat time)
     {
         days = time.days;
         hours = time.hours;

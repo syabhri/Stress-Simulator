@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class FloatPair
 {
-    [Tooltip("Name The float Pair For Easy Identification (Optional)")]
-    public string name;
-
     [Tooltip("Target is the external value to be chaged by effector using the operator")]
     public FloatVariable target;
 
@@ -259,7 +256,6 @@ public class FloatPair
     // used to pass value to other instace of this class
     public void PassValue(FloatPair floatPair)
     {
-        name = floatPair.name;
         target = floatPair.target;
         effector = floatPair.effector;
 

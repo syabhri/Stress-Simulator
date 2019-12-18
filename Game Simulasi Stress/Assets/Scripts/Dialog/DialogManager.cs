@@ -7,15 +7,25 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
+    #region Data Class
+    //replace targeted string with external value
+    [System.Serializable]
+    public class StringReplace
+    {
+        public string target;
+        public StringVariable replacement;
+    }
+    #endregion
+
+    #region Variables
     [Header("Properties")]
     public float typingDelay = .01f;
     public float punctuationDelay = .5f;
-    [SerializeField]
-    private List<char> punctuation = new List<char>();
-    [Tooltip("replace words that match in \"local\" with \"external\" from the dilaog")]
-    public List<StringPair> replace = new List<StringPair>();
+    public List<char> punctuation = new List<char>();
+    [Tooltip("replace target string in the dilaog with value from external variable")]
+    public List<StringReplace> replace = new List<StringReplace>();
 
-    [Header("GUI")]
+    [Header("Output")]
     public StringVariable nameText;
     public StringVariable dialogueText;
     //public Sprite avatarSprite;
@@ -28,7 +38,6 @@ public class DialogManager : MonoBehaviour
     [Header("Event")]
     public UnityEvent OnDialogStart;
     public UnityEvent OnDialogEnd;
-    public UnityEvent OnTypeSentenceFinish;
 
     [Header("Conditions")]
     public BoolVariable isDialogOpen;
@@ -45,7 +54,9 @@ public class DialogManager : MonoBehaviour
     //temp Reference
     private ButtonGenerator buttonGenerator;
     private ActivityManager activityManager;
+    #endregion
 
+    #region Unity Functions
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +77,9 @@ public class DialogManager : MonoBehaviour
                 Debug.Log("Displaying next sentence....");
             }*/
     }
+    #endregion
 
+    #region Dialog Functions
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("DialogStarted");
@@ -150,12 +163,12 @@ public class DialogManager : MonoBehaviour
 
     public string ReplaceText(string sentence)
     {
-        foreach (StringPair pair in replace)
+        foreach (StringReplace stringReplace in replace)
         {
-            if (sentence.Contains(pair.local))
+            if (sentence.Contains(stringReplace.target))
             {
-                sentence = sentence.Replace(pair.local, pair.external.Value);
-                Debug.Log("Text Replaced : " + pair.local + " -> " + pair.external.Value);
+                sentence = sentence.Replace(stringReplace.target, stringReplace.replacement.Value);
+                Debug.Log("Text Replaced : " + stringReplace.target + " -> " + stringReplace.replacement.Value);
             }
         }
         return sentence;
@@ -167,7 +180,9 @@ public class DialogManager : MonoBehaviour
         OnDialogEnd.Invoke();
         Debug.Log("Dialog Ended");
     }
+    #endregion
 
+    #region Decision Functions
     public void StartDecision()
     {
         Debug.Log("Decision Started");
@@ -221,4 +236,5 @@ public class DialogManager : MonoBehaviour
             button.onClick.AddListener(delegate { choiceEvent.unityEvent.Invoke(); });
         }
     }
+    #endregion
 }

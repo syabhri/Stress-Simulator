@@ -7,31 +7,21 @@ public class SaveData
 {
     //player data
     public string character_name;
-    public GameObject avatar;
-    public float[] playerPosition;
+    public string avatar;
+    public string[] player_position;
 
-    public FloatVariable[] stats;
+    public float stress_level;
+    public float energy;
+    public float coin;
 
-    public Ability[] abilities;
+    public FloatPairContainer ability;
 
-    public Subject[] subjects;
+    public List<FloatPairContainer> interest;
 
-    public SaveData(PlayerData playerData, GameData gameData)
+    public List<FloatVariable> knowleges;
+
+    public SaveData(PlayerData playerData)
     {
-        //player data
-        character_name = playerData.character_name.Value;
-
-        avatar = playerData.avatar;
-
-        playerPosition = new float[2];
-        playerPosition[0] = playerData.playerPosition.position.x;
-        playerPosition[0] = playerData.playerPosition.position.y;
-
         
-    }
-
-    public void LoadData()
-    {
-
     }
 }

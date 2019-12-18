@@ -7,6 +7,7 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [Header("Properties")]
+    [SerializeField] private float TimeScale = 1;
     [SerializeField] private float totalTime;
     [SerializeField] private float dayNormalized;
 
@@ -18,7 +19,6 @@ public class TimeManager : MonoBehaviour
         "Kamis", "Jumat", "Sabtu", "Minggu" };
 
     [Header("Public Variable")]
-    public FloatVariable TimeScale;
     public TimeContainer StartTime;
     public TimeContainer CurrentTime;
     public IntVariable dayShift;
@@ -69,7 +69,7 @@ public class TimeManager : MonoBehaviour
 
     private void UpdateTime()
     {
-        totalTime += Time.deltaTime / TimeScale.value;
+        totalTime += Time.deltaTime / TimeScale;
 
         dayNormalized = totalTime % 1f;
 

@@ -6,29 +6,22 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     public StringVariable character_name;
-    public GameObject avatar;
+    public GameObject Avatar { get; set; }
     public Vector2Variable playerPosition;
 
     [Space]
-
-    public List<FloatVariable> stats;
+    public FloatVariable stressLevel;
+    public FloatVariable energy;
+    public FloatVariable coin;
 
     [Space]
-
     public FloatPairContainer ability;
 
     [Space]
-
     public List<FloatPairContainer> interest;
 
     [Space]
-
-    public List<FloatVariable> knowlage;
-
-    public void SetAvatar(GameObject avatar)
-    {
-        this.avatar = avatar;
-    }
+    public List<FloatVariable> knowleges;
 
     public void SetAbility(FloatPairContainer ability)
     {

@@ -5,11 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Variable/Custom/GameData")]
 public class GameData : ScriptableObject
 {
-    public TimeContainer timeLimit;
-
-    public TimeContainer timeCountdown;
-
-    public Vector2Variable[] SpawnPoints;
-
-    public List<FloatVariable> subjects;
+    public List<GameObject> Avatars;
+    public List<FloatPairContainer> Abilities;
+    public List<FloatPairContainer> Insterest;
 }

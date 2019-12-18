@@ -45,24 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4313357dd36f15e4f8a4e77a9ca13c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeScale: 1
   totalTime: 0
   dayNormalized: 0
-  dayInAWeek: 0
-  dayName:
-  - Senin
-  - Selasa
-  - Rabu
-  - Kamis
-  - Jumat
-  - Sabtu
-  - Minggu
-  TimeScale: {fileID: 11400000, guid: f3318c67ebfcf9e4281fb11eaed097ce, type: 2}
   StartTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
   CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
   dayShift: {fileID: 11400000, guid: 79594161e9d787e4f9517f7ef7c5d518, type: 2}
   timeText: {fileID: 11400000, guid: 73f03487940fc604ab5d43c9c0e8bbdc, type: 2}
   dayCountText: {fileID: 11400000, guid: 846f3544a9cfeeb47b6c49a0b69abb2e, type: 2}
   dayNameText: {fileID: 11400000, guid: 86cec49f3af925b42b818e36676e7f70, type: 2}
+  TriggerTime:
+    days: 0
+    hours: 0
+    minutes: 0
+  OnTriggerTime:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &7330841114189131730
 MonoBehaviour:
   m_ObjectHideFlags: 0
