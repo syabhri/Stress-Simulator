@@ -6,6 +6,7 @@
 // ----------------------------------------------------------------------------
 
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName ="Variables/Float Variable")]
 public class FloatVariable : ScriptableObject
@@ -15,10 +16,12 @@ public class FloatVariable : ScriptableObject
 public string DeveloperDescription = "";
 #endif
     public float value;
+    public Action<FloatVariable> OnValueChange = delegate { };
 
     public void SetValue(float value)
     {
         this.value = value;
+        OnValueChange(this);
     }
 
     public void SetValue(FloatVariable value)

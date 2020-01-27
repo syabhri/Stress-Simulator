@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece72cfa0e474b44ebe829e0fee06138, type: 3}
   m_Name: TimePasser
   m_EditorClassIdentifier: 
-  days: 100
-  hours: 21
-  minutes: 0
+  time:
+    days: 0
+    hours: 5
+    minutes: 0

@@ -12,11 +12,8 @@ public class ActivityManager : MonoBehaviour
     public float EnergyPerHour;
 
     [Header("Data")]
-    public FloatVariable energy;
-    public FloatVariable stress;
-    public FloatVariable money;
-    public TimeContainer currentTime;
     public PlayerData playerData;
+    public TimeContainer currentTime;
 
     [Header("References")]
     public ThingRuntimeSet timeSetterPanel;
@@ -170,17 +167,17 @@ public class ActivityManager : MonoBehaviour
         if (activity.isUseEnergy)
         {
             float consuption = EnergyPerHour * activity.duration.ToHours();
-            energy.value -= consuption;
+            playerData.energy.value -= consuption;
             noticePanelText.Value += "<color=red>Energy -" + consuption + "/n";
-            Debug.Log("Energy Decreased by " + consuption + ", Energy = " + energy.value);
+            Debug.Log("Energy Decreased by " + consuption + ", Energy = " + playerData.energy.value);
         }
             
         // decrease the money if activity using money
         if (activity.isCostMoney)
         {
-            money.value -= activity.cost;
+            playerData.coins.value -= activity.cost;
             noticePanelText.Value += "<color=red>Money -" + activity.cost;
-            Debug.Log("Money Decreased by " + activity.cost + ", Money = " + money.value);
+            Debug.Log("Money Decreased by " + activity.cost + ", Money = " + playerData.coins.value);
         }
 
         // if activity is limited increase activity count
@@ -229,7 +226,7 @@ public class ActivityManager : MonoBehaviour
     public bool CheckEnergy()
     {
         float consuption = activity.duration.ToHours() * EnergyPerHour;
-        if (energy.value >= consuption)
+        if (playerData.energy.value >= consuption)
         {
             Debug.Log("Energy Enough, Energy -" + consuption);
             return true;
@@ -248,7 +245,7 @@ public class ActivityManager : MonoBehaviour
 
     public bool CheckMoney()
     {
-        if (money.value >= activity.cost)
+        if (playerData.coins.value >= activity.cost)
         {
             Debug.Log("Money Enough : -" + activity.cost);
             return true;
@@ -267,30 +264,30 @@ public class ActivityManager : MonoBehaviour
 
     public void IncreaseStress()
     {
-        float old = stress.value;
+        float old = playerData.stressLevel.value;
         if (activity.increaseStressByHours)
-            stress.value += activity.increasedStressMultiplier * activity.duration.ToHours();
+            playerData.stressLevel.value += activity.increasedStressMultiplier * activity.duration.ToHours();
         else
-            stress.value += activity.increasedStressMultiplier;
+            playerData.stressLevel.value += activity.increasedStressMultiplier;
 
-        if (stress.value > 100)
-            stress.value = 100;
-        noticePanelText.Value += "<color=red>Stress +" + (stress.value - old) + "/n";
-        Debug.Log("Stress +" + (stress.value - old) + ", Stress = " + stress.value);
+        if (playerData.stressLevel.value > 100)
+            playerData.stressLevel.value = 100;
+        noticePanelText.Value += "<color=red>Stress +" + (playerData.stressLevel.value - old) + "/n";
+        Debug.Log("Stress +" + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
     }
 
 
     public void DecreaseStress()
     {
-        float old = stress.value;
+        float old = playerData.stressLevel.value;
         if (activity.decreaseStressByHours)
-            stress.value -= activity.decreasedStressMultiplier * activity.duration.ToHours();
+            playerData.stressLevel.value -= activity.decreasedStressMultiplier * activity.duration.ToHours();
         else
-            stress.value -= activity.decreasedStressMultiplier;
-        if (stress.value < 0)
-            stress.value = 0;
-        noticePanelText.Value += "<color=green>Stress " + (stress.value - old) + "/n";
-        Debug.Log("Stress " + (stress.value - old) + ", Stress = " + stress.value);
+            playerData.stressLevel.value -= activity.decreasedStressMultiplier;
+        if (playerData.stressLevel.value < 0)
+            playerData.stressLevel.value = 0;
+        noticePanelText.Value += "<color=green>Stress " + (playerData.stressLevel.value - old) + "/n";
+        Debug.Log("Stress " + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
     }
 
     //change other stat based on the operation configured and stress level if effected
@@ -343,7 +340,7 @@ public class ActivityManager : MonoBehaviour
         float decreaseFactor;
 
         //find the decrease factor
-        decreaseFactor = Mathf.Round(effector * stress.value / 100);
+        decreaseFactor = Mathf.Round(effector * playerData.stressLevel.value / 100);
 
         //decrease the effector according to the decrease factor
         effector -= decreaseFactor;

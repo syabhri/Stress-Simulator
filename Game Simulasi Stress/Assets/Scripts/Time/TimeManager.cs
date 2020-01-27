@@ -6,11 +6,6 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-    [Header("Properties")]
-    [SerializeField] private float TimeScale = 1;
-    [SerializeField] private float totalTime;
-    [SerializeField] private float dayNormalized;
-
     // constant values
     public const float dayPerWeek = 7f;
     public const float hoursPerDay = 24f;
@@ -18,26 +13,37 @@ public class TimeManager : MonoBehaviour
     public readonly string[] dayName = { "Senin", "Selasa", "Rabu",
         "Kamis", "Jumat", "Sabtu", "Minggu" };
 
-    [Header("Public Variable")]
+    [Header("Properties")]
+    [SerializeField] private float TimeScale = 1;
+
+    [Header("External Variables")]
     public TimeContainer StartTime;
+    public TimeContainer EndTime;
     public TimeContainer CurrentTime;
-    public IntVariable dayShift;
 
     [Header("Output UI")]
     public StringVariable timeText;
     public StringVariable dayCountText;
     public StringVariable dayNameText;
 
-    [Header("Routine Events")]
-    public TimeFormat TriggerTime;
-    public UnityEvent OnTriggerTime;
+    [Header("Events")]
+    public UnityEvent OnEndTime;
+    public UnityEvent OnRoutine;
 
-    private bool IsRoutineExecuted;
     public static float currentDay;
     public static float currentHours;
     public static float currentMinutes;
     public static float dayOfTheWeek;
-    
+
+    // rotine properties
+    private bool IsRoutineExecuted = false;
+    private int lastDayExecuted;
+
+    private bool IsEndTimeExecuted = false;
+
+    // time counter
+    private float totalTime;
+    private float dayNormalized;
 
     private void Start()
     {
@@ -48,16 +54,17 @@ public class TimeManager : MonoBehaviour
     private void Update()
     {
         UpdateTime();
+        ExecuteRoutine();
 
-        if (TriggerTime.days == 0)
+        if (CurrentTime.time.days >= EndTime.time.days &&
+            CurrentTime.time.hours >= EndTime.time.hours &&
+            CurrentTime.time.minutes >= EndTime.time.minutes &&
+            IsEndTimeExecuted == false)
         {
-            ExecuteRoutine();
+            OnEndTime.Invoke();
+            Debug.Log("Time Ended");
+            IsEndTimeExecuted = true;
         }
-        else
-        {
-            ExecuteWeeklyRoutine();
-        }
-        
     }
 
     private void OnDisable()
@@ -85,7 +92,7 @@ public class TimeManager : MonoBehaviour
 
         timeText.Value = CurrentTime.time.hours.ToString("00") + ":" + CurrentTime.time.minutes.ToString("00");
         dayCountText.Value = (CurrentTime.time.days).ToString("00");
-        dayNameText.Value = dayName[(int)Mathf.Clamp(dayOfTheWeek - 1 + dayShift.value, 0, dayPerWeek)];
+        dayNameText.Value = dayName[(int)dayOfTheWeek];
     }
 
     public void SetTime(TimeContainer timeContainer)
@@ -112,39 +119,19 @@ public class TimeManager : MonoBehaviour
     // execute routine event every day
     public void ExecuteRoutine()
     {
-        if (TriggerTime.hours >= CurrentTime.time.hours &&
-            TriggerTime.minutes >= CurrentTime.time.minutes)
+        if (!IsRoutineExecuted)
         {
-            if (!IsRoutineExecuted)
-            {
-                Debug.Log("Executing Routine....");
-                OnTriggerTime.Invoke();
-                IsRoutineExecuted = true;
-            }
+            lastDayExecuted = (int)CurrentTime.time.days;
+            OnRoutine.Invoke();
+            IsRoutineExecuted = true;
+            Debug.Log("Routine Executed!");
         }
         else
         {
-            IsRoutineExecuted = false;
-        }
-    }
-
-    // execute routine event at spesific day of the week
-    public void ExecuteWeeklyRoutine()
-    {
-        if (TriggerTime.hours >= CurrentTime.time.hours &&
-            TriggerTime.minutes >= CurrentTime.time.minutes &&
-            TriggerTime.days >= dayOfTheWeek)
-        {
-            if (!IsRoutineExecuted)
+            if (CurrentTime.time.days > lastDayExecuted)
             {
-                Debug.Log("Executing Routine....");
-                OnTriggerTime.Invoke();
-                IsRoutineExecuted = true;
+                IsRoutineExecuted = false;
             }
-        }
-        else
-        {
-            IsRoutineExecuted = false;
         }
     }
 }

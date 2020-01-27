@@ -6,13 +6,10 @@ using TMPro;
 
 public class DropdownEvent : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
-
     public UnityEvent[] unityEvent;
 
-    public void InvokeSelected()
+    public void InvokeSelected(int selected)
     {
-        unityEvent[dropdown.value].Invoke();
+        unityEvent[selected].Invoke();
     }
-
 }

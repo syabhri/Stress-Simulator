@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "Variables/Int Variable")]
 public class IntVariable : ScriptableObject
@@ -10,10 +11,12 @@ public class IntVariable : ScriptableObject
     public string DeveloperDescription = "";
 #endif
     public int value;
+    public Action<IntVariable> OnValueChange = delegate { };
 
     public void SetValue(int value)
     {
         this.value = value;
+        OnValueChange.Invoke(this);
     }
 
     public void SetValue(IntVariable value)

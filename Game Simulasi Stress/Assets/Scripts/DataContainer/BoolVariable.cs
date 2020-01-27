@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "Variables/Bool Variable")]
 public class BoolVariable : ScriptableObject
@@ -11,10 +12,12 @@ public class BoolVariable : ScriptableObject
 #endif
 
     public bool value;
+    public Action<BoolVariable> OnValueChange = delegate { };
 
     public void SetBool(bool value)
     {
         this.value = value;
+        OnValueChange.Invoke(this);
     }
 
     public void ToggleBool()
@@ -23,5 +26,6 @@ public class BoolVariable : ScriptableObject
             value = false;
         else
             value = true;
+        OnValueChange.Invoke(this);
     }
 }

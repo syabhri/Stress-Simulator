@@ -48,17 +48,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a30c803344b6040914ece79a4b8412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
-  GameTimeUp: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
-  StarTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
-  LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
+  IsPlaying: 0
+  starTime:
+    days: 0
+    hours: 0
+    minutes: 0
+  endTime:
+    days: 30
+    hours: 0
+    minutes: 0
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
+  gameData: {fileID: 11400000, guid: 6bc27c730ea18e44f9f361d0abfe2b47, type: 2}
+  StarTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
+  EndTime: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
   CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
+  DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
   noticePanel: {fileID: 11400000, guid: 2cb3823165920064e9545481091ebcf9, type: 2}
   LoadingPanel: {fileID: 11400000, guid: 4ab8c066dc1bbee43892275e268b8f6a, type: 2}
   Player: {fileID: 11400000, guid: 5232c2cb1655b1a4f9ffb386554d8729, type: 2}
-  IsPlaying: 1
   NoticeText: {fileID: 11400000, guid: 69054b7d623791f4bb009b049a9476af, type: 2}
+  LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
 --- !u!114 &7820484409494991973
 MonoBehaviour:
   m_ObjectHideFlags: 0

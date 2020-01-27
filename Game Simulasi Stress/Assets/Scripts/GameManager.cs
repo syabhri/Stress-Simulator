@@ -2,30 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
-
     #region Variables
     [Header("Properties")]
     public bool IsPlaying;
-    public TimeFormat starTime;
+    public TimeFormat startTime;
     public TimeFormat endTime;
 
     [Header("External Variables")]
     public PlayerData playerData;
     public GameData gameData;
-    public TimeContainer StarTime;
+    public TimeContainer StartTime;
     public TimeContainer EndTime;
     public TimeContainer CurrentTime;
     public Vector2Variable DefaultSpawnPoint;
-
-    [Header("Reference")]
-    public ThingRuntimeSet noticePanel;
-    public ThingRuntimeSet LoadingPanel;
-    public ThingRuntimeSet Player;
 
     [Header("UI Output")]
     public StringVariable NoticeText;
@@ -36,79 +28,103 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // set input group to 0;
-
-        //playerSprite = Player.Item.GetComponent<SpriteRenderer>();
-        //playerAnimator = Player.Item.GetComponent<Animator>();
         if (IsPlaying)
         {
             //AssignAvatar();
             SpawnPlayer(playerData.playerPosition.position);
         }
-
-    }
-
-    private void Update()
-    {
-        if (IsPlaying)
-        {
-            CheckEndGame();
-        }
     }
     #endregion
 
     #region GameManager function
-    public void PlayGame(int sceneIndex)
+    public void LoadScene(int sceneIndex)
     { 
         StartCoroutine(LoadAsynchronously(sceneIndex));
+    }
+
+    public void LoadNextScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator LoadAsynchronously (int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-
-        LoadingPanel.Item.SetActive(true);
+        operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / .9f);
+            float progress = Mathf.Clamp01(operation.progress);
 
             Debug.Log(progress);
 
             LoadingProgress.value = progress;
 
-            yield return null;
+            if (operation.progress >= 0.9f)
+            {
+                operation.allowSceneActivation = true;
+            }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 
-    public void NewGame(int sceneIndex) 
+    public void NewGame() 
     {
+        // Set Starting Stat
+        playerData.stressLevel.SetValue(0);
+        playerData.energy.SetValue(100);
+        playerData.coins.SetValue(30);
+
         //set Starting Knowlage knowlage
         foreach (FloatVariable knowlege in playerData.knowleges)
         {
             knowlege.SetValue(0);
         }
 
-        // Set Starting Stat
-        playerData.stressLevel.SetValue(0);
-        playerData.energy.SetValue(100);
-        playerData.coin.SetValue(30);
-
         // set player default spawn position
         playerData.playerPosition.position = DefaultSpawnPoint.position;
 
         // set game duration
-        StarTime.time.SetValue(starTime);
+        StartTime.time.SetValue(startTime);
         EndTime.time.SetValue(endTime);
         
-        PlayGame(sceneIndex);
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void LoadGame()
+    public void SaveGame(string saveName)
     {
-        Debug.LogWarning("Function not implemented yet");
+        SaveData saveData = new SaveData(playerData, CurrentTime.time);
+        SaveManager.Save<SaveData>(saveData, saveName);
     }
 
-    public void PauseGame()
+    public void LoadGame(string saveName)
+    {
+        SaveData saveData = SaveManager.Load<SaveData>(saveName);
+
+        StartTime.time.minutes = saveData.current_time[0];
+        StartTime.time.hours = saveData.current_time[1];
+        StartTime.time.days = saveData.current_time[2];
+
+        playerData.characterName.Value = saveData.character_name;
+
+        foreach (GameObject avatar in gameData.Avatars)
+        {
+            if (avatar.name == saveData.avatar)
+                playerData.avatar = avatar;
+        }
+
+        playerData.playerPosition.position.x = saveData.player_position[0];
+        playerData.playerPosition.position.y = saveData.player_position[1];
+
+        playerData.stressLevel.value = saveData.stress_level;
+        playerData.energy.value = saveData.energy;
+        playerData.coins.value = saveData.coins;
+
+        LoadScene(1);
+    }
+
+    public static void PauseGame()
     {
         Time.timeScale = 0f;
         Debug.Log("GamePaused");
@@ -125,7 +141,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void QuitToMEnu()
+    public void QuitToMenu()
     {
         ChangeScene(0);
     }
@@ -141,24 +157,10 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer(Vector2 position)
     {
-        Instantiate<GameObject>(playerData.Avatar, new
+        Instantiate(playerData.avatar, new
             Vector3(position.x, position.y, 0),
             Quaternion.identity);
         Debug.Log("player spawed");
-    }
-
-    public void CheckEndGame()
-    {
-        if (CurrentTime.time.days >= EndTime.time.days)
-        {
-            if (CurrentTime.time.hours >= EndTime.time.hours)
-            {
-                if (CurrentTime.time.minutes >= EndTime.time.minutes)
-                {
-                    ChangeScene(2);
-                }
-            }
-        }
     }
     #endregion
 }

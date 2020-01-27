@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece72cfa0e474b44ebe829e0fee06138, type: 3}
   m_Name: CurrentTime
   m_EditorClassIdentifier: 
-  days: 21
-  hours: 8
-  minutes: 48
+  time:
+    days: 15
+    hours: 6
+    minutes: 1

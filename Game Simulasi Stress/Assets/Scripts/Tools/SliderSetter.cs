@@ -14,22 +14,40 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class SliderSetter : MonoBehaviour
 {
-    public Slider Slider;
-    public FloatVariable Variable;
-    public float min;
-    public float max;
+    public Slider slider;
+    public FloatVariable variable;
+    [SerializeField]
+    private bool isContinues;
 
     private void Start()
     {
-        if (Slider == null)
+        if (slider == null)
         {
-            Slider = GetComponent<Slider>();
+            slider = GetComponent<Slider>();
+        }
+
+        if (isContinues)
+        {
+            variable.OnValueChange += UpdateChanges;
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
-            Slider.value = Mathf.Clamp01(
-                Mathf.InverseLerp(min, max, Variable.value));
+        slider.value = variable.value;
     }
+
+    private void OnDestroy()
+    {
+        if (isContinues)
+        {
+            variable.OnValueChange -= UpdateChanges;
+        }
+    }
+
+    public void UpdateChanges(FloatVariable variable)
+    {
+        slider.value = variable.value;
+    }
+            
 }
