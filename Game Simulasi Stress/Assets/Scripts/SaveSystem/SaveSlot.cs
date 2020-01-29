@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class SaveDisplay : MonoBehaviour
+public class SaveSlot : MonoBehaviour
 {
     public string saveName;
     public GameData gameData;
@@ -12,6 +12,7 @@ public class SaveDisplay : MonoBehaviour
     public TextMeshProUGUI charaterName;
     public TextMeshProUGUI days;
 
+    [Space]
     public UnityEvent OnSaveExist;
     public UnityEvent OnSaveEmpty;
 

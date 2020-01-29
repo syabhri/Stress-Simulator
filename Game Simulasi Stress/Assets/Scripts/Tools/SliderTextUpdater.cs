@@ -35,23 +35,24 @@ public class SliderTextUpdater : MonoBehaviour
         {
             if (UsePercentSymbol)
             {
-                TextTarget.text = (SliderSource.value * Multiplier ).ToString() + "%";
+                TextTarget.text = (SliderSource.value * Multiplier ).ToString("0") + "%";
             }
             else
             {
-                TextTarget.text = (SliderSource.value * Multiplier).ToString();
+                TextTarget.text = (SliderSource.value * Multiplier).ToString("0");
             }
         }
         else
         {
             if (UsePercentSymbol)
             {
-                TextTarget.text = SliderSource.value.ToString() + "%";
+                TextTarget.text = SliderSource.value.ToString("0") + "%";
             }
             else
             {
-                TextTarget.text = SliderSource.value.ToString();
+                TextTarget.text = SliderSource.value.ToString("0");
             }
         }
+        Debug.Log("text Updated");
     }
 }

@@ -4,7 +4,11 @@ using TMPro;
 public class DropdownSetter : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
-    public IntVariable SelectedOption;
+    public StringListVariable Options;
+    public IntVariable Value;
+    [SerializeField]
+    [Tooltip("continuesly update on Value Changes, Enable only if dropdown is used as output otherwise will couse feedback loop")]
+    private bool IsContinues = false;
 
     private void Start()
     {
@@ -12,10 +16,31 @@ public class DropdownSetter : MonoBehaviour
         {
             dropdown = GetComponent<TMP_Dropdown>();
         }
+
+        if (IsContinues)
+        {
+            Value.OnValueChange += UpdateChanges;
+        }
     }
 
     private void OnEnable()
     {
-        dropdown.value = SelectedOption.value;
+        dropdown.ClearOptions();
+        dropdown.AddOptions(Options.Values);
+        UpdateChanges(Value);
+    }
+
+    private void OnDestroy()
+    {
+        if (IsContinues)
+        {
+            Value.OnValueChange -= UpdateChanges;
+        }
+    }
+
+    public void UpdateChanges(IntVariable Value)
+    {
+        dropdown.value = Value.value;
+        dropdown.RefreshShownValue();
     }
 }

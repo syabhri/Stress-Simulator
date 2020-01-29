@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
             float value = PlayerPrefs.GetFloat(volume.name, 0);
             audioMixer.SetFloat(volume.name, Mathf.Log10(value) * 20);
             volume.SetValue(value);
+
             volume.OnValueChange += ChangeVolume;
         }
     }
@@ -33,6 +34,4 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat(volume.name, Mathf.Log10(volume.value) *20);
         PlayerPrefs.SetFloat(volume.name, volume.value);
     }
-
-
 }

@@ -17,7 +17,8 @@ public class SliderSetter : MonoBehaviour
     public Slider slider;
     public FloatVariable variable;
     [SerializeField]
-    private bool isContinues;
+    [Tooltip("continuesly update on Value Changes, Enable only if slider is used as output otherwise will couse feedback loop")]
+    private bool isContinues = false;
 
     private void Start()
     {

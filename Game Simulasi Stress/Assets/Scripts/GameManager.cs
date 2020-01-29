@@ -50,22 +50,16 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadAsynchronously (int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-        operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress);
+            float progress = Mathf.Clamp01(operation.progress / .9f);
 
             Debug.Log(progress);
 
-            LoadingProgress.value = progress;
+            LoadingProgress.SetValue(progress);
 
-            if (operation.progress >= 0.9f)
-            {
-                operation.allowSceneActivation = true;
-            }
-
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
 
@@ -121,7 +115,7 @@ public class GameManager : MonoBehaviour
         playerData.energy.value = saveData.energy;
         playerData.coins.value = saveData.coins;
 
-        LoadScene(1);
+        StartCoroutine(LoadAsynchronously(1));
     }
 
     public static void PauseGame()

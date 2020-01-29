@@ -22,6 +22,7 @@ public class IntVariable : ScriptableObject
     public void SetValue(IntVariable value)
     {
         this.value = value.value;
+        OnValueChange.Invoke(this);
     }
 
     public void ApplyChange(int amount)

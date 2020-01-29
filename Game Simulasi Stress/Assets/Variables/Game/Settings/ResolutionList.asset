@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba1f118bd484a042a2354685a38d2aa, type: 3}
-  m_Name: EnergyText
+  m_Script: {fileID: 11500000, guid: 21c961861ca484246a72f535dc66f3c4, type: 3}
+  m_Name: ResolutionList
   m_EditorClassIdentifier: 
-  value: 100
+  values:
+  - 640 x 480
+  - 800 x 600
+  - 1024 x 768
+  - 1280 x 720
+  - 1360 x 768
+  - 1366 x 768

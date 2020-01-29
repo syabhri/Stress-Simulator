@@ -6,11 +6,12 @@ using System;
 public class StringListVariable : ScriptableObject
 {
     [SerializeField]
-    public List<string> values = new List<string>();
+    private List<string> values = new List<string>();
+    public Action<StringListVariable> OnValueChange = delegate { };
 
     public List<string> Values
     {
         get { return values; }
-        set { values = new List<string>(value); }
+        set { values = new List<string>(value); OnValueChange.Invoke(this); }
     }
 }

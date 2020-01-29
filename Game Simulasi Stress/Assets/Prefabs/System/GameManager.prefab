@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 739497648853751761}
   - component: {fileID: 7820484409494991973}
   - component: {fileID: 8541872964584808616}
-  - component: {fileID: 1388816559}
   - component: {fileID: 4189284325266800212}
   - component: {fileID: 2898035486844802327}
   m_Layer: 0
@@ -49,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
-  starTime:
+  startTime:
     days: 0
     hours: 0
     minutes: 0
@@ -59,13 +58,10 @@ MonoBehaviour:
     minutes: 0
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
   gameData: {fileID: 11400000, guid: 6bc27c730ea18e44f9f361d0abfe2b47, type: 2}
-  StarTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
+  StartTime: {fileID: 0}
   EndTime: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
   CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
   DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
-  noticePanel: {fileID: 11400000, guid: 2cb3823165920064e9545481091ebcf9, type: 2}
-  LoadingPanel: {fileID: 11400000, guid: 4ab8c066dc1bbee43892275e268b8f6a, type: 2}
-  Player: {fileID: 11400000, guid: 5232c2cb1655b1a4f9ffb386554d8729, type: 2}
   NoticeText: {fileID: 11400000, guid: 69054b7d623791f4bb009b049a9476af, type: 2}
   LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
 --- !u!114 &7820484409494991973
@@ -148,46 +144,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1388816559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739497648853751775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b06bb8268fce14b81d46f685fb77fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonName: Pause
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 7e7ffbf38714c3642873e4797348a7cb, type: 2}
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: b1554c25a2a8d0541b98d26cd1cbff43, type: 2}
-        m_MethodName: Acitvate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &4189284325266800212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +160,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1388816559}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -233,7 +189,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1388816559}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
