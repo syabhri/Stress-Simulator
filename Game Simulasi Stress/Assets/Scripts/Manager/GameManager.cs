@@ -86,15 +86,15 @@ public class GameManager : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void SaveGame(string saveName)
+    public void SaveGame(StringVariable saveName)
     {
         SaveData saveData = new SaveData(playerData, CurrentTime.time);
-        SaveManager.Save<SaveData>(saveData, saveName);
+        SaveManager.Save<SaveData>(saveData, saveName.Value);
     }
 
-    public void LoadGame(string saveName)
+    public void LoadGame(StringVariable saveName)
     {
-        SaveData saveData = SaveManager.Load<SaveData>(saveName);
+        SaveData saveData = SaveManager.Load<SaveData>(saveName.Value);
 
         StartTime.time.minutes = saveData.current_time[0];
         StartTime.time.hours = saveData.current_time[1];

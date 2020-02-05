@@ -167,7 +167,7 @@ public class ActivityManager : MonoBehaviour
         if (activity.isUseEnergy)
         {
             float consuption = EnergyPerHour * activity.duration.ToHours();
-            playerData.energy.value -= consuption;
+            playerData.energy.SetValue(playerData.energy.value - consuption);
             noticePanelText.Value += "<color=red>Energy -" + consuption + "/n";
             Debug.Log("Energy Decreased by " + consuption + ", Energy = " + playerData.energy.value);
         }
@@ -175,7 +175,7 @@ public class ActivityManager : MonoBehaviour
         // decrease the money if activity using money
         if (activity.isCostMoney)
         {
-            playerData.coins.value -= activity.cost;
+            playerData.coins.SetValue(playerData.coins.value - activity.cost);
             noticePanelText.Value += "<color=red>Money -" + activity.cost;
             Debug.Log("Money Decreased by " + activity.cost + ", Money = " + playerData.coins.value);
         }
@@ -266,12 +266,12 @@ public class ActivityManager : MonoBehaviour
     {
         float old = playerData.stressLevel.value;
         if (activity.increaseStressByHours)
-            playerData.stressLevel.value += activity.increasedStressMultiplier * activity.duration.ToHours();
+            playerData.stressLevel.SetValue(playerData.stressLevel.value + (activity.increasedStressMultiplier * activity.duration.ToHours()));
         else
-            playerData.stressLevel.value += activity.increasedStressMultiplier;
+            playerData.stressLevel.SetValue(playerData.stressLevel.value + activity.increasedStressMultiplier);
 
         if (playerData.stressLevel.value > 100)
-            playerData.stressLevel.value = 100;
+            playerData.stressLevel.SetValue(100);
         noticePanelText.Value += "<color=red>Stress +" + (playerData.stressLevel.value - old) + "/n";
         Debug.Log("Stress +" + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
     }
@@ -281,11 +281,11 @@ public class ActivityManager : MonoBehaviour
     {
         float old = playerData.stressLevel.value;
         if (activity.decreaseStressByHours)
-            playerData.stressLevel.value -= activity.decreasedStressMultiplier * activity.duration.ToHours();
+            playerData.stressLevel.SetValue(playerData.stressLevel.value - (activity.decreasedStressMultiplier * activity.duration.ToHours()));
         else
-            playerData.stressLevel.value -= activity.decreasedStressMultiplier;
+            playerData.stressLevel.SetValue(playerData.stressLevel.value - activity.decreasedStressMultiplier);
         if (playerData.stressLevel.value < 0)
-            playerData.stressLevel.value = 0;
+            playerData.stressLevel.SetValue(100);
         noticePanelText.Value += "<color=green>Stress " + (playerData.stressLevel.value - old) + "/n";
         Debug.Log("Stress " + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
     }

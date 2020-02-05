@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Custom Data Container/Time Container")]
 public class TimeContainer : ScriptableObject
 {
     public TimeFormat time;

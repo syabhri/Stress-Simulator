@@ -53,6 +53,6 @@ public class SliderTextUpdater : MonoBehaviour
                 TextTarget.text = SliderSource.value.ToString("0");
             }
         }
-        Debug.Log("text Updated");
+        Debug.Log(gameObject.name + "'s Text Updated");
     }
 }

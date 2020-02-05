@@ -19,6 +19,12 @@ MonoBehaviour:
     avatar: {fileID: 0}
     sentences:
     - Sebuah tempat tidur biru yang di tata rapi.
+  choiceEvent: []
   nextDialog: []
   doActivities:
   - {fileID: 11400000, guid: 78a21a0782679b4428e153084b57072b, type: 2}
+  OnDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 3311379283418409449}
   - component: {fileID: 3311379283418409450}
   - component: {fileID: 1302757593}
-  - component: {fileID: 5798447644793266927}
+  - component: {fileID: 1166834374300577128}
   m_Layer: 5
   m_Name: NoticePanel
   m_TagString: Untagged
@@ -578,7 +578,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &5798447644793266927
+--- !u!114 &1166834374300577128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,15 +587,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3311379283418409444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
+  m_Script: {fileID: 11500000, guid: 956e66b818f888c478a0a67c8abea095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDisable: 1
-  onEnable: 0
-  unityEvents:
+  onEnable:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
+      - m_Target: {fileID: 11400000, guid: 7e7ffbf38714c3642873e4797348a7cb, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -606,15 +604,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 69054b7d623791f4bb009b049a9476af, type: 2}
-        m_MethodName: set_Value
-        m_Mode: 5
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 68c70e74351b26341b3648ea3317a6f3, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ' '
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

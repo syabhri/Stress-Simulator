@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406b362455ae56e4ca3bc70c3b2817b2, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  subjects: []
+  AnimationVariant: {fileID: 11400000, guid: e6479f20326e3724db21c756f5dac977, type: 2}
   Avatars:
   - {fileID: 1835520806489497746, guid: 587ee922fd4df4046ba62cb7e0813491, type: 3}
   - {fileID: 7996294828283943519, guid: e026d9ac4b4b9834fbefd47f61247100, type: 3}
+  Abilities: []
+  Insterest: []

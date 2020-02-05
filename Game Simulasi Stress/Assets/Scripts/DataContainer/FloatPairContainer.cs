@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Custom Data Container/Float Pair Container")]
 public class FloatPairContainer : ScriptableObject
 {
 #if UNITY_EDITOR

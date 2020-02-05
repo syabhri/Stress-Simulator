@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "Variable/Custom/PlayerData")]
+[CreateAssetMenu(fileName = "PlayerData", menuName = "Custom Data Container/PlayerData")]
 public class PlayerData : ScriptableObject
 {
     public StringVariable characterName;

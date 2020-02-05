@@ -890,9 +890,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -906,7 +906,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &604649428931399
@@ -924,7 +924,7 @@ MonoBehaviour:
   TextTarget: {fileID: 604649456932231}
   SliderSource: {fileID: 604649428931401}
   UsePercentSymbol: 1
-  UseMultiplier: 1
+  UseMultiplier: 0
   Multiplier: 100
 --- !u!114 &604649428931400
 MonoBehaviour:
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 604649428931401}
   variable: {fileID: 11400000, guid: 5a40079fb69929043a6b6f9bafc51416, type: 2}
-  isContinues: 0
+  isContinues: 1
 --- !u!1 &604649456932233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
