@@ -2718,7 +2718,6 @@ GameObject:
   - component: {fileID: 3784824960029987274}
   - component: {fileID: 3784824960029987381}
   - component: {fileID: 3784824960029987382}
-  - component: {fileID: 3784824960029987383}
   m_Layer: 5
   m_Name: SmartPhoneMenu
   m_TagString: Untagged
@@ -2883,47 +2882,6 @@ MonoBehaviour:
   Animator: {fileID: 3784824960029987381}
   ParameterName: IsOpen
   parameterHash: 48337822
---- !u!114 &3784824960029987383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784824960029987272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 0
-  onEnable: 0
-  unityEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3784824961608588662}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3784824961123229555}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &3784824961123229555
 GameObject:
   m_ObjectHideFlags: 0

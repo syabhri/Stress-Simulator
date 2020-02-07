@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3002764964020409515}
   - component: {fileID: 3002764964020409517}
   - component: {fileID: 2089675601067290041}
-  - component: {fileID: 1473335187781568794}
   m_Layer: 0
   m_Name: DialogManager 1
   m_TagString: Untagged
@@ -59,7 +58,7 @@ MonoBehaviour:
   OnDialogStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1473335187781568794}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -81,7 +80,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1473335187781568794}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -108,7 +107,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1473335187781568794}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -119,11 +118,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnTypeSentenceFinish:
-    m_PersistentCalls:
-      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   isDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
@@ -173,38 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 8ff9dac0ea05f384485cb9c6985bbbe6, type: 2}
   Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3002764964020409515}
-        m_MethodName: DisplayNextSentences
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &1473335187781568794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3002764964020409514}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b06bb8268fce14b81d46f685fb77fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonName: Submit
-  debug: 0
-  inputGroup: 1
-  ActivateOnEnable: 1
-  unityEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3002764964020409515}

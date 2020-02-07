@@ -6,45 +6,65 @@ public class Teleporter : MonoBehaviour
 {
     public Vector2Variable destination;
     public float delay;
-
-    [Header("Interaction")]
-    public bool isRequireInteraction;
-    public string triggerButton = "Submit";
+    public bool isTrigger;
+    public bool isInstant;
 
     private bool isInRange = false;
     private Transform target;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (destination == null)
+        if (!isTrigger)
         {
-            Debug.LogError("Destination is not set");
-        }
-        isInRange = true;
-        target = collision.transform;
-        if (!isRequireInteraction)
-        {
-            Teleport();
-        }
-        
+            if (isInstant)
+            {
+                Teleport();
+                return;
+            }
+            isInRange = true;
+            target = collision.transform;
+        } 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isInRange = false;
+        if (!isTrigger)
+        {
+            isInRange = false;
+        }
     }
 
-    public void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isInRange)
-            if (Input.GetButtonDown(triggerButton))
+        if (isTrigger)
+        {
+            if (isInstant)
+            {
                 Teleport();
+                return;
+            }
+            isInRange = true;
+            target = collision.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isTrigger)
+        {
+            isInRange = false;
+        }
     }
 
     // move targeted object to destination coordinate
     public void Teleport()
     {
         Invoke("moveTarget", delay);  
+    }
+
+    public void Teleport(float delay)
+    {
+        Invoke("moveTarget", delay);
     }
 
     private void moveTarget()

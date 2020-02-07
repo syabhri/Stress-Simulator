@@ -235,10 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonName: Submit
-  debug: 0
-  inputGroup: 0
-  ActivateOnEnable: 0
-  unityEvent:
+  InputGroup: {fileID: 0}
+  OnButtonDown:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3654124415961176835}

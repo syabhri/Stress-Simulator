@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42fde01a248c594788bff14702d9c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 11400000, guid: 5232c2cb1655b1a4f9ffb386554d8729, type: 2}
+  player: {fileID: 11400000, guid: 267b00628a8cb2949b8bc50e2a908dd5, type: 2}
   virtualCamera: {fileID: 7543191869581795797}
 --- !u!1 &7516778588930186076
 GameObject:

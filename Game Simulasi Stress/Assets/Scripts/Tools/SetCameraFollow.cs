@@ -5,8 +5,7 @@ using Cinemachine;
 
 public class SetCameraFollow : MonoBehaviour
 {
-    public ThingRuntimeSet player;
-    public GameObjectContainer playerr;
+    public GameObjectContainer player;
 
     public CinemachineVirtualCamera virtualCamera;
     // Start is called before the first frame update
@@ -14,21 +13,20 @@ public class SetCameraFollow : MonoBehaviour
     {
         if (virtualCamera == null)
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        if (playerr.Value != null)
-            SetFollow(playerr.Value);
+        if (player.Value != null)
+            SetFollow(player.Value);
 
-        playerr.OnValueChanges += SetFollow;
+        player.OnValueChanges += SetFollow;
+    }
 
-        SetFollow();
-
-        GameObjectContainer gameObjectContainer = new GameObjectContainer();
-
-        playerr.ValueExt = gameObjectContainer;
+    private void OnDestroy()
+    {
+        player.OnValueChanges -= SetFollow;
     }
 
     public void SetFollow()
     {
-        virtualCamera.Follow = player.Item.transform;
+        virtualCamera.Follow = player.Value.transform;
     }
 
     public void SetFollow(GameObject target)

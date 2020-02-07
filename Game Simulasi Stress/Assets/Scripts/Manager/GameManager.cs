@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadAsynchronously(1));
     }
 
-    public static void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0f;
         Debug.Log("GamePaused");

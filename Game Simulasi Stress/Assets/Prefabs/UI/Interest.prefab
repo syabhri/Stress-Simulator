@@ -84,8 +84,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4224223344380616138}
   - component: {fileID: 4224223344380616139}
-  - component: {fileID: 6476782446672462428}
-  - component: {fileID: 2541195738400328914}
   - component: {fileID: 2649263320689167284}
   m_Layer: 5
   m_Name: Interest
@@ -158,17 +156,6 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: CheckToggleLimit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2649263320689167284}
         m_MethodName: InvokeEvent
         m_Mode: 1
@@ -183,66 +170,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &6476782446672462428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4224223344380616141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 0
-  onEnable: 1
-  unityEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: AddToggle
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 4224223344380616139}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &2541195738400328914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4224223344380616141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 1
-  onEnable: 0
-  unityEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: RemoveToggle
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 4224223344380616139}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &2649263320689167284
 MonoBehaviour:
   m_ObjectHideFlags: 0

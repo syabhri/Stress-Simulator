@@ -8,7 +8,7 @@ public class InputEvent : MonoBehaviour
     public string buttonName;
     public BoolVariable InputGroup;
     [Space]
-    public UnityEvent unityEvent;
+    public UnityEvent OnButtonDown;
 
     private bool isEnable = true;
 
@@ -29,7 +29,7 @@ public class InputEvent : MonoBehaviour
     {
         if (Input.GetButtonDown(buttonName) && isEnable)
         {
-            unityEvent.Invoke();
+            OnButtonDown.Invoke();
         }
     }
 

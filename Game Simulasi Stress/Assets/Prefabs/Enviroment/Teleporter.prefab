@@ -73,8 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
   delay: 0.5
-  isRequireInteraction: 0
-  triggerButton: Submit
+  isTrigger: 0
+  isInstant: 1
 --- !u!114 &2172628799670330519
 MonoBehaviour:
   m_ObjectHideFlags: 0

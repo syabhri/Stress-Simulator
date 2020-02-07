@@ -10,7 +10,7 @@ public class DropdownSetter : MonoBehaviour
     [Tooltip("continuesly update on Value Changes, Enable only if dropdown is used as output otherwise will couse feedback loop")]
     private bool IsContinues = false;
 
-    private void Start()
+    private void Awake()
     {
         if (dropdown == null)
         {

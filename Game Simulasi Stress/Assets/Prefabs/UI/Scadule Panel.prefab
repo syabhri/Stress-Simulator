@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7932984620076900868}
   - component: {fileID: 7932984620076901114}
   - component: {fileID: 7932984620076901113}
-  - component: {fileID: 7932984620076901112}
   m_Layer: 5
   m_Name: Scadule Panel
   m_TagString: Untagged
@@ -115,36 +114,6 @@ MonoBehaviour:
   Animator: {fileID: 7932984620076901114}
   ParameterName: IsOpen
   parameterHash: 48337822
---- !u!114 &7932984620076901112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7932984620076900870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 0
-  onEnable: 1
-  unityEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1313a7b82f41b734099ec4919d345a64, type: 2}
-        m_MethodName: SetBool
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7932984620616899192
 GameObject:
   m_ObjectHideFlags: 0

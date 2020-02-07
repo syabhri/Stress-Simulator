@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using TMPro;
 
-public class EmptyTextChecker : MonoBehaviour
+public class EmptyInputEvent : MonoBehaviour
 {
     TMP_InputField textMesh;
 

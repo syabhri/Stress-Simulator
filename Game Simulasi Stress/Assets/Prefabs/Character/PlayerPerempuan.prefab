@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7996294828283943504}
   - component: {fileID: 7996294828283943510}
   - component: {fileID: 7996294828283943509}
-  - component: {fileID: 9211676257634119387}
+  - component: {fileID: 5036954119101181409}
   m_Layer: 0
   m_Name: PlayerPerempuan
   m_TagString: Player
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 55508fb05fa6f1e4dbbdb26bb4edb6c4, type: 2}
   realtimeSaving: 1
---- !u!114 &9211676257634119387
+--- !u!114 &5036954119101181409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,10 +249,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 7996294828283943519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f557f39c5d4c1464090e5d0220344341, type: 3}
+  m_Script: {fileID: 11500000, guid: 956e66b818f888c478a0a67c8abea095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RuntimeSet: {fileID: 11400000, guid: 5232c2cb1655b1a4f9ffb386554d8729, type: 2}
-  isSingle: 1
-  removeOnDisabled: 0
-  isDisabled: 0
+  onEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 267b00628a8cb2949b8bc50e2a908dd5, type: 2}
+        m_MethodName: set_Value
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7996294828283943519}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 267b00628a8cb2949b8bc50e2a908dd5, type: 2}
+        m_MethodName: Clear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

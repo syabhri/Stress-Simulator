@@ -2079,8 +2079,7 @@ GameObject:
   - component: {fileID: 7536687561388832373}
   - component: {fileID: 7536687561388832375}
   - component: {fileID: 7536687561388832374}
-  - component: {fileID: 7536687561388832369}
-  - component: {fileID: 7536687561388832370}
+  - component: {fileID: 613551705451777217}
   m_Layer: 5
   m_Name: TimeSetterPanel
   m_TagString: Untagged
@@ -2148,7 +2147,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &7536687561388832369
+--- !u!114 &613551705451777217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2157,26 +2156,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7536687561388832372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
+  m_Script: {fileID: 11500000, guid: 956e66b818f888c478a0a67c8abea095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDisable: 0
-  onEnable: 1
-  unityEvents:
+  onEnable:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 66a95e4331ebf244d9468c63abe23529, type: 2}
-        m_MethodName: SetBool
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
+      - m_Target: {fileID: 11400000, guid: 7e7ffbf38714c3642873e4797348a7cb, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -2185,39 +2171,14 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &7536687561388832370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7536687561388832372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0c04d17dfa50743a3004b4f5407c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDisable: 1
-  onEnable: 0
-  unityEvents:
+  onDisable:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 66a95e4331ebf244d9468c63abe23529, type: 2}
-        m_MethodName: SetBool
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
+      - m_Target: {fileID: 11400000, guid: 68c70e74351b26341b3648ea3317a6f3, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
