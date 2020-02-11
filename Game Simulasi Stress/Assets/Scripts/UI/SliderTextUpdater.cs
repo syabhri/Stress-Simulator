@@ -11,15 +11,17 @@ public class SliderTextUpdater : MonoBehaviour
     public Slider SliderSource;
 
     [Space]
-    public bool UsePercentSymbol = true;
-
-    [Space]
-    public bool UseMultiplier = true;
-    public float Multiplier = 100;
+    public bool UsePercentage = true;
 
     private void OnEnable()
     {
         updateText();
+        SliderSource.onValueChanged.AddListener(delegate { updateText(); });
+    }
+
+    private void OnDisable()
+    {
+        SliderSource.onValueChanged.RemoveListener(delegate { updateText(); });
     }
 
     // called when value changed
@@ -31,28 +33,13 @@ public class SliderTextUpdater : MonoBehaviour
             return;
         }
 
-        if (UseMultiplier)
+        if (UsePercentage)
         {
-            if (UsePercentSymbol)
-            {
-                TextTarget.text = (SliderSource.value * Multiplier ).ToString("0") + "%";
-            }
-            else
-            {
-                TextTarget.text = (SliderSource.value * Multiplier).ToString("0");
-            }
+            TextTarget.text = (SliderSource.normalizedValue * 100).ToString() + "%";
         }
         else
         {
-            if (UsePercentSymbol)
-            {
-                TextTarget.text = SliderSource.value.ToString("0") + "%";
-            }
-            else
-            {
-                TextTarget.text = SliderSource.value.ToString("0");
-            }
+            TextTarget.text = SliderSource.value.ToString();
         }
-        Debug.Log(gameObject.name + "'s Text Updated");
     }
 }

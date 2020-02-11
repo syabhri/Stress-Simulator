@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SaveLocation : MonoBehaviour
 {
-    public Vector2Variable target;
+    public Vector2Container target;
     public bool realtimeSaving;
 
     private void Awake()
@@ -24,7 +24,6 @@ public class SaveLocation : MonoBehaviour
 
     public void GetLocation()
     {
-        target.position.x = transform.position.x;
-        target.position.y = transform.position.y;
+        target.Value = new Vector2(transform.position.x, transform.position.y);
     }
 }

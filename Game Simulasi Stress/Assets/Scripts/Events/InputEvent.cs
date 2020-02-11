@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class InputEvent : MonoBehaviour
 {
     public string buttonName;
-    public BoolVariable InputGroup;
+    public BoolContainer InputGroup;
     [Space]
     public UnityEvent OnButtonDown;
 
@@ -15,13 +15,13 @@ public class InputEvent : MonoBehaviour
     private void Start()
     {
         if (InputGroup != null)
-            InputGroup.OnValueChange += setEnable;
+            InputGroup.OnValueChanged += setEnable;
     }
 
     private void OnDestroy()
     {
         if (InputGroup != null)
-            InputGroup.OnValueChange -= setEnable;
+            InputGroup.OnValueChanged -= setEnable;
     }
 
     // Update is called once per frame
@@ -33,8 +33,8 @@ public class InputEvent : MonoBehaviour
         }
     }
 
-    public void setEnable(BoolVariable intVariable)
+    public void setEnable(BoolContainer intVariable)
     {
-        isEnable = InputGroup.value;
+        isEnable = InputGroup.Value;
     }
 }

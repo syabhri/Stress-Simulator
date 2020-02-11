@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,17 +12,15 @@ public class GameManager : MonoBehaviour
     public TimeFormat startTime;
     public TimeFormat endTime;
 
-    [Header("External Variables")]
+    [Header("Data Container")]
     public PlayerData playerData;
     public GameData gameData;
-    public TimeContainer StartTime;
-    public TimeContainer EndTime;
-    public TimeContainer CurrentTime;
-    public Vector2Variable DefaultSpawnPoint;
+    public Vector2Container DefaultSpawnPoint;
+    public FloatContainer LoadingProgress;
+    public TimeContainer TimePasser;
 
-    [Header("UI Output")]
-    public StringVariable NoticeText;
-    public FloatVariable LoadingProgress;
+    [Header("Event")]
+    public GameEvent SceneTransition;
     #endregion
 
     #region Unity Functions
@@ -31,15 +30,16 @@ public class GameManager : MonoBehaviour
         if (IsPlaying)
         {
             //AssignAvatar();
-            SpawnPlayer(playerData.playerPosition.position);
+            SpawnPlayer(playerData.playerPosition.Value);
         }
     }
     #endregion
 
-    #region GameManager function
+    #region SceneManager
     public void LoadScene(int sceneIndex)
     { 
         StartCoroutine(LoadAsynchronously(sceneIndex));
+        SceneTransition.Raise();
     }
 
     public void LoadNextScene()
@@ -57,48 +57,50 @@ public class GameManager : MonoBehaviour
 
             Debug.Log(progress);
 
-            LoadingProgress.SetValue(progress);
+            LoadingProgress.Value = progress;
 
             yield return null;
         }
     }
+    #endregion
 
+    #region Menu Function
     public void NewGame() 
     {
         // Set Starting Stat
-        playerData.stressLevel.SetValue(0);
-        playerData.energy.SetValue(100);
-        playerData.coins.SetValue(30);
+        playerData.stressLevel.Value = 0;
+        playerData.energy.Value = 100;
+        playerData.coins.Value = 30;
 
         //set Starting Knowlage knowlage
-        foreach (FloatVariable knowlege in playerData.knowleges)
+        foreach (FloatContainer knowlege in playerData.knowleges)
         {
-            knowlege.SetValue(0);
+            knowlege.Value = 0;
         }
 
         // set player default spawn position
-        playerData.playerPosition.position = DefaultSpawnPoint.position;
+        playerData.playerPosition.Value = DefaultSpawnPoint.Value;
 
-        // set game duration
-        StartTime.time.SetValue(startTime);
-        EndTime.time.SetValue(endTime);
+        // set start time
+        TimePasser.Value = startTime;
         
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void SaveGame(StringVariable saveName)
+    public void SaveGame(StringContainer saveName)
     {
-        SaveData saveData = new SaveData(playerData, CurrentTime.time);
-        SaveManager.Save<SaveData>(saveData, saveName.Value);
+        //TimeFormat currentTime = new TimeFormat(TimeManager.currentDay)
+        //SaveData saveData = new SaveData(playerData, new TimeFormat());
+        //SaveManager.Save<SaveData>(saveData, saveName.Value);
     }
 
-    public void LoadGame(StringVariable saveName)
+    public void LoadGame(StringContainer saveName)
     {
         SaveData saveData = SaveManager.Load<SaveData>(saveName.Value);
 
-        StartTime.time.minutes = saveData.current_time[0];
-        StartTime.time.hours = saveData.current_time[1];
-        StartTime.time.days = saveData.current_time[2];
+        TimePasser.Value.minutes = saveData.current_time[0];
+        TimePasser.Value.hours = saveData.current_time[1];
+        TimePasser.Value.days = saveData.current_time[2];
 
         playerData.characterName.Value = saveData.character_name;
 
@@ -108,12 +110,12 @@ public class GameManager : MonoBehaviour
                 playerData.avatar = avatar;
         }
 
-        playerData.playerPosition.position.x = saveData.player_position[0];
-        playerData.playerPosition.position.y = saveData.player_position[1];
+        playerData.playerPosition.SetPosition
+            (saveData.player_position[0], saveData.player_position[1]);
 
-        playerData.stressLevel.value = saveData.stress_level;
-        playerData.energy.value = saveData.energy;
-        playerData.coins.value = saveData.coins;
+        playerData.stressLevel.Value = saveData.stress_level;
+        playerData.energy.Value = saveData.energy;
+        playerData.coins.Value = saveData.coins;
 
         StartCoroutine(LoadAsynchronously(1));
     }
@@ -137,24 +139,25 @@ public class GameManager : MonoBehaviour
 
     public void QuitToMenu()
     {
-        ChangeScene(0);
+        LoadScene(0);
     }
+    #endregion
 
-    public void ChangeScene(string name)
-    {
-        SceneManager.LoadScene(name);
-    }
-    public void ChangeScene(int id)
-    {
-        SceneManager.LoadScene(id);
-    }
-
+    #region Misc
     public void SpawnPlayer(Vector2 position)
     {
         Instantiate(playerData.avatar, new
             Vector3(position.x, position.y, 0),
             Quaternion.identity);
         Debug.Log("player spawed");
+    }
+
+    public void CheckEndGame()
+    {
+        if (TimeManager.currentDay >= endTime.days)
+        {
+            LoadNextScene();
+        }
     }
     #endregion
 }

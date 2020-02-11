@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 
 public abstract class VariableContainer<T> : ScriptableObject
 {
@@ -8,17 +7,12 @@ public abstract class VariableContainer<T> : ScriptableObject
         public string DeveloperDescription = "";
     #endif
 
+    [SerializeField]
     protected T value;
-    public Action<T> OnValueChanges = delegate { };
 
-    public T Value
+    public virtual T Value
     {
-        set { this.value = value; OnValueChanges.Invoke(value); }
+        set { this.value = value; }
         get { return value; }
-    }
-
-    public VariableContainer<T> ValueExt
-    {
-        set { Value = value.value; }
     }
 }

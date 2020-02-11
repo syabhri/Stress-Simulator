@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Custom Data Container/GameData")]
+[CreateAssetMenu(menuName = "DataContainer/GameData")]
 public class GameData : ScriptableObject
 {
-    public IntVariable AnimationVariant;
+    public IntContainer AnimationVariant;
     public List<GameObject> Avatars;
     public List<FloatPairContainer> Abilities;
     public List<FloatPairContainer> Insterest;

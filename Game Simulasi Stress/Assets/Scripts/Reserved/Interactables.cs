@@ -11,7 +11,7 @@ public class Interactables : MonoBehaviour
     public GameEvent onDialogStart;
 
     [Header("Condition")]
-    public BoolVariable[] ignoreInput;
+    public BoolContainer[] ignoreInput;
 
     [Header("DataPasser")]
     public Dialogue dialoguePasser;
@@ -49,9 +49,9 @@ public class Interactables : MonoBehaviour
 
     private bool IgnoreInput()
     {
-        foreach (BoolVariable condition in ignoreInput)
+        foreach (BoolContainer condition in ignoreInput)
         {
-            if (condition.value)
+            if (condition.Value)
             {
                 return true;
             }

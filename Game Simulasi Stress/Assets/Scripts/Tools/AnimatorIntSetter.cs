@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimatorIntSetter : MonoBehaviour
 {
     [Tooltip("Integer to read from and send to the Animator as the specified parameter.")]
-    public IntVariable Int;
+    public IntContainer Int;
 
     [Tooltip("Animator to set parameters on.")]
     public Animator Animator;
@@ -30,7 +30,7 @@ public class AnimatorIntSetter : MonoBehaviour
     {
         if (setOnce)
         {
-            Animator.SetInteger(parameterHash, Int.value);
+            Animator.SetInteger(parameterHash, Int.Value);
         }
     }
 
@@ -38,7 +38,7 @@ public class AnimatorIntSetter : MonoBehaviour
     {
         if (!setOnce)
         {
-            Animator.SetInteger(parameterHash, Int.value);
+            Animator.SetInteger(parameterHash, Int.Value);
         }
     }
 }

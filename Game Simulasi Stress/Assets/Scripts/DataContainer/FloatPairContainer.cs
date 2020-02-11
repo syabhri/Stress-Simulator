@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
-[CreateAssetMenu(menuName = "Custom Data Container/Float Pair Container")]
-public class FloatPairContainer : ScriptableObject
+[CreateAssetMenu(menuName = "VariableContainer/FloatPairContainer")]
+public class FloatPairContainer : VariableContainer<FloatPair>
 {
-#if UNITY_EDITOR
-    [Multiline]
-    public string DeveloperDescription = "";
-#endif
-    public FloatPair pair;
+    public Action<FloatPairContainer> OnValueChanged = delegate { };
+
+    public override FloatPair Value
+    {
+        set { this.value = value; OnValueChanged.Invoke(this); }
+        get { return value; }
+    }
 }

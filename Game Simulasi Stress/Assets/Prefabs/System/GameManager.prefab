@@ -53,18 +53,19 @@ MonoBehaviour:
     days: 0
     hours: 0
     minutes: 0
+    dayName: 0
   endTime:
     days: 30
     hours: 0
     minutes: 0
+    dayName: 0
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
   gameData: {fileID: 11400000, guid: 6bc27c730ea18e44f9f361d0abfe2b47, type: 2}
-  StartTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
-  EndTime: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
-  CurrentTime: {fileID: 11400000, guid: c1ff85b26352f12438a88776b7c0f294, type: 2}
   DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
-  NoticeText: {fileID: 11400000, guid: 69054b7d623791f4bb009b049a9476af, type: 2}
   LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
+  TimePasser: {fileID: 11400000, guid: 71977f1d0f6bb414c9027aefb1d6fac6, type: 2}
+  EnviromentInput: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
+  SceneTransition: {fileID: 11400000, guid: 7163302ad98f564499377cd6c3e15e75, type: 2}
 --- !u!114 &7820484409494991973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,19 +93,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
-        m_MethodName: SetBool
+        m_MethodName: set_Value
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -143,19 +133,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
-        m_MethodName: SetBool
+        m_MethodName: set_Value
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -189,7 +168,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 710ca10be185f9d4591b71f30585ac81,
             type: 2}
-          m_ObjectArgumentAssemblyTypeName: StringVariable, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: StringContainer, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -219,7 +198,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 710ca10be185f9d4591b71f30585ac81,
             type: 2}
-          m_ObjectArgumentAssemblyTypeName: StringVariable, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: StringContainer, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

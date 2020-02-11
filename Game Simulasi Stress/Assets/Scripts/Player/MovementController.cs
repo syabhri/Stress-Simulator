@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public FloatVariable speed;
+    public float speed;
     private Vector2 moveVelocity;
 
     private Rigidbody2D rigitbody2d;
@@ -47,7 +47,7 @@ public class MovementController : MonoBehaviour
 
         //get input and set velocity base on speed and axis
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveVelocity = moveInput.normalized * speed.value;
+        moveVelocity = moveInput.normalized * speed;
 
         //debug
         //Debug.Log(Input.GetAxis("Horizontal") + " " + Input.GetAxis("Vertical"));

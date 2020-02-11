@@ -143,7 +143,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -173,11 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 94286005}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 16551bb4983608144919d7554594f0d4, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'P. Seni Budaya :'
   AfterText: 
@@ -324,7 +322,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -354,11 +352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 97342871}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 9d7afcfe361f9d943b4fe8f90b7e912f, type: 2}
+  updateFrom: 1
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 11400000, guid: 9d7afcfe361f9d943b4fe8f90b7e912f, type: 2}
   AlwaysUpdate: 0
   BeforeText: 'Bhs. Inggris :'
   AfterText: 
@@ -504,7 +500,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -665,7 +661,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -695,11 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 226512844}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 0bc8f11e2e6b56e43928a1a042ba62f6, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'Biologi :'
   AfterText: 
@@ -1043,7 +1037,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1073,11 +1067,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 452633265}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 9556aca6cbf8c5441ab86d84aad7c19d, type: 2}
+  updateFrom: 1
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 11400000, guid: 9556aca6cbf8c5441ab86d84aad7c19d, type: 2}
   AlwaysUpdate: 0
   BeforeText: 'Bhs. Indonesia :'
   AfterText: 
@@ -1334,7 +1326,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1364,11 +1356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 656739985}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: fd13dc6369a433e46bc70e60d07c3cb3, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'P. Jasmani :'
   AfterText: 
@@ -1584,7 +1574,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1614,11 +1604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1048309382}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: d89019023afc5b54ab887de9ce4d16b6, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'Sejarah:'
   AfterText: 
@@ -1765,7 +1753,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1795,11 +1783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1281197346}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 1ebca7b465c188143b0ee7ac607b5bc1, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'Matematika :'
   AfterText: 
@@ -1946,7 +1932,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1976,11 +1962,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1415009282}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 95c6077154218684e851db2582aad679, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: TIK
   AfterText: 
@@ -2163,7 +2147,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2193,11 +2177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1520989322}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 990493dd4ab7e2c47b0f9b7c71c6c7f3, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'Kimia :'
   AfterText: 
@@ -2666,7 +2648,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2696,11 +2678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1938485812}
-  updateString: 0
-  stringVariable: {fileID: 0}
-  updateFloat: 1
-  floatVariable: {fileID: 11400000, guid: 0b3880c6a39453c4ca6be3d931689ff1, type: 2}
+  updateFrom: 0
+  stringContainer: {fileID: 0}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 0
   BeforeText: 'Fisika :'
   AfterText: 
@@ -2824,7 +2804,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 11a2be8cd35264343a226ccb9368737c, type: 2}
-        m_MethodName: SetBool
+        m_MethodName: set_Value
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2834,16 +2814,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 2a84af513585cb249851a79885d498a0, type: 2}
-        m_MethodName: Raise
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
+        m_MethodName: set_Value
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -2999,7 +2979,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 11a2be8cd35264343a226ccb9368737c, type: 2}
-        m_MethodName: SetBool
+        m_MethodName: set_Value
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3042,16 +3022,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: a62afd9eb084aae46a7ce874ef7e58c5, type: 2}
-        m_MethodName: Raise
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
+        m_MethodName: set_Value
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

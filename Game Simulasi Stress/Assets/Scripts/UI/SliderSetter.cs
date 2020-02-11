@@ -15,7 +15,7 @@ using UnityEngine.UI;
 public class SliderSetter : MonoBehaviour
 {
     public Slider slider;
-    public FloatVariable variable;
+    public FloatContainer variable;
     [SerializeField]
     [Tooltip("continuesly update on Value Changes, Enable only if slider is used as output otherwise will couse feedback loop")]
     private bool isContinues = false;
@@ -29,26 +29,26 @@ public class SliderSetter : MonoBehaviour
 
         if (isContinues)
         {
-            variable.OnValueChange += UpdateChanges;
+            variable.OnValueChanged += UpdateChanges;
         }
     }
 
     private void OnEnable()
     {
-        slider.value = variable.value;
+        UpdateChanges(variable);
     }
 
     private void OnDestroy()
     {
         if (isContinues)
         {
-            variable.OnValueChange -= UpdateChanges;
+            variable.OnValueChanged -= UpdateChanges;
         }
     }
 
-    public void UpdateChanges(FloatVariable variable)
+    public void UpdateChanges(FloatContainer variable)
     {
-        slider.value = variable.value;
+        slider.value = variable.Value;
     }
             
 }

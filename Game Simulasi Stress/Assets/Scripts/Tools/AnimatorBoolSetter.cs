@@ -15,7 +15,7 @@ using UnityEngine;
 public class AnimatorBoolSetter : MonoBehaviour
 {
     [Tooltip("Bool to read from and send to the Animator as the specified parameter.")]
-    public BoolVariable Bool;
+    public BoolContainer Bool;
 
     [Tooltip("Animator to set parameters on.")]
     public Animator Animator;
@@ -33,13 +33,21 @@ public class AnimatorBoolSetter : MonoBehaviour
         parameterHash = Animator.StringToHash(ParameterName);
     }
 
-    private void Update()
+    private void Start()
     {
-        Animator.SetBool(parameterHash, Bool.value);
+        UpdateChanges(Bool);
+
+        Bool.OnValueChanged += UpdateChanges;
     }
 
     private void OnDisable()
     {
-        Bool.value = false;
+        Bool.OnValueChanged -= UpdateChanges;
+        Bool.Value = false;
+    }
+
+    public void UpdateChanges(BoolContainer container)
+    {
+        Animator.SetBool(parameterHash, container.Value);
     }
 }

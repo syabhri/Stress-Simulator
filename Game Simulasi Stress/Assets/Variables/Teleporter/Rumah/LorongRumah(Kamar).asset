@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e23c6117707504c917cf1bba98819c, type: 3}
   m_Name: LorongRumah(Kamar)
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
+  DeveloperDescription: 
+  value: {x: -10.69, y: -32.82}

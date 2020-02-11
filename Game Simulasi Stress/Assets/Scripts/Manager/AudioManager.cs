@@ -7,31 +7,31 @@ public class AudioManager : MonoBehaviour
 {
     public AudioMixer audioMixer;
     [Tooltip("Note : the filename must match the Exposed variable in audio mixer")]
-    public FloatVariable[] volumes;
+    public FloatContainer[] volumes;
 
     private void Start()
     {
-        foreach (FloatVariable volume in volumes)
+        foreach (FloatContainer volume in volumes)
         {
             float value = PlayerPrefs.GetFloat(volume.name, 0);
             audioMixer.SetFloat(volume.name, Mathf.Log10(value) * 20);
-            volume.SetValue(value);
+            volume.Value = value;
 
-            volume.OnValueChange += ChangeVolume;
+            volume.OnValueChanged += ChangeVolume;
         }
     }
 
     private void OnDestroy()
     {
-        foreach (FloatVariable volume in volumes)
+        foreach (FloatContainer volume in volumes)
         {
-            volume.OnValueChange -= ChangeVolume;
+            volume.OnValueChanged -= ChangeVolume;
         }
     }
 
-    public void ChangeVolume(FloatVariable volume)
+    public void ChangeVolume(FloatContainer volume)
     {
-        audioMixer.SetFloat(volume.name, Mathf.Log10(volume.value) *20);
-        PlayerPrefs.SetFloat(volume.name, volume.value);
+        audioMixer.SetFloat(volume.name, Mathf.Log10(volume.Value) *20);
+        PlayerPrefs.SetFloat(volume.name, volume.Value);
     }
 }

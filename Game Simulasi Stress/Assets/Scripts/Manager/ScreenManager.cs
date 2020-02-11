@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ScreenManager : MonoBehaviour
 {
-    public StringListVariable ResolutionOptions;
-    public IntVariable CurrentResolutionIndex;
-    public IntVariable DefaultResolutionIndex;
+    public StringListContainer ResolutionOptions;
+    public IntContainer CurrentResolutionIndex;
+    public IntContainer DefaultResolutionIndex;
 
-    public BoolVariable isFullScreen;
+    public BoolContainer isFullScreen;
 
     private Resolution[] resolutions;
 
@@ -16,47 +16,47 @@ public class ScreenManager : MonoBehaviour
     {
         resolutions = Screen.resolutions;
 
-        ResolutionOptions.Values.Clear();
+        ResolutionOptions.Value.Clear();
 
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            ResolutionOptions.Values.Add(option);
+            ResolutionOptions.Value.Add(option);
 
             if (resolutions[i].width == Screen.width &&
                 resolutions[i].height == Screen.height)
             {
-                CurrentResolutionIndex.SetValue(i);
+                CurrentResolutionIndex.Value = i;
             }
 
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
-                DefaultResolutionIndex.SetValue(i);
+                DefaultResolutionIndex.Value = i;
             }
         }
 
-        isFullScreen.SetBool(Screen.fullScreen);
+        isFullScreen.Value = Screen.fullScreen;
 
-        CurrentResolutionIndex.OnValueChange += setResolution;
-        isFullScreen.OnValueChange += SetFullScreen;
+        CurrentResolutionIndex.OnValueChanged += setResolution;
+        isFullScreen.OnValueChanged += SetFullScreen;
     }
 
     private void OnDestroy()
     {
-        CurrentResolutionIndex.OnValueChange -= setResolution;
-        isFullScreen.OnValueChange -= SetFullScreen;
+        CurrentResolutionIndex.OnValueChanged -= setResolution;
+        isFullScreen.OnValueChanged -= SetFullScreen;
     }
 
-    public void setResolution(IntVariable resolutionIndex)
+    public void setResolution(IntContainer resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex.value];
+        Resolution resolution = resolutions[resolutionIndex.Value];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         Debug.Log("Resolution Changed " + resolution.width + "x" + resolution.height);
     }
 
-    public void SetFullScreen(BoolVariable isFullScreen)
+    public void SetFullScreen(BoolContainer isFullScreen)
     {
-        Screen.fullScreen = isFullScreen.value;
+        Screen.fullScreen = isFullScreen.Value;
     }
 }

@@ -12,21 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dda18b34b18dad46b466b2ce4c7b173, type: 3}
   m_Name: Budi
   m_EditorClassIdentifier: 
-  response: 
-  dismisses: maaf lagi sibuk nih
   speakers:
   - name: Budi
     avatar: {fileID: 0}
     sentences:
     - Hai [player], apa kabar?
     - aku juga baik, btw kamu lagi senggang?, main yuk
-  choiceEvent:
-  - name: 
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  nextDialog: []
-  doActivities:
-  - {fileID: 11400000, guid: 18ac4c2a5c000de4c90153ede7a49ca8, type: 2}
+  choiceEvent: []

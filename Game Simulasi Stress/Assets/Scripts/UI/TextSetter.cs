@@ -6,7 +6,7 @@ using TMPro;
 public class TextSetter : MonoBehaviour
 {
     private TextMeshProUGUI textMeshPro;
-    public StringVariable Text;
+    public StringContainer Text;
     public bool Continues = false;
 
     private void Start()
@@ -16,16 +16,16 @@ public class TextSetter : MonoBehaviour
         SetText(Text);
 
         if (Continues)
-            Text.OnValueChange += SetText;
+            Text.OnValueChanged += SetText;
     }
 
     private void OnDestroy()
     {
         if (Continues)
-            Text.OnValueChange -= SetText;
+            Text.OnValueChanged -= SetText;
     }
 
-    public void SetText(StringVariable text)
+    public void SetText(StringContainer text)
     {
         textMeshPro.SetText(text.Value);
     }

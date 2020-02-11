@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Penuh Energy
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  pair:
-    name: 
-    target: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
-    effector: 1
-    operation: +
-    useRange: 0
+  value:
+    target: {fileID: 0}
+    effector: 0
+    operation: 0
+    useRange: 1
     min: 0
-    max: 0
+    max: 100
     useExternalEeffector: 0
     externalEffector: {fileID: 0}

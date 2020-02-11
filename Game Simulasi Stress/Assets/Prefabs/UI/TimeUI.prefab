@@ -251,11 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 8847484767367833425}
-  updateString: 1
-  stringVariable: {fileID: 11400000, guid: 846f3544a9cfeeb47b6c49a0b69abb2e, type: 2}
-  updateFloat: 0
-  floatVariable: {fileID: 0}
+  updateFrom: 0
+  stringContainer: {fileID: 11400000, guid: c3b8fae65feb330489def2f30c4e0aa8, type: 2}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 1
   BeforeText: Hari Ke -
   AfterText: /30
@@ -433,11 +431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 8847484767567158199}
-  updateString: 1
-  stringVariable: {fileID: 11400000, guid: 73f03487940fc604ab5d43c9c0e8bbdc, type: 2}
-  updateFloat: 0
-  floatVariable: {fileID: 0}
+  updateFrom: 0
+  stringContainer: {fileID: 11400000, guid: 5f41a48f3e47cca41897c5123f0699f8, type: 2}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 1
   BeforeText: 
   AfterText: 
@@ -615,11 +611,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d130fd2791daf489f15db022a89094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 8847484767737602630}
-  updateString: 1
-  stringVariable: {fileID: 11400000, guid: 86cec49f3af925b42b818e36676e7f70, type: 2}
-  updateFloat: 0
-  floatVariable: {fileID: 0}
+  updateFrom: 0
+  stringContainer: {fileID: 11400000, guid: 8552f1d44394d6e458c00c4c31f4befe, type: 2}
+  floatContainer: {fileID: 0}
   AlwaysUpdate: 1
   BeforeText: 
   AfterText: 

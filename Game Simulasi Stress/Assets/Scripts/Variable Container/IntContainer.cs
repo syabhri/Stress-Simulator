@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
+using System;
 
-[CreateAssetMenu(menuName = "Variables /Int Container")]
+[CreateAssetMenu(menuName = "VariableContainer/IntContainer")]
 public class IntContainer : VariableContainer<int>
 {
+    public Action<IntContainer> OnValueChanged = delegate { };
+
+    public override int Value
+    {
+        set { this.value = value; OnValueChanged.Invoke(this); }
+        get { return value; }
+    }
+
     public void AddAmount(int amount)
     {
         Value += amount;

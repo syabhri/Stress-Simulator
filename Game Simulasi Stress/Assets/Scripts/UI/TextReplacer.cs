@@ -12,16 +12,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class TextReplacer : MonoBehaviour
 {
+    public enum UpdateType { StringContainer, FloatContainer }
+
     [Tooltip("Text In ui that need to be relace")]
-    public TextMeshProUGUI Text; // <changes>
+    private TextMeshProUGUI UIText; // <changes>
 
     [Space]
-    public bool updateString;
-    public StringVariable stringVariable;
-    public bool updateFloat;
-    public FloatVariable floatVariable;
+    public UpdateType updateFrom;
+    public StringContainer stringContainer;
+    public FloatContainer floatContainer;
 
     [Space]
     public bool AlwaysUpdate;
@@ -29,31 +31,57 @@ public class TextReplacer : MonoBehaviour
     public string BeforeText = "";
     public string AfterText = "";
 
+    private UpdateType selectedType;
+
+    private void Awake()
+    {
+        UIText = GetComponent<TextMeshProUGUI>();
+    }
+
     private void OnEnable()
     {
-        UpdateText();
-    }
-
-    private void Update()
-    {
-        if (AlwaysUpdate)
+        switch (updateFrom)
         {
-            UpdateText();
+            case UpdateType.StringContainer:
+                UpdateText(stringContainer);
+                if (AlwaysUpdate) stringContainer.OnValueChanged += UpdateText;
+                selectedType = UpdateType.StringContainer;
+                break;
+            case UpdateType.FloatContainer:
+                UpdateText(floatContainer);
+                if (AlwaysUpdate) floatContainer.OnValueChanged += UpdateText;
+                selectedType = UpdateType.FloatContainer;
+                break;
+            default:
+                break;
         }
-    }
-
-    public void UpdateText()
-    {
         
-        if (updateFloat)
+    }
+
+    private void OnDisable()
+    {
+        switch (selectedType)
         {
-            Text.text = BeforeText + floatVariable.value.ToString() + AfterText;
-            Text.text = Text.text.Replace("/n", "<br>");
+            case UpdateType.StringContainer:
+                if (AlwaysUpdate) stringContainer.OnValueChanged -= UpdateText;
+                break;
+            case UpdateType.FloatContainer:
+                if (AlwaysUpdate) floatContainer.OnValueChanged -= UpdateText;
+                break;
+            default:
+                break;
         }
-        if (updateString)
-        {
-            Text.text = BeforeText + stringVariable.Value + AfterText;
-            Text.text = Text.text.Replace("/n", "<br>");
-        }
+    }
+
+    public void UpdateText(FloatContainer text)
+    {
+        UIText.text = BeforeText + text.Value.ToString() + AfterText;
+        UIText.text = UIText.text.Replace("/n", "<br>");
+    }
+
+    public void UpdateText(StringContainer text)
+    {
+        UIText.text = BeforeText + text.Value + AfterText;
+        UIText.text = UIText.text.Replace("/n", "<br>");
     }
 }

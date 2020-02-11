@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dda18b34b18dad46b466b2ce4c7b173, type: 3}
   m_Name: DialoguePasser
   m_EditorClassIdentifier: 
-  response: 
   speakers:
   - name: 
     avatar: {fileID: 0}
     sentences:
-    - 
-    - 
-    - 
-  nextDialog: []
-  doActivities: []
+    - hallo
+    - 'hai '
+    - bye
+  choiceEvent: []

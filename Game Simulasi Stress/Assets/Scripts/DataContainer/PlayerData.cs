@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Custom Data Container/PlayerData")]
 public class PlayerData : ScriptableObject
 {
-    public StringVariable characterName;
+    public StringContainer characterName;
     [SerializeField]
     public GameObject avatar;
-    public Vector2Variable playerPosition;
+    public Vector2Container playerPosition;
 
     [Space]
-    public FloatVariable stressLevel;
-    public FloatVariable energy;
-    public FloatVariable coins;
+    public FloatContainer stressLevel;
+    public FloatContainer energy;
+    public FloatContainer coins;
 
     [Space]
     public FloatPairContainer ability;
@@ -22,7 +22,7 @@ public class PlayerData : ScriptableObject
     public List<FloatPairContainer> interest;
 
     [Space]
-    public List<FloatVariable> knowleges;
+    public List<FloatContainer> knowleges;
 
     public GameObject Avatar
     {

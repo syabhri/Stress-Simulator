@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public Vector2Variable destination;
+    public Vector2Container destination;
     public float delay;
     public bool isTrigger;
-    public bool isInstant;
+    public bool isInstant = true;
 
-    private bool isInRange = false;
     private Transform target;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,20 +17,11 @@ public class Teleporter : MonoBehaviour
         {
             if (isInstant)
             {
-                Teleport();
+                StartCoroutine(MoveTarget(collision.transform, delay));
                 return;
             }
-            isInRange = true;
             target = collision.transform;
         } 
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (!isTrigger)
-        {
-            isInRange = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,39 +30,31 @@ public class Teleporter : MonoBehaviour
         {
             if (isInstant)
             {
-                Teleport();
+                StartCoroutine(MoveTarget(collision.transform , delay));
                 return;
             }
-            isInRange = true;
             target = collision.transform;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (isTrigger)
-        {
-            isInRange = false;
-        }
-    }
+    } 
 
     // move targeted object to destination coordinate
     public void Teleport()
     {
-        Invoke("moveTarget", delay);  
+        StartCoroutine(MoveTarget(target, delay));
     }
 
     public void Teleport(float delay)
     {
-        Invoke("moveTarget", delay);
+        StartCoroutine(MoveTarget(target, delay));
     }
 
-    private void moveTarget()
+    IEnumerator MoveTarget(Transform target, float delay)
     {
+        yield return new WaitForSeconds(delay);
         try
         {
             target.SetPositionAndRotation(
-            new Vector3(destination.position.x, destination.position.y),
+            new Vector3(destination.Value.x, destination.Value.y),
             Quaternion.identity);
         }
         catch (System.Exception)

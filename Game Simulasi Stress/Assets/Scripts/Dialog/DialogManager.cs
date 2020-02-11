@@ -10,10 +10,10 @@ public class DialogManager : MonoBehaviour
     #region Data Class
     //replace targeted string with external value
     [System.Serializable]
-    public class StringReplace
+    public struct StringReplace
     {
         public string target;
-        public StringVariable replacement;
+        public StringContainer replacement;
     }
     #endregion
 
@@ -26,34 +26,30 @@ public class DialogManager : MonoBehaviour
     public List<StringReplace> replace = new List<StringReplace>();
 
     [Header("Output")]
-    public StringVariable nameText;
-    public StringVariable dialogueText;
-    //public Sprite avatarSprite;
+    public StringContainer nameText;
+    public StringContainer dialogueText;
+    public GameObjectContainer dialogueImage;
 
     [Header("Reference")]
-    //public ThingRuntimeSet decisionPanel;
-    public ThingRuntimeSet decisionPanel;
-    public ThingRuntimeSet ActivityManager;
+    public GameObjectContainer DecisionPanel;
+
+    [Header("Conditions")]
+    public BoolContainer isDialogOpen;
+    public BoolContainer IsSentenceReady;
 
     [Header("Event")]
     public UnityEvent OnDialogStart;
     public UnityEvent OnDialogEnd;
 
-    [Header("Conditions")]
-    public BoolVariable isDialogOpen;
-
-    [Header("Data Passer")]
-    public StringVariable ButtonTextPasser;
-    public TimeContainer CurrentTime;
-
     //temp data container
     private Queue<string> sentences;
     private Queue<Speaker> speakers;
-    private  Dialogue dialogue;
+    private Dialogue dialogue;
+    private string sentence;
 
     //temp Reference
     private ButtonGenerator buttonGenerator;
-    private ActivityManager activityManager;
+    private Image dialogSprite;
     #endregion
 
     #region Unity Functions
@@ -63,27 +59,29 @@ public class DialogManager : MonoBehaviour
         sentences = new Queue<string>();
         speakers = new Queue<Speaker>();
 
-        buttonGenerator = decisionPanel.Item.GetComponent<ButtonGenerator>();
-        activityManager = ActivityManager.Item.GetComponent<ActivityManager>();
+        buttonGenerator = DecisionPanel.Value.GetComponent<ButtonGenerator>();
+        dialogSprite = dialogueImage.Value.GetComponent<Image>();
     }
+    /* Replaced By New Input Event Component
     private void Update()
     {
-        // Replaced By New Input Event Component
+        
         //listen submit only when dilaog panel is open but decision panel is closed
-        /*if (Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit"))
             if (IsDialogOpen.value && !IsDecisionOpen.value)
             {
                 DisplayNextSentences();
                 Debug.Log("Displaying next sentence....");
-            }*/
-    }
+            }
+    }*/
     #endregion
 
     #region Dialog Functions
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("DialogStarted");
-        isDialogOpen.value = true;
+        isDialogOpen.Value = true;
+        IsSentenceReady.Value = true;
         OnDialogStart.Invoke();
 
         this.dialogue = dialogue;
@@ -94,7 +92,7 @@ public class DialogManager : MonoBehaviour
         {
             speakers.Enqueue(speaker);
         }
-
+        
         DisplayNextSpeaker();
     }
 
@@ -103,19 +101,29 @@ public class DialogManager : MonoBehaviour
         Debug.Log("Displaying Next Speaker");
         if (speakers.Count == 0)
         {
-            if (!decisionPanel.Item.activeSelf)
+            if (!buttonGenerator.gameObject.activeSelf)
             {
-                if (dialogue.nextDialog.Length != 0 || dialogue.doActivities.Length != 0)
+                if (dialogue.choiceEvent.Count > 0)
                     StartDecision();
                 else
-                    Invoke("EndDialogue", .1f);
+                    EndDialogue();
             }
             return;
         }
 
         Speaker speaker = speakers.Dequeue();
         nameText.Value = speaker.name;
-        //avatarSprite = speaker.avatar;
+
+        if (speaker.avatar != null)
+        {
+            dialogSprite.sprite = speaker.avatar;
+            dialogSprite.gameObject.SetActive(true);
+        }
+        else
+        {
+            dialogSprite.gameObject.SetActive(false);
+        }
+
         sentences.Clear();
 
         foreach (string sentence in speaker.sentences)
@@ -128,13 +136,21 @@ public class DialogManager : MonoBehaviour
 
     public void DisplayNextSentences()
     {
+        if (!IsSentenceReady)
+        {
+            StopAllCoroutines();
+            dialogueText.Value = sentence;
+            IsSentenceReady.Value = true;
+            return;
+        }
+
         if (sentences.Count == 0)
         {
             DisplayNextSpeaker();
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        sentence = sentences.Dequeue();
 
         sentence = ReplaceText(sentence);
 
@@ -145,20 +161,22 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.Value = "";
+        IsSentenceReady.Value = false;
+        dialogueText.Value = string.Empty;
         foreach(char letter in sentence.ToCharArray())
         {
             if (punctuation.Contains(letter))
             {
                 dialogueText.Value += letter;
-                yield return new WaitForSeconds(punctuationDelay);
+                yield return new WaitForSecondsRealtime(punctuationDelay);
             }
             else
             {
                 dialogueText.Value += letter;
-                yield return new WaitForSeconds(typingDelay);
+                yield return new WaitForSecondsRealtime(typingDelay);
             }
         }
+        IsSentenceReady.Value = true;
     }
 
     public string ReplaceText(string sentence)
@@ -176,7 +194,7 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        isDialogOpen.value = false;
+        isDialogOpen.Value = false;
         OnDialogEnd.Invoke();
         Debug.Log("Dialog Ended");
     }
@@ -186,53 +204,17 @@ public class DialogManager : MonoBehaviour
     public void StartDecision()
     {
         Debug.Log("Decision Started");
-        decisionPanel.Item.SetActive(true);
-        AssignNextDialogues();
-        AssignActivities();
+        buttonGenerator.gameObject.SetActive(true);
 
-        ButtonTextPasser.Value = dialogue.dismisses;
-        Button button = buttonGenerator.AssignButton();
-        button.onClick.AddListener(delegate { EndDialogue(); } ); 
-    }
-
-    public void AssignNextDialogues()
-    {
-        foreach (Dialogue dialogue in dialogue.nextDialog)
-        {
-            ButtonTextPasser.Value = dialogue.response;
-            Button button = buttonGenerator.AssignButton();
-            button.onClick.AddListener(delegate { StartDialogue(dialogue); });
-        }
-    }
-
-    public void AssignActivities()
-    {
-        foreach (Activity activity in dialogue.doActivities)
-        {
-            if (activity.isScheduled)
-            {
-                if (TimeManager.currentDay == activity.schedule.days &&
-                    TimeManager.currentHours >= activity.schedule.hours &&
-                    TimeManager.currentMinutes >= activity.schedule.minutes &&
-                    TimeManager.currentHours <= activity.tolerance.days &&
-                    TimeManager.currentMinutes >= activity.tolerance.minutes)
-                {
-                    break;
-                }
-            }
-            ButtonTextPasser.Value = activity.name;
-            Button button = buttonGenerator.AssignButton();
-            button.onClick.AddListener(delegate { activityManager.DoActivity(activity); });
-            button.onClick.AddListener(delegate { EndDialogue(); });
-        }
+        AssignChoice(dialogue);
     }
 
     public void AssignChoice(Dialogue dialogue)
     {
         foreach (Dialogue.ChoiceEvent choiceEvent in dialogue.choiceEvent)
         {
-            ButtonTextPasser.Value = choiceEvent.name;
-            Button button = buttonGenerator.AssignButton();
+            Button button = buttonGenerator.AssignButton(choiceEvent.name);
+            button.onClick.AddListener(delegate { EndDialogue(); });
             button.onClick.AddListener(delegate { choiceEvent.unityEvent.Invoke(); });
         }
     }

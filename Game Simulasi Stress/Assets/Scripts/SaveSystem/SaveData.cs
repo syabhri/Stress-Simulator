@@ -36,12 +36,16 @@ public class SaveData
         avatar = playerData.avatar.name;
         
         player_position = new float[2];
-        player_position[0] = playerData.playerPosition.position.x;
-        player_position[1] = playerData.playerPosition.position.y;
 
-        stress_level = playerData.stressLevel.value;
-        energy = playerData.energy.value;
-        coins = playerData.coins.value;
+        if (playerData.playerPosition.Value != null)
+        {
+            player_position[0] = playerData.playerPosition.Value.x;
+            player_position[1] = playerData.playerPosition.Value.y;
+        }
+
+        stress_level = playerData.stressLevel.Value;
+        energy = playerData.energy.Value;
+        coins = playerData.coins.Value;
 
 
     }

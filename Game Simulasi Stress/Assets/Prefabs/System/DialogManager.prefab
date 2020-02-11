@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8094714307959764701
+--- !u!1 &3002764964020409514
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8094714307959764699}
-  - component: {fileID: 8094714307959764700}
-  - component: {fileID: 8094714307959764698}
+  - component: {fileID: 3002764964020409516}
+  - component: {fileID: 3002764964020409515}
+  - component: {fileID: 3002764964020409517}
+  - component: {fileID: 2089675601067290041}
   m_Layer: 0
   m_Name: DialogManager
   m_TagString: Untagged
@@ -18,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8094714307959764699
+--- !u!4 &3002764964020409516
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8094714307959764701}
+  m_GameObject: {fileID: 3002764964020409514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,46 +33,114 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8094714307959764700
+--- !u!114 &3002764964020409515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8094714307959764701}
+  m_GameObject: {fileID: 3002764964020409514}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f4d579295eefdf46b10d4e28f1e4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingDelay: 0.01
+  punctuationDelay: 0.5
+  punctuation: 2e002c003f0021003b003a00
+  replace:
+  - target: '[player]'
+    replacement: {fileID: 11400000, guid: 80588d0018ce1fe49acf760fa27e1090, type: 2}
   nameText: {fileID: 11400000, guid: 339af6d440022cc478f2e3800016ccbc, type: 2}
   dialogueText: {fileID: 11400000, guid: 4185570f15429da4ca4bb50791dcfe27, type: 2}
-  DecicionPanel: {fileID: 0}
-  PlayerMovement: {fileID: 0}
-  IsDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
---- !u!114 &8094714307959764698
+  dialogueImage: {fileID: 11400000, guid: e188e119fbe00c4468d48a55ffb7697a, type: 2}
+  DecisionPanel: {fileID: 11400000, guid: 4076945c52462104e8f730bb7efc3637, type: 2}
+  isDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
+  IsSentenceReady: {fileID: 11400000, guid: 4cb6fe6330ab6a84790fd74d4f57a864, type: 2}
+  OnDialogStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 7e7ffbf38714c3642873e4797348a7cb, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDialogEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 68c70e74351b26341b3648ea3317a6f3, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &3002764964020409517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8094714307959764701}
+  m_GameObject: {fileID: 3002764964020409514}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 24e282af1f673084cabc0d538b5a790a, type: 2}
+  Event: {fileID: 11400000, guid: c515b0767e26ba645b4e38f4053faa94, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8094714307959764700}
+      - m_Target: {fileID: 3002764964020409515}
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 864eb3532b2247544a234a502ae679b1,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &2089675601067290041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002764964020409514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8ff9dac0ea05f384485cb9c6985bbbe6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3002764964020409515}
+        m_MethodName: DisplayNextSentences
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

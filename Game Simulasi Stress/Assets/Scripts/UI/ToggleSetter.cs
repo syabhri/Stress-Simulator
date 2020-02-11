@@ -6,16 +6,11 @@ using UnityEngine.UI;
 public class ToggleSetter : MonoBehaviour
 {
     public Toggle toggle;
-    public BoolVariable Value;
+    public BoolContainer Value;
 
     private void OnEnable()
     {
         UpdateChanges(Value);
-    }
-
-    public void UpdateChanges(BoolVariable Value)
-    {
-        toggle.isOn = Value.value;
     }
 
     public void UpdateChanges(bool Value)

@@ -16,10 +16,10 @@ public class ActivityManager : MonoBehaviour
     public TimeContainer currentTime;
 
     [Header("References")]
-    public ThingRuntimeSet timeSetterPanel;
-    public ThingRuntimeSet timeSetterOkButton;
-    public ThingRuntimeSet noticePanel;
-    public ThingRuntimeSet player;
+    public GameObjectContainer timeSetterPanel;
+    public GameObjectContainer timeSetterOkButton;
+    public GameObjectContainer noticePanel;
+    public GameObjectContainer player;
 
     [Header("Events")]
     public GameEvent onTimeSkip;
@@ -35,8 +35,8 @@ public class ActivityManager : MonoBehaviour
     public Activity activity;//reference to the current activity
 
     [Header("UI Output")]
-    public StringVariable noticePanelText;
-    public StringVariable schedule;
+    public StringContainer noticePanelText;
+    public StringContainer schedule;
 
 
     //time setter panel ok button;
@@ -47,7 +47,7 @@ public class ActivityManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        okButton = timeSetterOkButton.Item.GetComponent<Button>();
+        okButton = timeSetterOkButton.Value.GetComponent<Button>();
     }
     #endregion
 
@@ -66,7 +66,7 @@ public class ActivityManager : MonoBehaviour
                 noticePanelText.Value =
                     "Aktifitas belum tersedia, aktifitas baru bisa di lakukan mulai jam "
                     + activity.schedule.hours.ToString("00") + " : " + activity.schedule.minutes.ToString("00");
-                noticePanel.Item.SetActive(true);
+                noticePanel.Value.SetActive(true);
                 CancelActivity();
                 OnActivityEnd.Invoke();
                 return;
@@ -78,7 +78,7 @@ public class ActivityManager : MonoBehaviour
             if (LimitPerDayReached(activity))
             {
                 noticePanelText.Value = "Limit Aktifitas Telah Tercapai, Coba Lagi Besok";
-                noticePanel.Item.SetActive(true);
+                noticePanel.Value.SetActive(true);
                 CancelActivity();
                 OnActivityEnd.Invoke();
                 return;
@@ -90,7 +90,7 @@ public class ActivityManager : MonoBehaviour
         if(activity.isDutrationAjustable)
         {
             //open panel to insert duration and change duration to the inputed amount
-            timeSetterPanel.Item.SetActive(true);
+            timeSetterPanel.Value.SetActive(true);
             Debug.Log("TimeSetter opened");
             okButton.onClick.RemoveAllListeners();
             okButton.onClick.AddListener(delegate { AdjustDuration(); });
@@ -114,7 +114,7 @@ public class ActivityManager : MonoBehaviour
 
         if (activity.AnimationTrigger != null)
         {
-            player.Deactivate();
+            player.Value.SetActive(false);
             activity.AnimationTrigger.Raise();
             StopAllCoroutines();
             StartCoroutine(StartTransition(1, 2));
@@ -167,17 +167,17 @@ public class ActivityManager : MonoBehaviour
         if (activity.isUseEnergy)
         {
             float consuption = EnergyPerHour * activity.duration.ToHours();
-            playerData.energy.SetValue(playerData.energy.value - consuption);
+            playerData.energy.Value = playerData.energy.Value - consuption;
             noticePanelText.Value += "<color=red>Energy -" + consuption + "/n";
-            Debug.Log("Energy Decreased by " + consuption + ", Energy = " + playerData.energy.value);
+            Debug.Log("Energy Decreased by " + consuption + ", Energy = " + playerData.energy.Value);
         }
             
         // decrease the money if activity using money
         if (activity.isCostMoney)
         {
-            playerData.coins.SetValue(playerData.coins.value - activity.cost);
+            playerData.coins.Value = playerData.coins.Value - activity.cost;
             noticePanelText.Value += "<color=red>Money -" + activity.cost;
-            Debug.Log("Money Decreased by " + activity.cost + ", Money = " + playerData.coins.value);
+            Debug.Log("Money Decreased by " + activity.cost + ", Money = " + playerData.coins.Value);
         }
 
         // if activity is limited increase activity count
@@ -203,7 +203,7 @@ public class ActivityManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         Phase3();
         InTransition.Raise();
-        noticePanel.Acitvate();
+        noticePanel.Value.SetActive(true);
     }
 
     IEnumerator StartTransition(float delay,float duration)
@@ -211,22 +211,22 @@ public class ActivityManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         OutTransition.Raise();
         yield return new WaitForSeconds(duration);
-        player.Acitvate();
+        player.Value.SetActive(true);
         Phase3();
         InTransition.Raise();
-        noticePanel.Acitvate();
+        noticePanel.Value.SetActive(true);
     }
 
     public void AdjustDuration()
     {
-        activity.duration.SetValue(timePasser.time);
+        activity.duration.SetValue(timePasser.Value);
     }
 
     //check wether the player have enough energy to do the activity
     public bool CheckEnergy()
     {
         float consuption = activity.duration.ToHours() * EnergyPerHour;
-        if (playerData.energy.value >= consuption)
+        if (playerData.energy.Value >= consuption)
         {
             Debug.Log("Energy Enough, Energy -" + consuption);
             return true;
@@ -235,7 +235,7 @@ public class ActivityManager : MonoBehaviour
         {
             string message = "Energi Tidak Cukup, Butuh Setidaknya " + consuption + " energi";
             noticePanelText.Value = message;
-            noticePanel.Item.SetActive(true);
+            noticePanel.Value.SetActive(true);
             Debug.Log(message);
             Debug.Log("Activity Ended");
             OnActivityEnd.Invoke();
@@ -245,7 +245,7 @@ public class ActivityManager : MonoBehaviour
 
     public bool CheckMoney()
     {
-        if (playerData.coins.value >= activity.cost)
+        if (playerData.coins.Value >= activity.cost)
         {
             Debug.Log("Money Enough : -" + activity.cost);
             return true;
@@ -254,7 +254,7 @@ public class ActivityManager : MonoBehaviour
         {
             string message = "Koin Tidak Cukup, Butuh Setidaknya " + activity.cost + " Koin";
             noticePanelText.Value = message;
-            noticePanel.Item.SetActive(true);
+            noticePanel.Value.SetActive(true);
             Debug.Log(message);
             Debug.Log("Activity Ended");
             OnActivityEnd.Invoke();
@@ -264,30 +264,30 @@ public class ActivityManager : MonoBehaviour
 
     public void IncreaseStress()
     {
-        float old = playerData.stressLevel.value;
+        float old = playerData.stressLevel.Value;
         if (activity.increaseStressByHours)
-            playerData.stressLevel.SetValue(playerData.stressLevel.value + (activity.increasedStressMultiplier * activity.duration.ToHours()));
+            playerData.stressLevel.Value = playerData.stressLevel.Value + (activity.increasedStressMultiplier * activity.duration.ToHours());
         else
-            playerData.stressLevel.SetValue(playerData.stressLevel.value + activity.increasedStressMultiplier);
+            playerData.stressLevel.Value = playerData.stressLevel.Value + activity.increasedStressMultiplier;
 
-        if (playerData.stressLevel.value > 100)
-            playerData.stressLevel.SetValue(100);
-        noticePanelText.Value += "<color=red>Stress +" + (playerData.stressLevel.value - old) + "/n";
-        Debug.Log("Stress +" + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
+        if (playerData.stressLevel.Value > 100) playerData.stressLevel.Value = 100;
+
+        noticePanelText.Value += "<color=red>Stress +" + (playerData.stressLevel.Value - old) + "/n";
+        Debug.Log("Stress +" + (playerData.stressLevel.Value - old) + ", Stress = " + playerData.stressLevel.Value);
     }
 
 
     public void DecreaseStress()
     {
-        float old = playerData.stressLevel.value;
+        float old = playerData.stressLevel.Value;
         if (activity.decreaseStressByHours)
-            playerData.stressLevel.SetValue(playerData.stressLevel.value - (activity.decreasedStressMultiplier * activity.duration.ToHours()));
+            playerData.stressLevel.Value = playerData.stressLevel.Value - (activity.decreasedStressMultiplier * activity.duration.ToHours());
         else
-            playerData.stressLevel.SetValue(playerData.stressLevel.value - activity.decreasedStressMultiplier);
-        if (playerData.stressLevel.value < 0)
-            playerData.stressLevel.SetValue(100);
-        noticePanelText.Value += "<color=green>Stress " + (playerData.stressLevel.value - old) + "/n";
-        Debug.Log("Stress " + (playerData.stressLevel.value - old) + ", Stress = " + playerData.stressLevel.value);
+            playerData.stressLevel.Value = playerData.stressLevel.Value - activity.decreasedStressMultiplier;
+        if (playerData.stressLevel.Value < 0)
+            playerData.stressLevel.Value = 100;
+        noticePanelText.Value += "<color=green>Stress " + (playerData.stressLevel.Value - old) + "/n";
+        Debug.Log("Stress " + (playerData.stressLevel.Value - old) + ", Stress = " + playerData.stressLevel.Value);
     }
 
     //change other stat based on the operation configured and stress level if effected
@@ -295,18 +295,18 @@ public class ActivityManager : MonoBehaviour
     {
         // create temp reference for sorter call
         FloatPair pair = activity.otherStat;
-        // create temp storage to store the effector value 
+        // create temp storage to store the effector Value 
         float effector;
-        // create temp storage for storing the target stat value before the change
-        float old = pair.target.value;
+        // create temp storage for storing the target stat Value before the change
+        float old = pair.target.Value;
 
         //assign the effector to local or external effector
         if (pair.useExternalEeffector)
-            effector = pair.externalEffector.value;
+            effector = pair.externalEffector.Value;
         else
             effector = pair.effector;
 
-        // multiply the effector value with the activity duration if the stat is changed by the hours
+        // multiply the effector Value with the activity duration if the stat is changed by the hours
         if (activity.ChangeStatByHours)
         {
             effector *= activity.duration.ToHours();
@@ -320,27 +320,27 @@ public class ActivityManager : MonoBehaviour
         pair.DoOperation(effector);
 
         //limit range so the stat can't go above 100 or below 0
-        pair.target.value = Mathf.Clamp(pair.target.value, 0, 100);
+        pair.target.Value = Mathf.Clamp(pair.target.Value, 0, 100);
 
         noticePanelText.Value += 
-            "<color=" + Mathf.Sign(pair.target.value - old).ToString().Replace("-1","red").Replace("1","green") + ">" + 
+            "<color=" + Mathf.Sign(pair.target.Value - old).ToString().Replace("-1","red").Replace("1","green") + ">" + 
             pair.target.name + " " + 
-            Mathf.Sign(pair.target.value - old).ToString().Replace("-1","+").Replace('1','+') + 
-            Mathf.Abs(pair.target.value - old) + "/n";
+            Mathf.Sign(pair.target.Value - old).ToString().Replace("-1","+").Replace('1','+') + 
+            Mathf.Abs(pair.target.Value - old) + "/n";
 
         Debug.Log("Stat " + pair.target.name + " Changed from " +
-            old + " to " + pair.target.value +
+            old + " to " + pair.target.Value +
             " using " + pair.operation + " operation with " +
-            effector + " effector value");
+            effector + " effector Value");
     }
 
     private float EffectedByStress(float effector)
     {
-        //decrease factor is how much the effector value will decrease by stress
+        //decrease factor is how much the effector Value will decrease by stress
         float decreaseFactor;
 
         //find the decrease factor
-        decreaseFactor = Mathf.Round(effector * playerData.stressLevel.value / 100);
+        decreaseFactor = Mathf.Round(effector * playerData.stressLevel.Value / 100);
 
         //decrease the effector according to the decrease factor
         effector -= decreaseFactor;
@@ -356,24 +356,24 @@ public class ActivityManager : MonoBehaviour
         //cycle trough player interest
         foreach (FloatPairContainer interest in playerData.interest)
         {
-            float old = activity.interest.pair.target.value; ;
+            float old = activity.interest.Value.target.Value; ;
             //if activity interest match the player interest
             if (activity.interest.name == interest.name)
             {
-                old = activity.interest.pair.target.value;
+                old = activity.interest.Value.target.Value;
 
                 //and the stat is change by the hours
                 if (activity.ChangeStatByHours)
                 {
                     //apply the interest bonus multiply by the activity duration
-                    activity.interest.pair.DoOperation((int)activity.duration.ToHours());
+                    activity.interest.Value.DoOperation((int)activity.duration.ToHours());
                 }
                 else
                 {
-                    activity.interest.pair.DoOperation();
+                    activity.interest.Value.DoOperation();
                 }
 
-                Debug.Log("Interest Applied " + old + " > " + activity.interest.pair.target.value);
+                Debug.Log("Interest Applied " + old + " > " + activity.interest.Value.target.Value);
             }     
         }   
     }
@@ -383,13 +383,13 @@ public class ActivityManager : MonoBehaviour
         float old;
         if (activity.ability.name == playerData.ability.name)
         {
-            old = activity.ability.pair.target.value;
+            old = activity.ability.Value.target.Value;
             if (activity.ChangeStatByHours)
-                activity.ability.pair.DoOperation((int)activity.duration.ToHours());
+                activity.ability.Value.DoOperation((int)activity.duration.ToHours());
             else
-                activity.ability.pair.DoOperation();
+                activity.ability.Value.DoOperation();
 
-            Debug.Log("Ability Applied " + old + " > " + activity.ability.pair.target.value);
+            Debug.Log("Ability Applied " + old + " > " + activity.ability.Value.target.Value);
         }
     }
     #endregion
@@ -400,10 +400,10 @@ public class ActivityManager : MonoBehaviour
     public bool CheckSchedule(Activity activity)
     {
         
-        if (currentTime.time.hours >= activity.schedule.hours
-            && currentTime.time.minutes >= activity.schedule.minutes
-            && currentTime.time.hours <= activity.tolerance.hours
-            && currentTime.time.minutes <= activity.tolerance.minutes)
+        if (currentTime.Value.hours >= activity.schedule.hours
+            && currentTime.Value.minutes >= activity.schedule.minutes
+            && currentTime.Value.hours <= activity.tolerance.hours
+            && currentTime.Value.minutes <= activity.tolerance.minutes)
         {
             return true;
         }
@@ -418,7 +418,7 @@ public class ActivityManager : MonoBehaviour
         {
             if (activity.isScheduled)
             {
-                if (activity.schedule.days == TimeManager.dayOfTheWeek)
+                if (activity.schedule.days == TimeManager.currentDay % 7f)
                 {
                     if (schedule.Value != "")
                         schedule.Value += "/n";
@@ -440,14 +440,14 @@ public class ActivityManager : MonoBehaviour
 
     public void SkipTime()
     {
-        timePasser.time.SetValue(activity.duration);
+        timePasser.Value = activity.duration;
         onTimeSkip.Raise();
     }
 
     /*
     public bool CheckValueLimit()
     {
-        if (activity.currentValue > activity.valueLimit)
+        if (activity.currentValue > activity.ValueLimit)
             return true;
         else
             return false;

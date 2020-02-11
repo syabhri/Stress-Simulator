@@ -14,14 +14,14 @@ public class SetCameraFollow : MonoBehaviour
         if (virtualCamera == null)
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
         if (player.Value != null)
-            SetFollow(player.Value);
+            SetFollow(player);
 
-        player.OnValueChanges += SetFollow;
+        player.OnValueChanged += SetFollow;
     }
 
     private void OnDestroy()
     {
-        player.OnValueChanges -= SetFollow;
+        player.OnValueChanged -= SetFollow;
     }
 
     public void SetFollow()
@@ -29,8 +29,8 @@ public class SetCameraFollow : MonoBehaviour
         virtualCamera.Follow = player.Value.transform;
     }
 
-    public void SetFollow(GameObject target)
+    public void SetFollow(VariableContainer<GameObject> target)
     {
-        virtualCamera.Follow = target.transform;
+        virtualCamera.Follow = target.Value.transform;
     }
 }
