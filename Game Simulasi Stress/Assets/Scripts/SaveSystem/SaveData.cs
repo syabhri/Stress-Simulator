@@ -5,8 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+    public struct Knowlage{
+        public string name;
+        public float value;
+    }
+
     //game data
-    public float[] current_time;
+    public TimeFormat play_time;
 
     //player data
     public string character_name;
@@ -17,24 +22,17 @@ public class SaveData
     public float energy;
     public float coins;
 
-    //public FloatPairContainer ability;
+    public string[] ability;
 
-    //public FloatPairContainer[] interest;
+    public string[] interest;
 
-    //public float[] knowleges;
+    public Knowlage[] knowleges;
 
     //constructor
-    public SaveData(PlayerData playerData, TimeFormat currentTime)
+    public SaveData(PlayerData playerData)
     {
-        current_time = new float[3];
-        current_time[0] = currentTime.minutes;
-        current_time[1] = currentTime.hours;
-        current_time[2] = currentTime.days;
-
         character_name = playerData.characterName.Value;
-
         avatar = playerData.avatar.name;
-        
         player_position = new float[2];
 
         if (playerData.playerPosition.Value != null)
@@ -43,10 +41,15 @@ public class SaveData
             player_position[1] = playerData.playerPosition.Value.y;
         }
 
+        play_time = new TimeFormat(playerData.playTime.Value.days,
+            playerData.playTime.Value.hours,
+            playerData.playTime.Value.minutes,
+            playerData.playTime.Value.dayName);
+
         stress_level = playerData.stressLevel.Value;
         energy = playerData.energy.Value;
         coins = playerData.coins.Value;
 
-
+        
     }
 }

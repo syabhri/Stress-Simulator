@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1926608665426627333}
   - component: {fileID: 1856246961876067526}
   - component: {fileID: 4778511310649152782}
+  - component: {fileID: 1941706527394200037}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,23 +50,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
-  startTime:
-    days: 0
-    hours: 0
-    minutes: 0
-    dayName: 0
-  endTime:
-    days: 30
-    hours: 0
-    minutes: 0
-    dayName: 0
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
   gameData: {fileID: 11400000, guid: 6bc27c730ea18e44f9f361d0abfe2b47, type: 2}
   DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
-  LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
-  TimePasser: {fileID: 11400000, guid: 71977f1d0f6bb414c9027aefb1d6fac6, type: 2}
-  EnviromentInput: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
+  StartTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
+  EndTime: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
+  CurrentTime: {fileID: 11400000, guid: 7dbdfa2568940434aafcad9250b854cb, type: 2}
   SceneTransition: {fileID: 11400000, guid: 7163302ad98f564499377cd6c3e15e75, type: 2}
+  LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}
 --- !u!114 &7820484409494991973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +216,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 739497648853751761}
         m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1941706527394200037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739497648853751775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ce62dc599352a24479bbd03f0abd7388, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739497648853751761}
+        m_MethodName: CheckEndGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -13,43 +13,46 @@ MonoBehaviour:
   m_Name: activityPasser
   m_EditorClassIdentifier: 
   activityName: 
-  tag: []
-  isActive: 0
-  isScaduled: 0
-  scadule:
+  isUseEnergy: 0
+  AnimationTrigger: {fileID: 0}
+  cost: 0
+  isScheduled: 0
+  isRoutine: 0
+  schedule:
     days: 0
     hours: 0
     minutes: 0
+    dayName: 0
   tolerance:
     days: 0
     hours: 0
     minutes: 15
-  isLimited: 0
+    dayName: 0
   limitPerDay: 0
+  currentCount: 0
   isDutrationAjustable: 1
   duration:
     days: 0
     hours: 0
     minutes: 0
+    dayName: 0
   isIncreaseStress: 0
   increaseStressByHours: 0
   increasedStressMultiplier: 0
   isDecreaseStress: 0
   decreaseStressByHours: 0
   decreasedStressMultiplier: 0
-  isEffectedByStress: 0
-  EffectedStat:
-    target: {fileID: 0}
-    effector: 0
-    operation: 
   isChangeOtherStat: 0
   ChangeStatByHours: 0
+  isEffectedByStress: 0
   otherStat:
-  - target: {fileID: 0}
+    target: {fileID: 0}
     effector: 0
-    operation: 
-  dialogue: {fileID: 0}
-  ValueLimit: 0
-  price: 0
-  interest: []
-  abilityEffector: {fileID: 0}
+    operation: 0
+    useRange: 1
+    min: 0
+    max: 100
+    useExternalEeffector: 0
+    externalEffector: {fileID: 0}
+  interest: {fileID: 0}
+  ability: {fileID: 0}

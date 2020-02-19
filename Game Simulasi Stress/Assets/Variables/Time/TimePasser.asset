@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeveloperDescription: 
   value:
-    days: 2
-    hours: 0
+    days: 0
+    hours: 10
     minutes: 0
     dayName: 0

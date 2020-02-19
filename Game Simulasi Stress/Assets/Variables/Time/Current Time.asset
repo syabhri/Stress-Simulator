@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9b6eede23964047b438c80d4679450, type: 3}
-  m_Name: AnimationVariant
+  m_Script: {fileID: 11500000, guid: ece72cfa0e474b44ebe829e0fee06138, type: 3}
+  m_Name: Current Time
   m_EditorClassIdentifier: 
-  DeveloperDescription: '1 -  Laki-Laki
-
-    2 - Perempuan'
-  value: 0
+  DeveloperDescription: 
+  value:
+    days: 0
+    hours: 0
+    minutes: 0
+    dayName: 0

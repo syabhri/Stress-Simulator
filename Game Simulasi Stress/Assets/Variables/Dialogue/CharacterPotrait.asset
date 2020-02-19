@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5815a05fe05fa5c41b45e6e9a62dcf08, type: 3}
-  m_Name: DialogImage
+  m_Name: CharacterPotrait
   m_EditorClassIdentifier: 
   DeveloperDescription: 
   value: {fileID: 0}

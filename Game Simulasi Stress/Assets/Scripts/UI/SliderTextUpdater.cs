@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[ExecuteInEditMode]
 public class SliderTextUpdater : MonoBehaviour
 {
     public TextMeshProUGUI TextTarget;
@@ -12,17 +11,6 @@ public class SliderTextUpdater : MonoBehaviour
 
     [Space]
     public bool UsePercentage = true;
-
-    private void OnEnable()
-    {
-        updateText();
-        SliderSource.onValueChanged.AddListener(delegate { updateText(); });
-    }
-
-    private void OnDisable()
-    {
-        SliderSource.onValueChanged.RemoveListener(delegate { updateText(); });
-    }
 
     // called when value changed
     public void updateText ()

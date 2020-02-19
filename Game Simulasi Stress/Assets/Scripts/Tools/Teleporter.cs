@@ -50,7 +50,7 @@ public class Teleporter : MonoBehaviour
 
     IEnumerator MoveTarget(Transform target, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         try
         {
             target.SetPositionAndRotation(

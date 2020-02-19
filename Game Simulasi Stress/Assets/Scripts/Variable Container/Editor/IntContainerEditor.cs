@@ -13,5 +13,6 @@ public class IntContainerEditor : Editor
         IntContainer m_Target = target as IntContainer;
         if (GUILayout.Button("Update Changes"))
             m_Target.OnValueChanged.Invoke(m_Target);
+        GUILayout.Label("Delegate Count : " + m_Target.OnValueChanged.GetInvocationList().Length.ToString());
     }
 }

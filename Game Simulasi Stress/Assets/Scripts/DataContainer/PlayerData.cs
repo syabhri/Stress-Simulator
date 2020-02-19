@@ -11,6 +11,9 @@ public class PlayerData : ScriptableObject
     public Vector2Container playerPosition;
 
     [Space]
+    public TimeContainer playTime;
+
+    [Space]
     public FloatContainer stressLevel;
     public FloatContainer energy;
     public FloatContainer coins;

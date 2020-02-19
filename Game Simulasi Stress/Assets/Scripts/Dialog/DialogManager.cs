@@ -25,16 +25,16 @@ public class DialogManager : MonoBehaviour
     [Tooltip("replace target string in the dilaog with value from external variable")]
     public List<StringReplace> replace = new List<StringReplace>();
 
-    [Header("Output")]
-    public StringContainer nameText;
-    public StringContainer dialogueText;
-    public GameObjectContainer dialogueImage;
-
-    [Header("Reference")]
+    [Header("Activated UI")]
+    public BoolContainer DialogPanel;
     public GameObjectContainer DecisionPanel;
 
+    [Header("Output UI")]
+    public StringContainer nameText;
+    public StringContainer dialogueText;
+    public GameObjectContainer CharacterPotrait;
+
     [Header("Conditions")]
-    public BoolContainer isDialogOpen;
     public BoolContainer IsSentenceReady;
 
     [Header("Event")]
@@ -49,7 +49,7 @@ public class DialogManager : MonoBehaviour
 
     //temp Reference
     private ButtonGenerator buttonGenerator;
-    private Image dialogSprite;
+    private Image characterPotrait;
     #endregion
 
     #region Unity Functions
@@ -60,7 +60,7 @@ public class DialogManager : MonoBehaviour
         speakers = new Queue<Speaker>();
 
         buttonGenerator = DecisionPanel.Value.GetComponent<ButtonGenerator>();
-        dialogSprite = dialogueImage.Value.GetComponent<Image>();
+        characterPotrait = CharacterPotrait.Value.GetComponent<Image>();
     }
     /* Replaced By New Input Event Component
     private void Update()
@@ -80,7 +80,7 @@ public class DialogManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("DialogStarted");
-        isDialogOpen.Value = true;
+        DialogPanel.Value = true;
         IsSentenceReady.Value = true;
         OnDialogStart.Invoke();
 
@@ -116,12 +116,12 @@ public class DialogManager : MonoBehaviour
 
         if (speaker.avatar != null)
         {
-            dialogSprite.sprite = speaker.avatar;
-            dialogSprite.gameObject.SetActive(true);
+            characterPotrait.sprite = speaker.avatar;
+            characterPotrait.gameObject.SetActive(true);
         }
         else
         {
-            dialogSprite.gameObject.SetActive(false);
+            characterPotrait.gameObject.SetActive(false);
         }
 
         sentences.Clear();
@@ -136,7 +136,7 @@ public class DialogManager : MonoBehaviour
 
     public void DisplayNextSentences()
     {
-        if (!IsSentenceReady)
+        if (!IsSentenceReady.Value)
         {
             StopAllCoroutines();
             dialogueText.Value = sentence;
@@ -194,7 +194,7 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        isDialogOpen.Value = false;
+        DialogPanel.Value = false;
         OnDialogEnd.Invoke();
         Debug.Log("Dialog Ended");
     }
@@ -205,6 +205,7 @@ public class DialogManager : MonoBehaviour
     {
         Debug.Log("Decision Started");
         buttonGenerator.gameObject.SetActive(true);
+        buttonGenerator.DefaultAction.AddListener(delegate { EndDialogue(); });
 
         AssignChoice(dialogue);
     }
@@ -214,7 +215,6 @@ public class DialogManager : MonoBehaviour
         foreach (Dialogue.ChoiceEvent choiceEvent in dialogue.choiceEvent)
         {
             Button button = buttonGenerator.AssignButton(choiceEvent.name);
-            button.onClick.AddListener(delegate { EndDialogue(); });
             button.onClick.AddListener(delegate { choiceEvent.unityEvent.Invoke(); });
         }
     }

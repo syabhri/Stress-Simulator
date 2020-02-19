@@ -255,7 +255,7 @@ MonoBehaviour:
   stringContainer: {fileID: 11400000, guid: c3b8fae65feb330489def2f30c4e0aa8, type: 2}
   floatContainer: {fileID: 0}
   AlwaysUpdate: 1
-  BeforeText: Hari Ke -
+  BeforeText: 'Hari Ke - '
   AfterText: /30
 --- !u!1 &8847484767567158197
 GameObject:

@@ -12,6 +12,11 @@ public class GameObjectContainer : VariableContainer<GameObject>
         get { return value; }
     }
 
+    public void SetActive(bool value)
+    {
+        Value.SetActive(value);
+    }
+
     public void Clear()
     {
         value = null;

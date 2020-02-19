@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DialoguePasser
   m_EditorClassIdentifier: 
   speakers:
-  - name: 
+  - name: Julia
     avatar: {fileID: 0}
     sentences:
-    - hallo
-    - 'hai '
-    - bye
+    - 'Hai [player], apa kabar?
+
+      Hari ini cuacanya sangat cerah.'
   choiceEvent: []

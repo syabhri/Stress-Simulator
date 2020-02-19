@@ -88,6 +88,7 @@ public class ButtonGenerator : MonoBehaviour
         if (ClearOnDisabled)
         {
             ClearUsedButtons();
+            DefaultAction.RemoveAllListeners();
         }
     }
 }

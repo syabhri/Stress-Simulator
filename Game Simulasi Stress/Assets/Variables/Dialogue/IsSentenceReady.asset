@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: IsSentenceReady
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  value: 0
+  value: 1

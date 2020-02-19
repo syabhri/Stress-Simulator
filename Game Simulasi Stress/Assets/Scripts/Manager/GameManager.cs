@@ -9,24 +9,26 @@ public class GameManager : MonoBehaviour
     #region Variables
     [Header("Properties")]
     public bool IsPlaying;
-    public TimeFormat startTime;
-    public TimeFormat endTime;
 
     [Header("Data Container")]
     public PlayerData playerData;
     public GameData gameData;
     public Vector2Container DefaultSpawnPoint;
-    public FloatContainer LoadingProgress;
-    public TimeContainer TimePasser;
 
-    [Header("Event")]
+    [Header("Time Manager")]
+    public TimeContainer StartTime;
+    public TimeContainer EndTime;
+    public TimeContainer CurrentTime;
+
+    [Header("Scene Manager")]
     public GameEvent SceneTransition;
+    public FloatContainer LoadingProgress;
+
     #endregion
 
     #region Unity Functions
     private void Awake()
     {
-        // set input group to 0;
         if (IsPlaying)
         {
             //AssignAvatar();
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
         playerData.playerPosition.Value = DefaultSpawnPoint.Value;
 
         // set start time
-        TimePasser.Value = startTime;
+        StartTime.Value.Reset();
         
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -98,9 +100,10 @@ public class GameManager : MonoBehaviour
     {
         SaveData saveData = SaveManager.Load<SaveData>(saveName.Value);
 
-        TimePasser.Value.minutes = saveData.current_time[0];
-        TimePasser.Value.hours = saveData.current_time[1];
-        TimePasser.Value.days = saveData.current_time[2];
+        StartTime.Value.days = saveData.play_time.days;
+        StartTime.Value.hours = saveData.play_time.hours;
+        StartTime.Value.minutes = saveData.play_time.minutes;
+        StartTime.Value.dayName = saveData.play_time.dayName;
 
         playerData.characterName.Value = saveData.character_name;
 
@@ -154,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckEndGame()
     {
-        if (TimeManager.currentDay >= endTime.days)
+        if (CurrentTime.Value.days >= EndTime.Value.days)
         {
             LoadNextScene();
         }

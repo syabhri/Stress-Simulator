@@ -14,21 +14,26 @@ public class TimeContainer : VariableContainer<TimeFormat>
 
     public void SetDay(string day)
     {
-        float.TryParse(day, out value.days);
+        int.TryParse(day, out value.days);
     }
 
     public void SetHour(string hour)
     {
-        float.TryParse(hour, out value.hours);
+        int.TryParse(hour, out value.hours);
     }
 
     public void SetMinute(string minute)
     {
-        float.TryParse(minute, out value.minutes);
+        int.TryParse(minute, out value.minutes);
     }
 
     public void SetDayName(string dayName)
     {
         Enum.TryParse(dayName, out value.dayName);
+    }
+
+    public void Reset()
+    {
+        Value.Reset();
     }
 }

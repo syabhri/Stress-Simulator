@@ -44,6 +44,6 @@ public class SaveSlot : MonoBehaviour
         }
 
         charaterName.SetText(saveData.character_name);
-        days.SetText(saveData.current_time[2].ToString());
+        days.SetText(saveData.play_time.days.ToString());
     }
 }

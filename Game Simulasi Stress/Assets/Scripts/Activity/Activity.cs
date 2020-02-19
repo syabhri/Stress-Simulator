@@ -14,9 +14,8 @@ public class Activity : ScriptableObject
     //public Animator animator;
 
     [Header("Cost")]
-    public bool isCostMoney;
     public float cost;
-
+    
     [Header("Schedule")]
     public bool isScheduled;
     public bool isRoutine;
@@ -24,8 +23,8 @@ public class Activity : ScriptableObject
     public TimeFormat tolerance = new TimeFormat(0,0,15);//default value
 
     [Header("Limit")]
-    public bool isLimited;
     public float limitPerDay;
+    [HideInInspector]
     public float currentCount;
     //public float valueLimit;
     //[Tooltip("auto, do not change")]
@@ -63,14 +62,12 @@ public class Activity : ScriptableObject
         //tag = activity.tag;
         //isActive = activity.isActive;
 
-        isCostMoney = activity.isCostMoney;
         cost = activity.cost;
 
         isScheduled = activity.isScheduled;
         schedule.SetValue(activity.schedule);
         tolerance.SetValue(activity.tolerance);
 
-        isLimited = activity.isLimited;
         limitPerDay = activity.limitPerDay;
 
         isDutrationAjustable = activity.isDutrationAjustable;

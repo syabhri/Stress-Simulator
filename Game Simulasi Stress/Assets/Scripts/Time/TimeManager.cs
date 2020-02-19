@@ -13,6 +13,9 @@ public class TimeManager : MonoBehaviour
 
     [Header("Properties")]
     [SerializeField] private float TimeScale = 1;
+
+    [Header("Data Container")]
+    public TimeContainer CurrentTime;
     
     [Header("Output UI")]
     public StringContainer ClockText;
@@ -21,11 +24,6 @@ public class TimeManager : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent OnRoutine;
-
-    public static int currentDay;
-    public static int currentHours;
-    public static int currentMinutes;
-    public static DayName currentDayName;
 
     // routine properties
     private bool IsRoutineExecuted = true;
@@ -47,13 +45,13 @@ public class TimeManager : MonoBehaviour
 
         dayNormalize = totalTime % 1f;
 
-        currentDay = Mathf.CeilToInt(totalTime);
-        currentHours = Mathf.FloorToInt(dayNormalize * hoursPerDay);
-        currentMinutes = Mathf.FloorToInt(dayNormalize * hoursPerDay % 1f * minutesPerHours);
+        CurrentTime.Value.days = Mathf.CeilToInt(totalTime);
+        CurrentTime.Value.hours = Mathf.FloorToInt(dayNormalize * hoursPerDay);
+        CurrentTime.Value.minutes = Mathf.FloorToInt(dayNormalize * hoursPerDay % 1f * minutesPerHours);
         
-        ClockText.Value = currentHours.ToString("00") + ":" + currentMinutes.ToString("00");
-        dayCountText.Value = currentDay.ToString("00");
-        dayNameText.Value = currentDayName.ToString();
+        ClockText.Value = CurrentTime.Value.hours.ToString("00") + ":" + CurrentTime.Value.minutes.ToString("00");
+        dayCountText.Value = CurrentTime.Value.days.ToString("00");
+        dayNameText.Value = CurrentTime.Value.dayName.ToString();
     }
 
     public void SetTime(TimeContainer time)
@@ -62,12 +60,12 @@ public class TimeManager : MonoBehaviour
             time.Value.days + 
             (time.Value.hours / hoursPerDay) + 
             (time.Value.minutes / hoursPerDay / minutesPerHours);
-        currentDayName = time.Value.dayName;
+        CurrentTime.Value.dayName = time.Value.dayName;
     }
 
     public void SkipTime(TimeContainer time)
     {
-        for (int i = currentDay; i < currentDay + time.Value.days - 1; i++)
+        for (int i = CurrentTime.Value.days; i < CurrentTime.Value.days + time.Value.days - 1; i++)
         {
             setNextDayName();
             OnRoutine.Invoke();
@@ -82,7 +80,7 @@ public class TimeManager : MonoBehaviour
     public void ResetTime()
     {
         totalTime = 0;
-        currentDayName = DayName.Senin;
+        CurrentTime.Value.dayName = DayName.Senin;
     }
 
     // execute routine event every day
@@ -91,14 +89,14 @@ public class TimeManager : MonoBehaviour
         if (!IsRoutineExecuted)
         {
             setNextDayName();
-            lastDayExecuted = currentDay;
             OnRoutine.Invoke();
+            lastDayExecuted = CurrentTime.Value.days;
             IsRoutineExecuted = true;
             Debug.Log("Routine Executed!");
         }
         else
         {
-            if (currentDay != 1 && currentDay > lastDayExecuted)
+            if (CurrentTime.Value.days != 1 && CurrentTime.Value.days > lastDayExecuted)
             {
                 IsRoutineExecuted = false;
             }
@@ -107,28 +105,28 @@ public class TimeManager : MonoBehaviour
 
     private void setNextDayName()
     {
-        switch (currentDayName)
+        switch (CurrentTime.Value.dayName)
         {
             case DayName.Senin:
-                currentDayName = DayName.Selasa;
+                CurrentTime.Value.dayName = DayName.Selasa;
                 break;
             case DayName.Selasa:
-                currentDayName = DayName.Rabu;
+                CurrentTime.Value.dayName = DayName.Rabu;
                 break;
             case DayName.Rabu:
-                currentDayName = DayName.Kamis;
+                CurrentTime.Value.dayName = DayName.Kamis;
                 break;
             case DayName.Kamis:
-                currentDayName = DayName.Jumat;
+                CurrentTime.Value.dayName = DayName.Jumat;
                 break;
             case DayName.Jumat:
-                currentDayName = DayName.Sabtu;
+                CurrentTime.Value.dayName = DayName.Sabtu;
                 break;
             case DayName.Sabtu:
-                currentDayName = DayName.Minggu;
+                CurrentTime.Value.dayName = DayName.Minggu;
                 break;
             case DayName.Minggu:
-                currentDayName = DayName.Senin;
+                CurrentTime.Value.dayName = DayName.Senin;
                 break;
             default:
                 break;

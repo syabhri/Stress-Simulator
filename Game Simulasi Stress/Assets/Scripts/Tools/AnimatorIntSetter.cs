@@ -28,17 +28,25 @@ public class AnimatorIntSetter : MonoBehaviour
 
     private void OnEnable()
     {
-        if (setOnce)
-        {
-            Animator.SetInteger(parameterHash, Int.Value);
-        }
+        if (setOnce) SetInteger(Int);
     }
 
-    private void Update()
+    private void Start()
     {
         if (!setOnce)
         {
-            Animator.SetInteger(parameterHash, Int.Value);
+            SetInteger(Int);
+            Int.OnValueChanged += SetInteger;
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (!setOnce) Int.OnValueChanged -= SetInteger;
+    }
+
+    public void SetInteger(IntContainer container)
+    {
+        Animator.SetInteger(parameterHash, container.Value);
     }
 }

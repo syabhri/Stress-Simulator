@@ -11,7 +11,7 @@ public class ActivitySet : ScriptableObject
     {
         foreach (Activity activity in activities)
         {
-            if (activity.isLimited)
+            if (activity.limitPerDay > 0)
             {
                 activity.currentCount = 0;
             }

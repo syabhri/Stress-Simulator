@@ -51,11 +51,11 @@ MonoBehaviour:
   replace:
   - target: '[player]'
     replacement: {fileID: 11400000, guid: 80588d0018ce1fe49acf760fa27e1090, type: 2}
+  DialogPanel: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
+  DecisionPanel: {fileID: 11400000, guid: 4076945c52462104e8f730bb7efc3637, type: 2}
   nameText: {fileID: 11400000, guid: 339af6d440022cc478f2e3800016ccbc, type: 2}
   dialogueText: {fileID: 11400000, guid: 4185570f15429da4ca4bb50791dcfe27, type: 2}
-  dialogueImage: {fileID: 11400000, guid: e188e119fbe00c4468d48a55ffb7697a, type: 2}
-  DecisionPanel: {fileID: 11400000, guid: 4076945c52462104e8f730bb7efc3637, type: 2}
-  isDialogOpen: {fileID: 11400000, guid: 020549d6c85e89341b92ee2e49ce83bc, type: 2}
+  CharacterPotrait: {fileID: 11400000, guid: e188e119fbe00c4468d48a55ffb7697a, type: 2}
   IsSentenceReady: {fileID: 11400000, guid: 4cb6fe6330ab6a84790fd74d4f57a864, type: 2}
   OnDialogStart:
     m_PersistentCalls:
@@ -63,6 +63,50 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 7e7ffbf38714c3642873e4797348a7cb, type: 2}
         m_MethodName: Raise
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: d75c58ba71acd0d4f872b8f86ff88438, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: e058d99608a963c458af3f18c0251207, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 9a4442d8eb8c46f4890f61e317a693c0, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: f8f9424bd632b574db3ab92ec31911a9, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -79,6 +123,50 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 68c70e74351b26341b3648ea3317a6f3, type: 2}
         m_MethodName: Raise
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: d75c58ba71acd0d4f872b8f86ff88438, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: e058d99608a963c458af3f18c0251207, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 9a4442d8eb8c46f4890f61e317a693c0, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: f8f9424bd632b574db3ab92ec31911a9, type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

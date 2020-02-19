@@ -73,7 +73,7 @@ public class ActivityManager : MonoBehaviour
             }
         }
 
-        if (activity.isLimited)
+        if (activity.limitPerDay > 0)
         {
             if (LimitPerDayReached(activity))
             {
@@ -108,7 +108,7 @@ public class ActivityManager : MonoBehaviour
         if (activity.isUseEnergy)
             if (!CheckEnergy())
                 return;
-        if (activity.isCostMoney)
+        if (activity.cost > 0)
             if (!CheckMoney())
                 return;
 
@@ -173,7 +173,7 @@ public class ActivityManager : MonoBehaviour
         }
             
         // decrease the money if activity using money
-        if (activity.isCostMoney)
+        if (activity.cost > 0)
         {
             playerData.coins.Value = playerData.coins.Value - activity.cost;
             noticePanelText.Value += "<color=red>Money -" + activity.cost;
@@ -181,7 +181,7 @@ public class ActivityManager : MonoBehaviour
         }
 
         // if activity is limited increase activity count
-        if (activity.isLimited)
+        if (activity.limitPerDay > 0)
         {
             activity.currentCount += 1;
         }
@@ -418,7 +418,7 @@ public class ActivityManager : MonoBehaviour
         {
             if (activity.isScheduled)
             {
-                if (activity.schedule.days == TimeManager.currentDay % 7f)
+                if (activity.schedule.days == currentTime.Value.days % 7f)
                 {
                     if (schedule.Value != "")
                         schedule.Value += "/n";

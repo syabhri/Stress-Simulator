@@ -1,23 +1,23 @@
 ﻿[System.Serializable]
-public class TimeFormat 
+public class TimeFormat
 {
-    public float days;
-    public float hours;
-    public float minutes;
+    public int days;
+    public int hours;
+    public int minutes;
     public TimeManager.DayName dayName;
 
     //default constructor
     public TimeFormat() { }
 
     //constructor
-    public TimeFormat(float days, float hours, float minutes)
+    public TimeFormat(int days, int hours, int minutes)
     {
         this.days = days;
         this.hours = hours;
         this.minutes = minutes;
     }
 
-    public TimeFormat(float days, float hours, float minutes, TimeManager.DayName dayName)
+    public TimeFormat(int days, int hours, int minutes, TimeManager.DayName dayName)
     {
         this.days = days;
         this.hours = hours;
@@ -31,6 +31,14 @@ public class TimeFormat
         hours = time.hours;
         minutes = time.minutes;
         dayName = time.dayName;
+    }
+
+    public void Reset()
+    {
+        days = 0;
+        hours = 0;
+        minutes = 0;
+        dayName = TimeManager.DayName.Senin;
     }
 
     public float ToHours()

@@ -52,7 +52,7 @@ public class SaveManager : MonoBehaviour
     {
         string path = Application.persistentDataPath + saveFolder;
         DirectoryInfo directory = new DirectoryInfo(path);
-        directory.Delete();
+        directory.Delete(true);
         Directory.CreateDirectory(path);
         Debug.Log("Save Deleted");
     }
