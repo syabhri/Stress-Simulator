@@ -2,10 +2,10 @@
 
 public abstract class VariableContainer<T> : ScriptableObject
 {
-    #if UNITY_EDITOR
-        [Multiline]
-        public string DeveloperDescription = "";
-    #endif
+#if UNITY_EDITOR
+    [Multiline]
+    public string DeveloperDescription = "";
+#endif
 
     [SerializeField]
     protected T value;

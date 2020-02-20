@@ -68,8 +68,7 @@ MonoBehaviour:
   m_text: i
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9158ba4b041b220469af7ed37bf97d10, type: 2}
-  m_sharedMaterial: {fileID: 21993476458127986, guid: 9158ba4b041b220469af7ed37bf97d10,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: af9cd4e112f6d254086343d467042d37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -179,7 +178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &446125762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -198,7 +197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.11, y: 0.56}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!223 &446125765
@@ -350,12 +349,12 @@ PrefabInstance:
     - target: {fileID: 1662060251503873701, guid: aa44b7844c329d14986b030abb0506e6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1662060251503873701, guid: aa44b7844c329d14986b030abb0506e6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.409
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1662060251503873701, guid: aa44b7844c329d14986b030abb0506e6,
         type: 3}
@@ -482,26 +481,6 @@ PrefabInstance:
       propertyPath: exitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 578331068042150337}
-    - target: {fileID: 5107204383361908883, guid: aa44b7844c329d14986b030abb0506e6,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.87475204
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107204383361908883, guid: aa44b7844c329d14986b030abb0506e6,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.749504
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107204383361908883, guid: aa44b7844c329d14986b030abb0506e6,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.02762413
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107204383361908883, guid: aa44b7844c329d14986b030abb0506e6,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.8655434
-      objectReference: {fileID: 0}
     - target: {fileID: 5896659538979125354, guid: aa44b7844c329d14986b030abb0506e6,
         type: 3}
       propertyPath: OnButtonDown.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument

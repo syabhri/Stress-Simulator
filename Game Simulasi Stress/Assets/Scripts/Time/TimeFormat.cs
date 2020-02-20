@@ -43,21 +43,41 @@ public class TimeFormat
 
     public float ToHours()
     {
-        return (days * TimeManager.hoursPerDay) + hours + (minutes / TimeManager.minutesPerHours);
+        float result = (days * TimeManager.hoursPerDay) + hours + (minutes / TimeManager.minutesPerHours);
+        return result;
+    }
+
+    public float ToHoursExt()
+    {
+        float result = hours + (minutes / TimeManager.minutesPerHours);
+        return result;
     }
 
     public float ToDays()
     {
         return days + (hours / TimeManager.hoursPerDay) +
-            ((minutes / TimeManager.minutesPerHours) / TimeManager.hoursPerDay);
+            (minutes / TimeManager.minutesPerHours / TimeManager.hoursPerDay);
     }
 
-    public bool Matches(TimeFormat timeFormat)
+    public bool Equals(TimeFormat other, bool useDayName)
     {
-        if (days == timeFormat.days && hours == timeFormat.hours && minutes == timeFormat.minutes)
-        {
+        if (useDayName)
+            if (other.dayName != dayName)
+                return false;
+
+        if (other.hours == hours && other.minutes == minutes)
             return true;
-        }
-        return false;
+        else
+            return false;
+    }
+
+    public bool Equals(TimeFormat other)
+    {
+        if (other.days == days && 
+            other.hours == hours && 
+            other.minutes == minutes)
+            return true;
+        else
+            return false;
     }
 }

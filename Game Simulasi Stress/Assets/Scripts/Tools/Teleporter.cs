@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public Vector2Container destination;
+    public Transform destination;
     public float delay;
     public bool isTrigger;
     public bool isInstant = true;
@@ -53,9 +53,7 @@ public class Teleporter : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         try
         {
-            target.SetPositionAndRotation(
-            new Vector3(destination.Value.x, destination.Value.y),
-            Quaternion.identity);
+            target.SetPositionAndRotation(destination.position, Quaternion.identity);
         }
         catch (System.Exception)
         {
