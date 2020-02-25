@@ -20,12 +20,10 @@ public class EmptyInputEvent : MonoBehaviour
         if (textMesh.text == string.Empty)
         {
             OnEmpty.Invoke();
-            Debug.Log("empty");
         }
         else
         {
             OnExist.Invoke();
-            Debug.Log("not empty");
         }
     }
 }

@@ -29,7 +29,7 @@ public class SetCameraFollow : MonoBehaviour
         virtualCamera.Follow = player.Value.transform;
     }
 
-    public void SetFollow(VariableContainer<GameObject> target)
+    public void SetFollow(GameObjectContainer target)
     {
         virtualCamera.Follow = target.Value.transform;
     }

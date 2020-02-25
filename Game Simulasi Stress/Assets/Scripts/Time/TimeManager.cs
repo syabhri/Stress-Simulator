@@ -33,6 +33,15 @@ public class TimeManager : MonoBehaviour
     private float totalTime;
     private float dayNormalize;
 
+    private int dayBuffer;
+    private int hourBuffer;
+    private int minuteBuffer;
+
+    private void OnEnable()
+    {
+        SetTime(CurrentTime);
+    }
+
     private void Update()
     {
         UpdateTime();
@@ -45,13 +54,27 @@ public class TimeManager : MonoBehaviour
 
         dayNormalize = totalTime % 1f;
 
-        CurrentTime.Value.days = Mathf.CeilToInt(totalTime);
-        CurrentTime.Value.hours = Mathf.FloorToInt(dayNormalize * hoursPerDay);
-        CurrentTime.Value.minutes = Mathf.FloorToInt(dayNormalize * hoursPerDay % 1f * minutesPerHours);
-        
-        ClockText.Value = CurrentTime.Value.hours.ToString("00") + ":" + CurrentTime.Value.minutes.ToString("00");
-        dayCountText.Value = CurrentTime.Value.days.ToString("00");
-        dayNameText.Value = CurrentTime.Value.dayName.ToString();
+        dayBuffer = Mathf.CeilToInt(totalTime);
+        hourBuffer = Mathf.FloorToInt(dayNormalize * hoursPerDay);
+        minuteBuffer = Mathf.FloorToInt(dayNormalize * hoursPerDay % 1f * minutesPerHours);
+
+        if (CurrentTime.Value.days != dayBuffer)
+        {
+            CurrentTime.Value.days = dayBuffer;
+            dayCountText.Value = CurrentTime.Value.days.ToString("00");
+            dayNameText.Value = CurrentTime.Value.dayName.ToString();
+        }
+
+        if (CurrentTime.Value.hours != hourBuffer)
+        {
+            CurrentTime.Value.hours = hourBuffer;
+        }
+
+        if (CurrentTime.Value.minutes != minuteBuffer)
+        {
+            CurrentTime.Value.minutes = minuteBuffer;
+            ClockText.Value = CurrentTime.Value.hours.ToString("00") + ":" + CurrentTime.Value.minutes.ToString("00");
+        }
     }
 
     public void SetTime(TimeContainer time)
@@ -67,7 +90,7 @@ public class TimeManager : MonoBehaviour
     {
         for (int i = CurrentTime.Value.days; i < CurrentTime.Value.days + time.Value.days - 1; i++)
         {
-            setNextDayName();
+            CurrentTime.Value.dayName = NextDayName(CurrentTime.Value.dayName);
             OnRoutine.Invoke();
         }
 
@@ -88,7 +111,7 @@ public class TimeManager : MonoBehaviour
     {
         if (!IsRoutineExecuted)
         {
-            setNextDayName();
+            CurrentTime.Value.dayName = NextDayName(CurrentTime.Value.dayName);
             OnRoutine.Invoke();
             lastDayExecuted = CurrentTime.Value.days;
             IsRoutineExecuted = true;
@@ -103,35 +126,31 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void setNextDayName()
+    public static DayName NextDayName(DayName dayName)
     {
-        switch (CurrentTime.Value.dayName)
+        switch (dayName)
         {
             case DayName.Senin:
-                CurrentTime.Value.dayName = DayName.Selasa;
-                break;
+                return DayName.Selasa;
             case DayName.Selasa:
-                CurrentTime.Value.dayName = DayName.Rabu;
-                break;
+                return DayName.Rabu;
             case DayName.Rabu:
-                CurrentTime.Value.dayName = DayName.Kamis;
-                break;
+                return DayName.Kamis;
             case DayName.Kamis:
-                CurrentTime.Value.dayName = DayName.Jumat;
-                break;
+                return DayName.Jumat;
             case DayName.Jumat:
-                CurrentTime.Value.dayName = DayName.Sabtu;
-                break;
+                return DayName.Sabtu;
             case DayName.Sabtu:
-                CurrentTime.Value.dayName = DayName.Minggu;
-                break;
+                return DayName.Minggu;
             case DayName.Minggu:
-                CurrentTime.Value.dayName = DayName.Senin;
-                break;
+                return DayName.Senin;
             default:
-                break;
+                return dayName;
         }
     }
 
-
+    public static int DaysToMinute(int days)
+    {
+        return days * (int)hoursPerDay * (int)minutesPerHours;
+    }
 }

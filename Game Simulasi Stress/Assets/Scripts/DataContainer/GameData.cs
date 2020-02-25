@@ -8,4 +8,5 @@ public class GameData : ScriptableObject
     public List<GameObject> Avatars;
     public List<FloatPairContainer> Abilities;
     public List<FloatPairContainer> Insterest;
+    public Vector2Container DefaultSpawnPoint;
 }

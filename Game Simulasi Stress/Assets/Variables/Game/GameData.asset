@@ -12,9 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406b362455ae56e4ca3bc70c3b2817b2, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  AnimationVariant: {fileID: 11400000, guid: e6479f20326e3724db21c756f5dac977, type: 2}
   Avatars:
   - {fileID: 1835520806489497746, guid: 587ee922fd4df4046ba62cb7e0813491, type: 3}
   - {fileID: 7996294828283943519, guid: e026d9ac4b4b9834fbefd47f61247100, type: 3}
-  Abilities: []
-  Insterest: []
+  Abilities:
+  - {fileID: 11400000, guid: 6335c0c8a0b99d4469e550d4b51171ce, type: 2}
+  - {fileID: 11400000, guid: 7831b0a20b86084439a587e180db9927, type: 2}
+  Insterest:
+  - {fileID: 11400000, guid: 79253bd6ef4cf8a4e9a0ed69275ca99b, type: 2}
+  - {fileID: 11400000, guid: f63a3ea7975117646b37e13a9b5a3451, type: 2}
+  - {fileID: 11400000, guid: aa5884f69f279ab4b98e9748d05d3c59, type: 2}
+  - {fileID: 11400000, guid: e3100f6f01b5d714bbd14307e393662c, type: 2}
+  - {fileID: 11400000, guid: 2f71ca24f0372f341a68077d73d8b560, type: 2}
+  - {fileID: 11400000, guid: c08b2637d93cf6e47a1d94934b2d0fda, type: 2}
+  - {fileID: 11400000, guid: 1dd39e8bcfe998c4a85d237749ff1596, type: 2}
+  - {fileID: 11400000, guid: 780744c5c954b26409a74a25b9274e72, type: 2}
+  - {fileID: 11400000, guid: 41439c43a3008a242b45d09397151f61, type: 2}
+  - {fileID: 11400000, guid: 26a678ae8c05db74381838a63883ed7c, type: 2}
+  DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}

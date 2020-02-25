@@ -61,6 +61,8 @@ public class DialogManager : MonoBehaviour
 
         buttonGenerator = DecisionPanel.Value.GetComponent<ButtonGenerator>();
         characterPotrait = CharacterPotrait.Value.GetComponent<Image>();
+
+        DialogPanel.Value = false;
     }
     /* Replaced By New Input Event Component
     private void Update()
@@ -80,6 +82,8 @@ public class DialogManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("DialogStarted");
+        if (DialogPanel.Value)// prevent double trigger
+            return;
         DialogPanel.Value = true;
         IsSentenceReady.Value = true;
         OnDialogStart.Invoke();

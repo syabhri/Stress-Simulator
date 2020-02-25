@@ -10,11 +10,15 @@ public class SaveLocation : MonoBehaviour
 
     private void Awake()
     {
+        if (target.Value == null)
+        {
+            target.Value = new Vector2();
+        }
         GetLocation();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (realtimeSaving)
         {
@@ -24,6 +28,6 @@ public class SaveLocation : MonoBehaviour
 
     public void GetLocation()
     {
-        target.Value = new Vector2(transform.position.x, transform.position.y);
+        target.SetPosition(transform.position.x, transform.position.y);
     }
 }

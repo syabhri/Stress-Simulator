@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Teleporter : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Teleporter : MonoBehaviour
     public float delay;
     public bool isTrigger;
     public bool isInstant = true;
+    public UnityEvent OnTeleport;
+    public UnityEvent OnArrive;
 
     private Transform target;
 
@@ -17,6 +20,7 @@ public class Teleporter : MonoBehaviour
         {
             if (isInstant)
             {
+                OnTeleport.Invoke();
                 StartCoroutine(MoveTarget(collision.transform, delay));
                 return;
             }
@@ -30,6 +34,7 @@ public class Teleporter : MonoBehaviour
         {
             if (isInstant)
             {
+                OnTeleport.Invoke();
                 StartCoroutine(MoveTarget(collision.transform , delay));
                 return;
             }
@@ -37,14 +42,22 @@ public class Teleporter : MonoBehaviour
         }
     } 
 
+    public bool Instant
+    {
+        set { isInstant = value; }
+        get { return isInstant; }
+    }
+
     // move targeted object to destination coordinate
     public void Teleport()
     {
+        OnTeleport.Invoke();
         StartCoroutine(MoveTarget(target, delay));
     }
 
     public void Teleport(float delay)
     {
+        OnTeleport.Invoke();
         StartCoroutine(MoveTarget(target, delay));
     }
 
@@ -58,6 +71,10 @@ public class Teleporter : MonoBehaviour
         catch (System.Exception)
         {
             throw;
+        }
+        finally
+        {
+            OnArrive.Invoke();
         }
     }
 }

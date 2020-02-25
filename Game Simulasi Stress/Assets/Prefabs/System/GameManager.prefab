@@ -50,11 +50,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  StartTime:
+    days: 0
+    hours: 7
+    minutes: 0
+    dayName: 0
+  EndDay: 30
   playerData: {fileID: 11400000, guid: b1a04f7aea16b744ca11762ffc8a37d6, type: 2}
   gameData: {fileID: 11400000, guid: 6bc27c730ea18e44f9f361d0abfe2b47, type: 2}
-  DefaultSpawnPoint: {fileID: 11400000, guid: f8b6a7a65d4b870418fd862b0099ac4e, type: 2}
-  StartTime: {fileID: 11400000, guid: 9cb079f4038b8274bb106fc08519b523, type: 2}
-  EndTime: {fileID: 11400000, guid: ed020ea87375c9a4a95c2e06bafdf81a, type: 2}
   CurrentTime: {fileID: 11400000, guid: 7dbdfa2568940434aafcad9250b854cb, type: 2}
   SceneTransition: {fileID: 11400000, guid: 7163302ad98f564499377cd6c3e15e75, type: 2}
   LoadingProgress: {fileID: 11400000, guid: 05c457d8501a90e4887e4db19957cf34, type: 2}

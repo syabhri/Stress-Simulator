@@ -1,13 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class SaveData
 {
-    public struct Knowlage{
+    [System.Serializable]
+    public struct Knowlage {
         public string name;
         public float value;
+
+        public Knowlage(string name, float value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+    }
+
+    [System.Serializable]
+    public struct PlayerPosition
+    {
+        public float x;
+        public float y;
+
+        public PlayerPosition(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     //game data
@@ -16,30 +37,26 @@ public class SaveData
     //player data
     public string character_name;
     public string avatar;
-    public float[] player_position;
+    public PlayerPosition player_position;
 
     public float stress_level;
     public float energy;
     public float coins;
 
-    public string[] ability;
+    public string ability;
 
-    public string[] interest;
+    public List<string> interest;
 
-    public Knowlage[] knowleges;
+    public List<Knowlage> knowleges;
 
     //constructor
     public SaveData(PlayerData playerData)
     {
         character_name = playerData.characterName.Value;
         avatar = playerData.avatar.name;
-        player_position = new float[2];
 
-        if (playerData.playerPosition.Value != null)
-        {
-            player_position[0] = playerData.playerPosition.Value.x;
-            player_position[1] = playerData.playerPosition.Value.y;
-        }
+        player_position = new PlayerPosition(playerData.playerPosition.Value.x,
+            playerData.playerPosition.Value.y);
 
         play_time = new TimeFormat(playerData.playTime.Value.days,
             playerData.playTime.Value.hours,
@@ -50,6 +67,15 @@ public class SaveData
         energy = playerData.energy.Value;
         coins = playerData.coins.Value;
 
-        
+        ability = playerData.ability?.name;
+
+        interest = playerData.interest.Select(i => i.name).ToList();
+
+        knowleges = new List<Knowlage>();
+
+        foreach (FloatContainer knowlage in playerData.knowleges)
+        {
+            knowleges.Add(new Knowlage(knowlage.name, knowlage.Value));
+        }
     }
 }

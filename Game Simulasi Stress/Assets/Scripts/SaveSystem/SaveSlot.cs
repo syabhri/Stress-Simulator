@@ -20,19 +20,17 @@ public class SaveSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SaveManager.SaveExists(saveName))
-        {
-            updateInformation();
-            OnSaveExist.Invoke();
-        }
-        else
-        {
-            OnSaveEmpty.Invoke();
-        }
+        updateInformation();
     }
 
     public void updateInformation()
     {
+        if (!SaveManager.SaveExists(saveName))
+        {
+            OnSaveEmpty.Invoke();
+            return;
+        }
+
         saveData = SaveManager.Load<SaveData>(saveName);
 
         foreach (GameObject avatar in gameData.Avatars)
@@ -44,6 +42,8 @@ public class SaveSlot : MonoBehaviour
         }
 
         charaterName.SetText(saveData.character_name);
-        days.SetText(saveData.play_time.days.ToString());
+        days.SetText("Hari Ke " + saveData.play_time.days.ToString());
+
+        OnSaveExist.Invoke();
     }
 }

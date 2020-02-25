@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     #region Variables
     [Header("Properties")]
     public bool IsPlaying;
+    public TimeFormat StartTime;
+    public int EndDay;
 
     [Header("Data Container")]
     public PlayerData playerData;
     public GameData gameData;
-    public Vector2Container DefaultSpawnPoint;
 
     [Header("Time Manager")]
-    public TimeContainer StartTime;
-    public TimeContainer EndTime;
     public TimeContainer CurrentTime;
 
     [Header("Scene Manager")]
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
             //AssignAvatar();
             SpawnPlayer(playerData.playerPosition.Value);
         }
+        Time.timeScale = 1f;
     }
     #endregion
 
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
 
-            Debug.Log(progress);
+            //Debug.Log(progress);
 
             LoadingProgress.Value = progress;
 
@@ -81,47 +82,62 @@ public class GameManager : MonoBehaviour
         }
 
         // set player default spawn position
-        playerData.playerPosition.Value = DefaultSpawnPoint.Value;
+        playerData.playerPosition.Value = gameData.DefaultSpawnPoint.Value;
 
         // set start time
-        StartTime.Value.Reset();
+        CurrentTime.Value.SetValue(StartTime);
         
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void SaveGame(StringContainer saveName)
     {
-        //TimeFormat currentTime = new TimeFormat(TimeManager.currentDay)
-        //SaveData saveData = new SaveData(playerData, new TimeFormat());
-        //SaveManager.Save<SaveData>(saveData, saveName.Value);
+        SaveData saveData = new SaveData(playerData);
+        SaveManager.Save(saveData, saveName.Value);
     }
 
     public void LoadGame(StringContainer saveName)
     {
         SaveData saveData = SaveManager.Load<SaveData>(saveName.Value);
 
-        StartTime.Value.days = saveData.play_time.days;
-        StartTime.Value.hours = saveData.play_time.hours;
-        StartTime.Value.minutes = saveData.play_time.minutes;
-        StartTime.Value.dayName = saveData.play_time.dayName;
+        //load time
+        CurrentTime.Value = saveData.play_time;
 
+        // load Charater Name
         playerData.characterName.Value = saveData.character_name;
 
+        //Load Character Avatar
         foreach (GameObject avatar in gameData.Avatars)
         {
             if (avatar.name == saveData.avatar)
                 playerData.avatar = avatar;
         }
 
+        //Load Position
         playerData.playerPosition.SetPosition
-            (saveData.player_position[0], saveData.player_position[1]);
+            (saveData.player_position.x, saveData.player_position.y);
 
+        //Load Stats
         playerData.stressLevel.Value = saveData.stress_level;
         playerData.energy.Value = saveData.energy;
         playerData.coins.Value = saveData.coins;
 
-        StartCoroutine(LoadAsynchronously(1));
-    }
+        //Load Ability
+        playerData.ability = gameData.Abilities.FirstOrDefault(a => a.name == saveData.ability);
+
+        //Load Interest
+        playerData.interest = gameData.Insterest.Where(i => saveData.interest.Any(l => i.name == l)).ToList();
+
+        //load knowlage
+        foreach (FloatContainer knowlage in playerData.knowleges)
+        {
+            knowlage.Value = saveData.knowleges.FirstOrDefault(k => k.name == knowlage.name).value;
+        }
+
+        LoadScene(1);
+
+        //StartCoroutine(LoadAsynchronously(1));
+    } 
 
     public void PauseGame()
     {
@@ -157,7 +173,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckEndGame()
     {
-        if (CurrentTime.Value.days >= EndTime.Value.days)
+        if (CurrentTime.Value.days >= EndDay)
         {
             LoadNextScene();
         }

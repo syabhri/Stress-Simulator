@@ -358,7 +358,7 @@ public class ActivityManager : MonoBehaviour
         {
             float old = activity.interest.Value.target.Value; ;
             //if activity interest match the player interest
-            if (activity.interest.name == interest.name)
+            if (activity.interest.Equals(interest))
             {
                 old = activity.interest.Value.target.Value;
 
@@ -381,7 +381,7 @@ public class ActivityManager : MonoBehaviour
     public void ApplyBonusAbility()
     {
         float old;
-        if (activity.ability.name == playerData.ability.name)
+        if (activity.ability.Equals(playerData.ability))
         {
             old = activity.ability.Value.target.Value;
             if (activity.ChangeStatByHours)

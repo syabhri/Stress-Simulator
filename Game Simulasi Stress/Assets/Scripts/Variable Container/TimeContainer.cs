@@ -34,6 +34,6 @@ public class TimeContainer : VariableContainer<TimeFormat>
 
     public void Reset()
     {
-        Value.Reset();
+        Value?.Reset();
     }
 }

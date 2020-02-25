@@ -33,7 +33,7 @@ public class AnimatorBoolSetter : MonoBehaviour
         parameterHash = Animator.StringToHash(ParameterName);
     }
 
-    private void Start()
+    private void OnEnable()
     {
         UpdateChanges(Bool);
 

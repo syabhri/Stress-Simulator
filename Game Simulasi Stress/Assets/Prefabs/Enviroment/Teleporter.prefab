@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 6493475347015795432}
   - component: {fileID: 6493475347015795414}
   - component: {fileID: 6493475347015795415}
-  - component: {fileID: 2172628799670330519}
   m_Layer: 0
   m_Name: Teleporter
   m_TagString: Untagged
@@ -106,20 +105,7 @@ MonoBehaviour:
   delay: 0.5
   isTrigger: 0
   isInstant: 1
---- !u!114 &2172628799670330519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6493475347015795433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5a619e163c918469ca1643d684fc73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTrigger: 0
-  enterEvent:
+  OnTeleport:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: e4e550a9ba9dcc849971316fb4c3cae5, type: 2}
@@ -146,7 +132,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  exitEvent:
+  OnArrive:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 35d78d1a0b1911c48b5b81e35cfe7c2b, type: 2}

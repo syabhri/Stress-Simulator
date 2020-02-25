@@ -43,14 +43,22 @@ public class TimeFormat
 
     public float ToHours()
     {
-        float result = (days * TimeManager.hoursPerDay) + hours + (minutes / TimeManager.minutesPerHours);
-        return result;
+        return (days * TimeManager.hoursPerDay) + hours + (minutes / TimeManager.minutesPerHours);
     }
 
     public float ToHoursExt()
     {
-        float result = hours + (minutes / TimeManager.minutesPerHours);
-        return result;
+        return  hours + (minutes / TimeManager.minutesPerHours);
+    }
+
+    public int ToMinutes()
+    {
+        return minutes + (hours * (int)TimeManager.minutesPerHours) + (days * (int)TimeManager.hoursPerDay * (int)TimeManager.minutesPerHours);
+    }
+
+    public int ToMinutesExt()
+    {
+        return minutes + (hours * (int)TimeManager.minutesPerHours);
     }
 
     public float ToDays()
