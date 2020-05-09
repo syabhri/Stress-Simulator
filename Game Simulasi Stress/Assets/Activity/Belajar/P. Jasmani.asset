@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
+  m_Name: P. Jasmani
+  m_EditorClassIdentifier: 
+  animationTrigger: {fileID: 11400000, guid: cc1f0da3a30be6b498296005cc6b43b1, type: 2}
+  trannsitionDelay: 0
+  energyPerHour: 10
+  cost: 0
+  limitPerDay: 0
+  isDutrationAjustable: 1
+  duration:
+    days: 0
+    hours: 0
+    minutes: 0
+    dayName: 0
+  isIncreaseStress: 1
+  increasedStressModifier: 10
+  isDecreaseStress: 0
+  decreasedStressModifier: 0
+  isChangeOtherStat: 1
+  isEffectedByStress: 1
+  changedStat: {fileID: 11400000, guid: fd13dc6369a433e46bc70e60d07c3cb3, type: 2}
+  changedStatModifier: 5
+  interest: {fileID: 11400000, guid: ff5d877782aeea64cb4182ae128a9810, type: 2}
+  ability: {fileID: 0}

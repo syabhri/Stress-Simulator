@@ -71,7 +71,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300024, guid: 8b8092044136f074480dbc1cb87a0acb,
+      objectReference: {fileID: 21300000, guid: 8b8092044136f074480dbc1cb87a0acb,
         type: 3}
     - target: {fileID: 8115072814817956602, guid: de155f78bcd85c742ba5059db1c1e00c,
         type: 3}
@@ -81,8 +81,18 @@ PrefabInstance:
     - target: {fileID: 8115072814817956602, guid: de155f78bcd85c742ba5059db1c1e00c,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 5.1600003
+      value: 4.78
       objectReference: {fileID: 0}
+    - target: {fileID: 6204898720779394721, guid: de155f78bcd85c742ba5059db1c1e00c,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204898720779394721, guid: de155f78bcd85c742ba5059db1c1e00c,
+        type: 3}
+      propertyPath: m_textInfo.textComponent
+      value: 
+      objectReference: {fileID: 1428101619389852832}
     - target: {fileID: 8115072814817956600, guid: de155f78bcd85c742ba5059db1c1e00c,
         type: 3}
       propertyPath: left
@@ -112,6 +122,11 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 3842449967098093816}
+    - target: {fileID: 752129967203169727, guid: de155f78bcd85c742ba5059db1c1e00c,
+        type: 3}
+      propertyPath: OnButtonDown.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 3842449967098093817}
     - target: {fileID: 1416734885017327211, guid: de155f78bcd85c742ba5059db1c1e00c,
         type: 3}
       propertyPath: enterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -132,21 +147,11 @@ PrefabInstance:
       propertyPath: exitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2100431792806898959}
-    - target: {fileID: 752129967203169727, guid: de155f78bcd85c742ba5059db1c1e00c,
+    - target: {fileID: 6561346502116197123, guid: de155f78bcd85c742ba5059db1c1e00c,
         type: 3}
-      propertyPath: OnButtonDown.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      propertyPath: onEnable.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3842449967098093817}
-    - target: {fileID: 6204898720779394721, guid: de155f78bcd85c742ba5059db1c1e00c,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6204898720779394721, guid: de155f78bcd85c742ba5059db1c1e00c,
-        type: 3}
-      propertyPath: m_textInfo.textComponent
-      value: 
-      objectReference: {fileID: 1428101619389852832}
+      objectReference: {fileID: 2100431792806898959}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de155f78bcd85c742ba5059db1c1e00c, type: 3}
 --- !u!212 &3842449967098093816 stripped

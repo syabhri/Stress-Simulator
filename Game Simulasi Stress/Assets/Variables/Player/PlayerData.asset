@@ -32,3 +32,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16551bb4983608144919d7554594f0d4, type: 2}
   - {fileID: 11400000, guid: d89019023afc5b54ab887de9ce4d16b6, type: 2}
   - {fileID: 11400000, guid: 95c6077154218684e851db2582aad679, type: 2}
+  ActivityLimitCount:
+  - name: Makan
+    count: 1

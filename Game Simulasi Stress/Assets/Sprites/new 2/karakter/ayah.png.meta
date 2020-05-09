@@ -18,6 +18,7 @@ TextureImporter:
     21300026: ayah_13
     21300028: ayah_14
     21300030: ayah_15
+    21300032: potrait
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -459,6 +460,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: f617ebb5b8997884f80ee5ad206b4bcd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: potrait
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2744
+        width: 320
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9debaf4fb636c664ba19a63ae98b6cb3
       vertices: []
       indices: 
       edges: []

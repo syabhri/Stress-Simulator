@@ -198,6 +198,9 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        nameText.Value = string.Empty;
+        characterPotrait.gameObject.SetActive(false);
+        dialogueText.Value = string.Empty;
         DialogPanel.Value = false;
         OnDialogEnd.Invoke();
         Debug.Log("Dialog Ended");

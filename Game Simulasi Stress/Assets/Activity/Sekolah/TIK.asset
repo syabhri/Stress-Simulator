@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
+  m_Name: TIK
+  m_EditorClassIdentifier: 
+  animationTrigger: {fileID: 11400000, guid: 1c4b469273672314a814b207669997d5, type: 2}
+  trannsitionDelay: 3
+  energyPerHour: 10
+  cost: 0
+  limitPerDay: 0
+  isDutrationAjustable: 0
+  duration:
+    days: 0
+    hours: 2
+    minutes: 0
+    dayName: 0
+  isIncreaseStress: 1
+  increasedStressModifier: 10
+  isDecreaseStress: 0
+  decreasedStressModifier: 0
+  isChangeOtherStat: 1
+  isEffectedByStress: 1
+  changedStat: {fileID: 11400000, guid: 95c6077154218684e851db2582aad679, type: 2}
+  changedStatModifier: 10
+  interest: {fileID: 11400000, guid: 1399ac04edf040f4c9a5dcfbd14bd2a8, type: 2}
+  ability: {fileID: 0}

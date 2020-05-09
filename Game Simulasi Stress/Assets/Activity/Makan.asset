@@ -12,45 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: Makan
   m_EditorClassIdentifier: 
-  activityName: Makan
-  isUseEnergy: 0
-  isCostMoney: 0
+  animationTrigger: {fileID: 0}
+  trannsitionDelay: 0
+  energyPerHour: 0
   cost: 0
-  isScheduled: 0
-  schedule:
-    days: 0
-    hours: 0
-    minutes: 0
-  tolerance:
-    days: 0
-    hours: 0
-    minutes: 15
-  isLimited: 1
   limitPerDay: 3
-  currentCount: 0
   isDutrationAjustable: 0
   duration:
     days: 0
     hours: 0
     minutes: 15
+    dayName: 0
   isIncreaseStress: 0
-  increaseStressByHours: 0
-  increasedStressMultiplier: 0
+  increasedStressModifier: 0
   isDecreaseStress: 1
-  decreaseStressByHours: 0
-  decreasedStressMultiplier: 3
+  decreasedStressModifier: 12
   isChangeOtherStat: 1
-  ChangeStatByHours: 0
   isEffectedByStress: 1
-  otherStat:
-    name: 
-    target: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
-    effector: 0
-    operation: 
-    useRange: 1
-    min: 0
-    max: 100
-    useExternalEeffector: 0
-    externalEffector: {fileID: 0}
+  changedStat: {fileID: 11400000, guid: fc04ee2f4d080fe4f9fcc15bbdacd471, type: 2}
+  changedStatModifier: 12
   interest: {fileID: 0}
-  ability: {fileID: 0}
+  ability: {fileID: 11400000, guid: 7071272630a6b6e45935bbf8ceee7da1, type: 2}

@@ -12,7 +12,7 @@ public class ScreenManager : MonoBehaviour
 
     private Resolution[] resolutions;
 
-    private void Start()
+    private void OnEnable()
     {
         resolutions = Screen.resolutions;
 

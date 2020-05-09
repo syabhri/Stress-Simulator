@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         {
             //AssignAvatar();
             SpawnPlayer(playerData.playerPosition.Value);
+            CurrentTime.OnValueChanged += CheckEndGame;
         }
         Time.timeScale = 1f;
     }
@@ -134,6 +135,9 @@ public class GameManager : MonoBehaviour
             knowlage.Value = saveData.knowleges.FirstOrDefault(k => k.name == knowlage.name).value;
         }
 
+        //load Activity Limit
+        playerData.ActivityLimitCount = saveData.activityLimits;
+
         LoadScene(1);
 
         //StartCoroutine(LoadAsynchronously(1));
@@ -178,5 +182,13 @@ public class GameManager : MonoBehaviour
             LoadNextScene();
         }
     }
+    public void CheckEndGame(TimeContainer currentTime)
+    {
+        if (currentTime.Value.days >= EndDay)
+        {
+            LoadNextScene();
+        }
+    }
+
     #endregion
 }

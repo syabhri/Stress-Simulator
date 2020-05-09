@@ -12,45 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: Jalan-Jalan
   m_EditorClassIdentifier: 
-  activityName: Jalan-Jalan
-  isUseEnergy: 1
-  isCostMoney: 1
-  cost: 0
-  isScheduled: 0
-  schedule:
-    days: 0
-    hours: 0
-    minutes: 0
-  tolerance:
-    days: 0
-    hours: 0
-    minutes: 15
-  isLimited: 0
+  animationTrigger: {fileID: 0}
+  trannsitionDelay: 0
+  energyPerHour: 0
+  cost: 20
   limitPerDay: 0
-  currentCount: 0
-  isDutrationAjustable: 0
+  isDutrationAjustable: 1
   duration:
     days: 0
     hours: 0
     minutes: 0
+    dayName: 0
   isIncreaseStress: 0
-  increaseStressByHours: 0
-  increasedStressMultiplier: 0
-  isDecreaseStress: 0
-  decreaseStressByHours: 0
-  decreasedStressMultiplier: 0
+  increasedStressModifier: 0
+  isDecreaseStress: 1
+  decreasedStressModifier: 10
   isChangeOtherStat: 0
-  ChangeStatByHours: 0
   isEffectedByStress: 0
-  otherStat:
-    name: 
-    target: {fileID: 0}
-    effector: 0
-    operation: 
-    useRange: 1
-    min: 0
-    max: 100
-    useExternalEeffector: 0
-    externalEffector: {fileID: 0}
+  changedStat: {fileID: 0}
+  changedStatModifier: 0
   interest: {fileID: 0}
   ability: {fileID: 0}

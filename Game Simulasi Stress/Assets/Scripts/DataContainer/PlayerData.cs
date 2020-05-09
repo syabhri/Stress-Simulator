@@ -5,6 +5,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Custom Data Container/PlayerData")]
 public class PlayerData : ScriptableObject
 {
+    [System.Serializable]
+    public class ActivityLimit
+    {
+        public string name;
+        public int count;
+
+        public ActivityLimit(string name, int count)
+        {
+            this.name = name;
+            this.count = count;
+        }
+    }
+
     public StringContainer characterName;
     [SerializeField]
     public GameObject avatar;
@@ -19,13 +32,16 @@ public class PlayerData : ScriptableObject
     public FloatContainer coins;
 
     [Space]
-    public FloatPairContainer ability;
+    public FloatContainer ability;
 
     [Space]
-    public List<FloatPairContainer> interest;
+    public List<BoolContainer> interest;
 
     [Space]
     public List<FloatContainer> knowleges;
+
+    [Space]
+    public List<ActivityLimit> ActivityLimitCount;
 
     public GameObject Avatar
     {
@@ -33,7 +49,7 @@ public class PlayerData : ScriptableObject
         set { avatar = value; }
     }
 
-    public void SetAbility(FloatPairContainer ability)
+    public void SetAbility(FloatContainer ability)
     {
         this.ability = ability;
     }
@@ -43,12 +59,12 @@ public class PlayerData : ScriptableObject
         ability = null;
     }
 
-    public void SetInterest(FloatPairContainer interest)
+    public void SetInterest(BoolContainer interest)
     {
         this.interest.Add(interest);
     }
 
-    public void RemoveInterest(FloatPairContainer interest)
+    public void RemoveInterest(BoolContainer interest)
     {
         this.interest.Remove(interest);
     }
@@ -56,5 +72,10 @@ public class PlayerData : ScriptableObject
     public void ResetInterest()
     {
         interest.Clear();
+    }
+
+    public void ResetActivityLimit()
+    {
+        ActivityLimitCount.Clear();
     }
 }

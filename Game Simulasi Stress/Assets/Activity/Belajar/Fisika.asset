@@ -12,48 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
   m_Name: Fisika
   m_EditorClassIdentifier: 
-  activityName: Belajar Fisika
-  isUseEnergy: 1
-  AnimationTrigger: {fileID: 11400000, guid: cc1f0da3a30be6b498296005cc6b43b1, type: 2}
-  animator: {fileID: 0}
-  isCostMoney: 0
+  animationTrigger: {fileID: 11400000, guid: cc1f0da3a30be6b498296005cc6b43b1, type: 2}
+  trannsitionDelay: 0
+  energyPerHour: 10
   cost: 0
-  isScheduled: 0
-  isRoutine: 0
-  schedule:
-    days: 0
-    hours: 0
-    minutes: 0
-  tolerance:
-    days: 0
-    hours: 0
-    minutes: 15
-  isLimited: 0
   limitPerDay: 0
-  currentCount: 0
   isDutrationAjustable: 1
   duration:
     days: 0
-    hours: 10
+    hours: 0
     minutes: 0
+    dayName: 0
   isIncreaseStress: 1
-  increaseStressByHours: 1
-  increasedStressMultiplier: 2
+  increasedStressModifier: 10
   isDecreaseStress: 0
-  decreaseStressByHours: 0
-  decreasedStressMultiplier: 0
+  decreasedStressModifier: 0
   isChangeOtherStat: 1
-  ChangeStatByHours: 1
-  isEffectedByStress: 0
-  otherStat:
-    name: 
-    target: {fileID: 11400000, guid: 0b3880c6a39453c4ca6be3d931689ff1, type: 2}
-    effector: 2
-    operation: +
-    useRange: 1
-    min: 0
-    max: 100
-    useExternalEeffector: 0
-    externalEffector: {fileID: 0}
-  interest: {fileID: 11400000, guid: e3100f6f01b5d714bbd14307e393662c, type: 2}
+  isEffectedByStress: 1
+  changedStat: {fileID: 11400000, guid: 0b3880c6a39453c4ca6be3d931689ff1, type: 2}
+  changedStatModifier: 5
+  interest: {fileID: 11400000, guid: 7f00f546d6fe73b41b2dff5911c00f08, type: 2}
   ability: {fileID: 0}

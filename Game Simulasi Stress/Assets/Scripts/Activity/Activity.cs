@@ -5,30 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Activity", menuName = "ScriptableObject/Activity")]
 public class Activity : ScriptableObject
 {
-    [Header("Properties")]
-    public string activityName;
-    public bool isUseEnergy;
-    //public string[] tag;
-    //public bool isActive;
-    public GameEvent AnimationTrigger;
-    //public Animator animator;
+    [Header("Animation")]
+    public GameEvent animationTrigger;
+    public float trannsitionDelay;
+
+    [Header("Energy Consumption")]
+    public float energyPerHour;
 
     [Header("Cost")]
     public float cost;
-    
-    [Header("Schedule")]
-    public bool isScheduled;
-    public bool isRoutine;
-    public TimeFormat schedule;
-    public TimeFormat tolerance = new TimeFormat(0,0,15);//default value
 
     [Header("Limit")]
-    public float limitPerDay;
-    [HideInInspector]
-    public float currentCount;
-    //public float valueLimit;
-    //[Tooltip("auto, do not change")]
-    //public float currentValue;
+    public int limitPerDay;
+
+    [Header("Scaduling")]
+    public bool isSceduled;
+    public TimeFormat SceduleStart;
+    public TimeFormat SceduleEnd;
 
     [Header("Duration")]
     public bool isDutrationAjustable;
@@ -36,37 +29,33 @@ public class Activity : ScriptableObject
 
     [Header("Increase Stress")]
     public bool isIncreaseStress;
-    public bool increaseStressByHours;
-    public float increasedStressMultiplier;
+    public float increasedStressModifier;
 
     [Header("Decrease Stress")]
     public bool isDecreaseStress;
-    public bool decreaseStressByHours;
-    public float decreasedStressMultiplier;
+    public float decreasedStressModifier;
 
     [Header("Other Stat")]
     public bool isChangeOtherStat;
-    public bool ChangeStatByHours;
     public bool isEffectedByStress;
-    public FloatPair otherStat;
+    public FloatContainer changedStat;
+    public float changedStatModifier;
 
     [Header("Bonus")]
-    public FloatPairContainer interest;
-    public FloatPairContainer ability;
+    public BoolContainer interest;
+    public FloatContainer ability;
 
     //incoplete
     public void PassValue(Activity activity)
     {
-        activityName = activity.activityName;
-        isUseEnergy = activity.isUseEnergy;
-        //tag = activity.tag;
-        //isActive = activity.isActive;
+        name = activity.name;
+
+        animationTrigger = activity.animationTrigger;
+        trannsitionDelay = activity.trannsitionDelay;
+
+        energyPerHour = activity.energyPerHour;
 
         cost = activity.cost;
-
-        isScheduled = activity.isScheduled;
-        schedule.SetValue(activity.schedule);
-        tolerance.SetValue(activity.tolerance);
 
         limitPerDay = activity.limitPerDay;
 
@@ -74,19 +63,16 @@ public class Activity : ScriptableObject
         duration.SetValue(activity.duration);
 
         isIncreaseStress = activity.isIncreaseStress;
-        increaseStressByHours = activity.increaseStressByHours;
-        increasedStressMultiplier = activity.increasedStressMultiplier;
+        increasedStressModifier = activity.increasedStressModifier;
 
         isDecreaseStress = activity.isDecreaseStress;
-        decreaseStressByHours = activity.decreaseStressByHours;
-        decreasedStressMultiplier = activity.decreasedStressMultiplier;
-
-        isEffectedByStress = activity.isEffectedByStress;
-        //EffectedStat = activity.EffectedStat;
+        decreasedStressModifier = activity.decreasedStressModifier;
 
         isChangeOtherStat = activity.isChangeOtherStat;
-        ChangeStatByHours = activity.ChangeStatByHours;
-        otherStat = activity.otherStat;
+        isEffectedByStress = activity.isEffectedByStress;
+
+        changedStat = activity.changedStat;
+        changedStatModifier = activity.changedStatModifier;
 
         interest = activity.interest;
         ability = activity.ability;

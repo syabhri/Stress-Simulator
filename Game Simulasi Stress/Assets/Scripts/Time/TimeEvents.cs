@@ -20,23 +20,37 @@ public class TimeEvents : MonoBehaviour
         public bool executed;
         public int expirationTime;
     }
+    public enum UpdateMethode { Manual, Smart, Realtime}
     public TimeContainer CurrentTime;
-    public bool AlwaysUpdate;
+    public UpdateMethode updateMethode;
 
     public List<TimeEvent> timeEvents;
 
     private void OnEnable()
     {
         ResetEvent();
-        if (AlwaysUpdate)
-            StartCoroutine("RoutineCheck");
-        else
-            CheckEvents();
+
+        switch (updateMethode)
+        {
+            case UpdateMethode.Manual:
+                CheckEvents();
+                break;
+            case UpdateMethode.Smart:
+                CurrentTime.OnValueChanged += CheckEvents;
+                break;
+            case UpdateMethode.Realtime:
+                StartCoroutine("RoutineCheck");
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnDisable()
     {
+        CurrentTime.OnValueChanged -= CheckEvents;
         StopAllCoroutines();
+        ResetEvent();
     }
 
     private IEnumerator RoutineCheck()
@@ -49,6 +63,14 @@ public class TimeEvents : MonoBehaviour
     }
 
     public void CheckEvents()
+    {
+        foreach (TimeEvent timeEvent in timeEvents)
+        {
+            CheckEvent(timeEvent);
+        }
+    }
+
+    public void CheckEvents(TimeContainer time)
     {
         foreach (TimeEvent timeEvent in timeEvents)
         {
@@ -71,6 +93,7 @@ public class TimeEvents : MonoBehaviour
                 timeEvent.executed = false;
                 CheckEvent(timeEvent);
             }
+            return;
         }
 
         // if the TriggerTime days is 0 then add current day instead

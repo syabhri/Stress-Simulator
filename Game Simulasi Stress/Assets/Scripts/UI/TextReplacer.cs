@@ -22,8 +22,13 @@ public class TextReplacer : MonoBehaviour
 
     [Space]
     public UpdateType updateFrom;
+
+    [Space]
     public StringContainer stringContainer;
+
+    [Space]
     public FloatContainer floatContainer;
+    public bool WholeNumber;
 
     [Space]
     public bool AlwaysUpdate;
@@ -75,7 +80,15 @@ public class TextReplacer : MonoBehaviour
 
     public void UpdateText(FloatContainer text)
     {
-        UIText.text = BeforeText + text.Value.ToString() + AfterText;
+        if (WholeNumber)
+        {
+            UIText.text = BeforeText + Mathf.Round(text.Value).ToString() + AfterText;
+        }
+        else
+        {
+            UIText.text = BeforeText + text.Value.ToString() + AfterText;
+        }
+        
         UIText.text = UIText.text.Replace("/n", "<br>");
     }
 

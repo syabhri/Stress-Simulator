@@ -11,8 +11,8 @@ public class TimeManager : MonoBehaviour
     public const float minutesPerHours = 60f;
     public enum DayName { Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Minggu }
 
-    [Header("Properties")]
-    [SerializeField] private float TimeScale = 1;
+    [Header("Properties")][Tooltip("how many second equals ingame day (real second : ingame days")]
+    public float TimeScale = 1;
 
     [Header("Data Container")]
     public TimeContainer CurrentTime;
@@ -72,7 +72,7 @@ public class TimeManager : MonoBehaviour
 
         if (CurrentTime.Value.minutes != minuteBuffer)
         {
-            CurrentTime.Value.minutes = minuteBuffer;
+            CurrentTime.SetMinute(minuteBuffer);
             ClockText.Value = CurrentTime.Value.hours.ToString("00") + ":" + CurrentTime.Value.minutes.ToString("00");
         }
     }

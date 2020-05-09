@@ -9,17 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd9bbcb9980a28c4c8c5f3644d9ee32c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e7269497d1f55841a6df9cf355171db, type: 3}
   m_Name: TIK
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  pair:
-    name: 
-    target: {fileID: 11400000, guid: 95c6077154218684e851db2582aad679, type: 2}
-    effector: 5
-    operation: +
-    useRange: 1
-    min: 0
-    max: 100
-    useExternalEeffector: 0
-    externalEffector: {fileID: 0}
+  value: 0

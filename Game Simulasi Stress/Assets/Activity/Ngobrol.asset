@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbaae3edb5a8e2b4bbf0d1bb24a32970, type: 3}
+  m_Name: Ngobrol
+  m_EditorClassIdentifier: 
+  animationTrigger: {fileID: 11400000, guid: 6096d34cd0d9ff14f862b533c434d139, type: 2}
+  trannsitionDelay: 0
+  energyPerHour: 10
+  cost: 0
+  limitPerDay: 0
+  isDutrationAjustable: 0
+  duration:
+    days: 0
+    hours: 0
+    minutes: 15
+    dayName: 0
+  isIncreaseStress: 0
+  increasedStressModifier: 0
+  isDecreaseStress: 1
+  decreasedStressModifier: 8
+  isChangeOtherStat: 0
+  isEffectedByStress: 0
+  changedStat: {fileID: 0}
+  changedStatModifier: 0
+  interest: {fileID: 0}
+  ability: {fileID: 0}

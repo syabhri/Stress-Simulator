@@ -49,6 +49,8 @@ public class SaveData
 
     public List<Knowlage> knowleges;
 
+    public List<PlayerData.ActivityLimit> activityLimits;
+
     //constructor
     public SaveData(PlayerData playerData)
     {
@@ -77,5 +79,7 @@ public class SaveData
         {
             knowleges.Add(new Knowlage(knowlage.name, knowlage.Value));
         }
+
+        activityLimits = playerData.ActivityLimitCount;
     }
 }

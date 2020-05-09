@@ -6,11 +6,16 @@ using TMPro;
 
 public class SliderTextUpdater : MonoBehaviour
 {
-    public TextMeshProUGUI TextTarget;
     public Slider SliderSource;
+    public TextMeshProUGUI TextTarget;
 
     [Space]
     public bool UsePercentage = true;
+
+    private void Start()
+    {
+        updateText();
+    }
 
     // called when value changed
     public void updateText ()
